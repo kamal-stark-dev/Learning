@@ -1,6 +1,11 @@
 #include <stdio.h>
 // https://www.youtube.com/watch?v=rw4s4M3hFfs
 
+// You are given a list of blocks, where each block contains a gym, a park, or a store. You want to find the farthest block from each of the gyms, parks, and stores. A block can be farthest from a gym, park, or store even if it is not present in the list. In that case, the distance is considered to be infinity. Need to find the minimum farthest distance and select the block on the basis of that.
+
+// Below code is not working as expected. It's not giving the correct output. It needs to be fixed.
+// The below commented code is the correct solution for this.
+
 typedef struct
 {
     char gym;

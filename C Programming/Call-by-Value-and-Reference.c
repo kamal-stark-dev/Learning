@@ -58,3 +58,25 @@ int main()
     twicePointByReference(&point);
     printf("Value of point after call by reference is (%d, %d)\n\n", point.x, point.y);
 }
+
+/*
+ITERATION:
+a = 10
+callByValue(a)
+    x = 100
+    a = 10
+a = 10
+callByReference(&a)
+    *x = 100
+    a = 100
+a = 100
+point = 10 20
+twicePointByValue(point)
+    pt.x = 20
+    pt.y = 40
+point = 10 20
+twicePointByReference(&point)
+    pt->x = 20
+    pt->y = 40
+point = 20 40
+*/

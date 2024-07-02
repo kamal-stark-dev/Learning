@@ -81,7 +81,8 @@ The array after shifting:
 
 ITERATION:
 array = 1 2 3 4 5
-shift = 2
+shift = 7
+shift %= length: 2
 shift_type = l
 reverse array from index 0 to 1: 2 1 3 4 5
 reverse array from index 2 to 4(length - 1): 2 1 5 4 3

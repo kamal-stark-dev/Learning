@@ -39,3 +39,27 @@ int main()
 
     return 0;
 }
+
+/*
+SAMPLE INPUT:
+Orignal array:
+1 2 3 4 5 6 7
+
+SAMPLE OUTPUT:
+Array after reversing:
+7 6 5 4 3 2 1
+
+ITERATION:
+array = 1 2 3 4 5 6 7
+length = 7
+i = 0
+length / 2 = 7 / 2 = 3
+swap(&arr[0], &arr[6])
+array = 7 2 3 4 5 6 1
+i = 1
+swap(&arr[1], &arr[5])
+array = 7 6 3 4 5 2 1
+i = 2
+swap(&arr[2], &arr[4])
+array = 7 6 5 4 3 2 1
+*/

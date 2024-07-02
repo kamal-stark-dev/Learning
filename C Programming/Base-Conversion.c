@@ -303,3 +303,30 @@ char *DecimalToHex(const int decimal)
 
     return hex;
 }
+
+/*
+SAMPLE INPUT:
+Hexadecimal to Decimal Conversion:
+Hexadecimal: 1A3
+Decimal: 419
+
+Decimal to Hexadecimal Conversion:
+Decimal: 419
+Hexadecimal: 1A3
+
+Binary to Decimal Conversion:
+Binary: 1001010101000
+Decimal: 419
+
+Decimal to Binary Conversion:
+Decimal: 419
+Binary: 110100011
+
+Hexadecimal to Binary Conversion:
+Hexadecimal: 1A3
+Binary: 000110100011
+
+Binary to Hexadecimal Conversion:
+Binary: 1001010101000
+Hexadecimal: 4A8
+*/

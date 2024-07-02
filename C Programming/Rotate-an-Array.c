@@ -81,4 +81,17 @@ Enter (l or L) for left shift and (r or R) for right shift: r
 SAMPLE OUTPUT:
 The array after shifting is:
 4 5 1 2 3
+
+ITERATION:
+array = 1 2 3 4 5
+shift = 7
+shift %= length: 2
+shift_type = r
+temp[0] = arr[(0 - 2 + 5) % 5] = arr[3] = 4
+temp[1] = arr[(1 - 2 + 5) % 5] = arr[4] = 5
+temp[2] = arr[(2 - 2 + 5) % 5] = arr[0] = 1
+temp[3] = arr[(3 - 2 + 5) % 5] = arr[1] = 2
+temp[4] = arr[(4 - 2 + 5) % 5] = arr[2] = 3
+temp = 4 5 1 2 3
+output = 4 5 1 2 3
 */
