@@ -26,6 +26,12 @@ void multiply(int a, int b)
     printf("Multiplication is %d\n", a * b);
 }
 
+void multipleValues(int a, int b, int *sum, int *diff)
+{
+    *sum = a + b;
+    *diff = a - b;
+}
+
 int main()
 {
     printf("POINTERS: stores the address of a C variable and allows you to manipulate these variables.\n\n");
@@ -38,6 +44,12 @@ int main()
     printf("Value of ptr: %p\n", ptr);
     printf("Address of ptr: %p\n", &ptr);
     printf("Dereferencing value of ptr: %d\n", *ptr);
+
+    printf("\nSIZES OF POINTERS: \n\n");
+    printf("Size of int pointer: %lu bytes\n", sizeof(int *));
+    // 8 bytes for 64-bit system
+    // 4 bytes for 32-bit system
+    printf("The size of every pointer is the same, regardless of the data type it points to as it stores the memory address which is same no matter the data type.\n\n");
 
     printf("\nTYPES OF POINTERS:\n\n");
 
@@ -118,6 +130,93 @@ int main()
 
     // *pointerToConst = 4; // error: assignment of read-only location
 
+    printf("POINTER ARITHIMETIC: \n\n");
+
+    printf("Refers to legal valid arithemetic operations that can be performed on pointers.\n\n");
+
+    printf("1. Increment and Decrement: \n\n");
+
+    int arr1[] = {1, 2, 3, 4, 5};
+
+    int *ptr3 = arr1;
+
+    printf("Value of ptr3 = %p\n", ptr3);
+    printf("Dereference of ptr3 = %d\n", *ptr3);
+
+    ptr3++;
+    printf("Value of ptr3 after increment = %p\n", ptr3);
+    printf("Dereference of ptr3 after increment = %d\n", *ptr3);
+
+    ptr3--;
+    printf("Value of ptr3 after decrement = %p\n", ptr3);
+    printf("Dereference of ptr3 after decrement = %d\n", *ptr3);
+
+    printf("\n2. Addition and Subtraction: \n\n");
+
+    int *ptr4 = &arr1[2];
+
+    printf("Value of ptr4 = %p\n", ptr4);
+    printf("Dereference of ptr4 = %d\n", *ptr4);
+
+    ptr4 = ptr4 + 2;
+    printf("Value of ptr4 after addition = %p\n", ptr4);
+    printf("Dereference of ptr4 after addition = %d\n", *ptr4);
+
+    ptr4 = ptr4 - 2;
+    printf("Value of ptr4 after subtraction = %p\n", ptr4);
+    printf("Dereference of ptr4 after subtraction = %d\n", *ptr4);
+
+    printf("\n3. Pointer Comparison: \n\n");
+
+    int *ptr5 = &arr1[2];
+    int *ptr6 = &arr1[4];
+
+    if (ptr5 < ptr6)
+    {
+        printf("ptr5 is less than ptr6\n");
+    }
+    else
+    {
+        printf("ptr5 is greater than ptr6\n");
+    }
+
+    printf("\n4. Pointer to Array: \n\n");
+
+    int arr2[5] = {1, 2, 3, 4, 5};
+    int *ptr7 = arr2;
+
+    printf("Value of ptr7 = %p\n", ptr7);
+    printf("Dereference of ptr7 = %d\n\n", *ptr7);
+
+    printf("USE CASE OF POINTERS: \n\n");
+
+    printf("1. Dynamic Memory Allocation. \n\n");
+    printf("2. Accessing Arrays Elements. \n\n");
+    printf("3. Return Multiple Values from a Function. \n\n");
+    printf("4. Pass by Reference. \n\n");
+    printf("5. Implement Data Structures. \n\n");
+    printf("6. Locating exact position of memory. \n\n");
+    printf("7. In System-Level Programming where memory addresses are useful. \n\n");
+
+    /*
+    ADVANTEGES OF POINTERS:
+
+    1. Dynamic Memory Allocation and Deallocation.
+    2. An array or structure can be accessed efficiently with pointers.
+    3. Useful for accessing memory locations.
+    4. Used in complex data structures like linked lists, graphs, trees etc.
+    5. Pointers reduces the length of program and aslo reduces the execution time.
+
+    DISADVANTAGES OF POINTERS:
+
+    1. Memory can get corrupted if an incorrect value is provided to pointers.
+    2. Pointers can be complex to understand.
+    3. Pointers are majorly responsible for memory leaks in C.
+    4. Pointers are comparitively slower than variables in c.
+    5. Uninitialized pointers might cause segmentation fault.
+    */
+
     printf("END~");
+
     return 0;
 }
