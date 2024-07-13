@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int main(int argc, char *argv[])
+int main(int argc, char *argv[]) // command line arguments
 {
     printf("\nNumber of arguments: %d\n\n", argc);
 
