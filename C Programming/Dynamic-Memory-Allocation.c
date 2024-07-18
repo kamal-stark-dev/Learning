@@ -68,6 +68,17 @@ int main()
 
     printArray(arr, 15);
 
+    /*
+    Note:
+    1. The previous data is not lost after reallocating more memory.
+    2. Realloc can't be used if the memory to a ptr has been freed.
+    3. Also, if you have allocated another memory before reallocation then if there is no space to expand then it'll create a new memory for the bigger chunk and shift the current data onto that memory,the previous memory remains there as it is.
+    4. As the memory before realloc remains there it becomes vulnerable and if it contains some sensitive data then it isn't secure.
+
+    Refer to this program to know more about
+    Realloc Vulnerability - https://github.com/portfoliocourses/c-example-code/blob/main/realloc_vulnerability.c
+    */
+
     free(arr);
 
     return 0;
