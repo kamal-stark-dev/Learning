@@ -4,29 +4,55 @@
 #include <stdio.h>
 #include <string.h>
 
-const char COW[][100] = {
-    "     \\   ^__^",
-    "      \\  (oo)\\________",
-    "         (__)\\        )\\/\\",
-    "              ||----w |",
-    "              ||     ||",
-};
+const char COWS[][10][50] = {
+    {
+        "     \\   ^__^",
+        "      \\  (oo)\\________",
+        "         (__)\\        )\\/\\",
+        "              ||----w |",
+        "              ||     ||",
+    },
+    {
+        "     \\   ^__^",
+        "      \\  ($$)\\________",
+        "         (__)\\        )\\/\\",
+        "              ||----w |",
+        "              ||     ||",
+    },
+    {
+        "     \\   ^__^",
+        "      \\  (xx)\\________",
+        "         (_ )\\        )\\/\\",
+        "           U  ||----w |",
+        "              ||     ||",
+    },
+    {
+        "     \\   ^__^",
+        "      \\  (..)\\________",
+        "         (__)\\        )\\/\\",
+        "              ||----w |",
+        "              ||     ||",
+    }};
+
+const char COW_LIST[][10] = {"-default", "-money", "-ded", "-amazed"};
 
 void print_message(int length, char message[]);
-void print_cow();
+void print_cow(char *argument);
 
 int main(int argc, char *argv[])
 {
-
-    printf("Enter a message: ");
     char message[100];
-    fgets(message, sizeof(message), stdin);
+
+    // printf("Enter a message: ");
+    // fgets(message, sizeof(message), stdin);
+
+    strcpy(message, argv[2]);
 
     int length = strlen(message);
 
     print_message(length, message);
 
-    print_cow();
+    print_cow(argv[1]);
 
     return 0;
 }
@@ -51,10 +77,17 @@ void print_message(int length, char message[])
     printf("--\n");
 }
 
-void print_cow()
+void print_cow(char *argument)
 {
-    for (int i = 0, l = 5; i < l; i++)
+    for (int i = 0; i < 4; i++)
     {
-        printf("%s\n", COW[i]);
+        if (!strcmp(argument, COW_LIST[i]))
+        {
+            // printf("%s\n", COW_LIST[i]);
+            for (int j = 0, l = 5; j < l; j++)
+            {
+                printf("%s\n", COWS[i][j]);
+            }
+        }
     }
 }
