@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 
-const char COWS[][10][50] = {
+const char COWS[][5][40] = {
     {
         "     \\   ^__^",
         "      \\  (oo)\\________",
@@ -36,7 +36,7 @@ const char COWS[][10][50] = {
 
 const char COW_LIST[][10] = {"-default", "-money", "-ded", "-amazed"};
 
-void print_message(int length, char message[]);
+void print_message(char *message);
 void print_cow(char *argument);
 
 int main(int argc, char *argv[])
@@ -48,33 +48,32 @@ int main(int argc, char *argv[])
 
     strcpy(message, argv[2]);
 
-    int length = strlen(message);
-
-    print_message(length, message);
+    print_message(message);
 
     print_cow(argv[1]);
 
     return 0;
 }
 
-void print_message(int length, char message[])
+void print_message(char *message)
 {
+    int length = strlen(message);
+
     message[strcspn(message, "\n")] = '\0'; // Remove the newline character
-    printf("\n__");
-    for (int i = 0; i < length; i++)
+    printf("\n");
+    for (int i = 0; i < length + 4; i++)
     {
         printf("_");
     }
-    printf("__");
 
     printf("\n| %s |", message);
 
-    printf("\n--");
-    for (int i = 0; i < length; i++)
+    printf("\n");
+    for (int i = -4; i < length; i++)
     {
         printf("-");
     }
-    printf("--\n");
+    printf("\n");
 }
 
 void print_cow(char *argument)
