@@ -1,4 +1,3 @@
-#include <cs50.h>
 #include <stdio.h>
 
 void print_row(int bricks, int height);
@@ -9,7 +8,8 @@ int main(void)
 
     do
     {
-        height = get_int("Height? ");
+        printf("Height? ");
+        scanf("%d", &height);
     } while (height < 1 || height > 8);
 
     for (int i = 1; i <= height; i++)
