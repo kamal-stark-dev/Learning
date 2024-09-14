@@ -1,0 +1,28 @@
+$text-color: #fff;
+$bg-color: #222;
+$font-sizes: (
+  "small": 0.6rem,
+  "regular": 1.2rem,
+  "large": 2.4rem,
+  "title": 3.6rem,
+);
+$font: Helvetica, Arial, sans-serif;
+
+body {
+  background: $bg-color;
+  color: $text-color;
+  font-family: $font;
+}
+
+h1 {
+  font-size: map-get($font-sizes, title);
+}
+
+.main {
+  margin: 0 auto;
+  width: 75%;
+
+  p {
+    font-size: map-get($font-sizes, regular);
+  }
+}

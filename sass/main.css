@@ -1,0 +1,17 @@
+body {
+  background: #222;
+  color: #fff;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+h1 {
+  font-size: 3.6rem;
+}
+
+.main {
+  margin: 0 auto;
+  width: 75%;
+}
+.main p {
+  font-size: 1.2rem;
+}/*# sourceMappingURL=main.css.map */
