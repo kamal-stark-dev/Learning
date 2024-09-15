@@ -5,7 +5,7 @@
 
 ## Variables in SASS
 
-In normal css variables are defined like this -
+In normal css _variables_ are defined like this -
 
 ```css
 :root {
@@ -18,7 +18,7 @@ body {
 }
 ```
 
-But in scss we define variables like this -
+But in **scss** we define _variables_ like this -
 
 ```scss
 $text-color: #fff;
@@ -30,7 +30,7 @@ body {
 }
 ```
 
-Which will be compiled into css having fixed values of the colors rather than the variable value.
+Which will be _compiled_ into css having fixed values of the colors rather than the variable value.
 
 ```css
 body {
@@ -41,7 +41,7 @@ body {
 
 ## Maps in SCSS -
 
-Maps are similar to arrays & dictionaries in python, to create it use -
+Maps are similar to _arrays & dictionaries_ in python, to create it use -
 
 ```scss
 $font-sizes: (
@@ -59,7 +59,7 @@ span {
 }
 ```
 
-> We use `map-get` to select a value from a map, it takes map-name and key value.
+> We use `map-get` to select a value from a map, it takes _map-name_ and _key value_.
 
 This gets converted to the following css -
 
@@ -90,3 +90,168 @@ span {
 ```
 
 We won't have to use `.main p` for the same.
+
+## Use of `&` and `#{&}` in SASS -
+
+In SASS you use `&` to refer to parent element -
+
+```scss
+.main {
+  margin: 0 auto;
+  width: 75%;
+
+  & p {
+    font-size: 1.2rem;
+  }
+}
+```
+
+which translates to the following css -
+
+```css
+.main {
+  margin: 0 auto;
+  width: 75%;
+}
+
+.main p {
+  font-size: 1.2rem;
+}
+```
+
+Also suppose you have a class `.main` and a child class element `.main__paragraph`, then you can use the following.
+
+```scss
+// use of `interpolation`
+
+.main {
+  width: 75%;
+  margin: 0 auto;
+
+  #{&}__paragraph {
+    color: #00ffff;
+  }
+}
+```
+
+which is similar to the following scss -
+
+```scss
+.main {
+  width: 75%;
+  margin: 0 auto;
+
+  .main .main__paragraph {
+    color: #00ffff;
+  }
+}
+```
+
+## Partials in SCSS -
+
+to create a **_partial scss_** file you need to add a `_` before the scss file name and that _won't get compiled_ to css. These are used to import css in another scss files.
+
+ex: inside a `_resets.scss` file -
+
+```scss
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+```
+
+inside `main.scss` file -
+
+```scss
+@import "./resets";
+```
+
+> Notice we didn't have to use the `_` or the `.scss` extenstion while importing.
+
+Similarly you can create a `_variables.scss` file for storing your variables.
+
+## Functions in SCSS
+
+Functions are coding blocks which takes some input and then return some value after processing it.
+
+Let's create a function which makes `map-get` a little easier to use -
+
+```scss
+@function size($size) {
+  @return map-get($font-sizes, $size);
+}
+
+// using a function
+
+h1 {
+  font-size: size(title);
+  // ==> font-size: map-get($font-sizes, title); ==> font-size: 3.6rem;
+}
+```
+
+## Mixins -
+
+Mixins are similar to functions are let's look at its use case through an example -
+
+```scss
+@mixin flexCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main {
+  @include flexCenter;
+}
+```
+
+we can also pass arguments to a mixin, ex - `@mixin flexCenter($direction)`, we can also use mixin to add light and dark modes.
+
+## Extend
+
+If you have an element which have the same css as another element with few more modifications to it then you can use the `@extend` to skip writing the common css.
+
+```scss
+.para1 {
+  font-size: 2rem;
+  text-transform: uppercase;
+  color: yellow;
+
+  &:hover {
+    color: orange;
+  }
+}
+
+.para2 {
+  @extend .para1;
+
+  color: pink;
+}
+```
+
+## Math Operations
+
+To perform mathematical operations in css we needed to use `calc()` function but in scss you can do it directly.
+
+```scss
+.main {
+  width: 80% - 20%;
+  height: calc(80% - 20%);
+}
+```
+
+The above code will compile to -
+
+```css
+.main {
+  width: 60%;
+  height: calc(80% - 20%);
+}
+```
+
+The direct approach will give you the value in css but the `calc()` one will be the same in css.
+
+---
+
+So, The basics of **SASS** is done which includes things like **_variables, nested rules, mixins and functions_**.

@@ -1,4 +1,10 @@
 body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
   background: #222;
   color: #fff;
   font-family: Helvetica, Arial, sans-serif;
@@ -9,9 +15,25 @@ h1 {
 }
 
 .main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   margin: 0 auto;
   width: 75%;
 }
 .main p {
   font-size: 1.2rem;
+}
+.main .paragraph1, .main .paragraph2 {
+  color: orange;
+}
+.main .paragraph2 {
+  background-color: #111;
+  padding: 1rem;
+}
+@media (max-width: 800px) {
+  .main {
+    flex-direction: row;
+  }
 }/*# sourceMappingURL=main.css.map */
