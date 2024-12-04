@@ -1,4 +1,4 @@
-# 2109. Adding Spaces to a String
+# 2109. Adding Spaces to a String - MEDIUM
 
 def addSpaces(s: str, spaces: list[int]) -> str:
     """
