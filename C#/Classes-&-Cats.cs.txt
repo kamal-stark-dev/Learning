@@ -1,0 +1,41 @@
+using System.Net.NetworkInformation;
+using System.Security.Cryptography.X509Certificates;
+
+Console.Title = "Classes";
+
+
+Cat newCat_1 = new("Pilli Pilli", 4);
+Cat newCat_2 = new("Pilli Pilli", 4);
+Cat newCat_3 = new("Pilli Pilli", 4);
+
+Console.WriteLine("Their are " + Cat.Count + " Cats, Meow!!");
+
+Console.ReadKey();
+
+class Cat
+{
+    public Cat(string _name, int _age)
+    {
+        name = _name;
+        age = _age;
+        Count++;
+    }
+
+    static public int Count = 0; // this doesn't changes for each object we create
+    // same goes for static functions and also these are called by their class names
+    public string name = "";
+
+    // public protected and private
+
+    /* both the lines below holds the same meaning.
+    private int age;
+    int age;
+    */
+
+    public int age;
+
+    public void Meow()
+    {
+        Console.WriteLine(name + " says Meow!");
+    }
+}

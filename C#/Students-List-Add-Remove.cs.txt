@@ -1,0 +1,57 @@
+Console.Title = "Class of the Famous";
+
+Console.Write("Enter the number of students in your class: ");
+int count = Convert.ToInt32( Console.ReadLine() );
+
+// string[] students = new string[count];
+
+List<string> students = new List<string>();
+
+for (int i = 0; i < count; i++)
+{
+    Console.Write("Student " + (i + 1) + ": ");
+    students.Add( Console.ReadLine() ?? "--null--" );
+}
+students.Sort(); // sort the list
+
+for (int i = 0; i < students.Count; i++)
+{
+    Console.WriteLine(i + 1 + ". " + students[i]);
+}
+
+Console.WriteLine("\nDo you want to add / remove students (yes / no): ");
+string add_or_remove = Console.ReadLine() ?? "Null";
+
+if (add_or_remove.ToLower() == "yes")
+{
+    Console.Write("What operation do you want to perform (add / remove): ");
+    string operation = Console.ReadLine() ?? "Null";
+
+    if (operation.ToLower() == "add")
+    {
+        Console.Write("Enter the name of the student whom you want to add: ");
+        students.Add(Console.ReadLine() ?? "Null");
+    }
+    else if (operation.ToLower() == "remove")
+    {
+        Console.Write("Write the index of the student whom you want to remove: ");
+        int index = Convert.ToInt32( Console.ReadLine() );
+
+        students.RemoveAt(index - 1);
+    }
+
+    Console.WriteLine("\nOperation Succesfull!!\nThe new list is: ");
+
+    students.Sort();
+
+    for (int i = 0; i < students.Count; i++)
+    {
+        Console.WriteLine(i + 1 + ". " + students[i]);
+    }
+}
+else
+{
+    Console.WriteLine("Press any key to EXIT!!");
+}
+
+Console.ReadKey();

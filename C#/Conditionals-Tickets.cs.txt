@@ -1,0 +1,50 @@
+using System.Data;
+using System.Security.Authentication.ExtendedProtection;
+
+Console.Title = "Conditionals > if-else";
+
+Console.WriteLine("Welcome to the Cinema Hall!!\nEnter the number of tickets you want to buy.");
+
+int members = Convert.ToInt32(Console.ReadLine());
+
+if (members < 0)
+{
+    Console.ForegroundColor = ConsoleColor.Red;
+    Console.WriteLine("Do you want to take someone out of the hall??");
+    Console.ReadKey();
+    return;
+}
+
+int price = 200;
+int total = members * price;
+int change = 0;
+
+Console.WriteLine("The ticket price of one ticket is Rs. 200.\nYour total for " + members + " members is Rs." + total + ".\nInsert your cash ===>");
+
+int cash = Convert.ToInt32(Console.ReadLine());
+
+if (cash < 0)
+{
+    Console.ForegroundColor = ConsoleColor.Red;
+    Console.WriteLine("You are supposed to give monet not take it. DUH!!");
+}
+else if (cash == total)
+{
+    Console.ForegroundColor = ConsoleColor.Green;
+    if (members == 1)
+        Console.WriteLine("Your ticket is successfully booked!!");
+    else
+        Console.WriteLine("Your tickets are successfully booked!!");
+}
+else
+{
+    Console.ForegroundColor = ConsoleColor.Green;
+    change = cash - total;
+    if (members == 1)
+        Console.WriteLine("Your ticket is successfully booked!!\nWith Rs. " + change + " in change.");
+    else
+        Console.WriteLine("Your tickets are successfully booked!!\nWith Rs. " + change + " in change.");
+}
+
+// wait for any key to exit
+Console.ReadKey();

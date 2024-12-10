@@ -1,0 +1,36 @@
+Console.Title = "Methods / Functions";
+
+static void meetAlien(string user)
+{
+    Random numberGen = new Random();
+
+    string name = "X-" + numberGen.Next(1, 1001);
+    int age = numberGen.Next(18, 300);
+
+    Console.ForegroundColor = ConsoleColor.Green;
+    Console.WriteLine("Hii "+ user +", I am " + name + " and I am " + age + " years old.");
+    Console.ForegroundColor = ConsoleColor.White;
+}
+
+int word_counter(string sentence)
+{
+    string[] words = sentence.Split(" ");
+    return words.Length;
+
+    /* Shorter Version
+    return sentence.split(" ").Length;
+    */
+}
+
+meetAlien("Y-322");
+
+Console.WriteLine("Enter a sentence to find it's word count: ");
+
+string sentence = Console.ReadLine() ?? "";
+
+int words_count = word_counter(sentence);
+
+Console.WriteLine("Their are " + words_count + " words in the provided sentence.");
+
+
+Console.ReadKey();

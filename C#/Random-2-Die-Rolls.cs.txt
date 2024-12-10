@@ -1,0 +1,31 @@
+using System.Security.Cryptography;
+
+Console.Title = "Rolling tow dices.";
+
+Random randomGen = new Random();
+
+int roll_1 = 0;
+int roll_2 = 1;
+
+int attempts = 0;
+
+Console.ForegroundColor = ConsoleColor.Blue;
+Console.WriteLine("Press ENTER to roll both die.");
+
+Console.ForegroundColor = ConsoleColor.White;
+while (roll_1 != roll_2)
+{
+    Console.ReadKey();
+
+    roll_1 = randomGen.Next(1, 7);
+    roll_2 = randomGen.Next(1, 7);
+
+    Console.WriteLine("You rolled:\n\tDice 1: " + roll_1 + "\n\tDice 2: " + roll_2);
+
+    attempts++;
+}
+
+Console.ForegroundColor = ConsoleColor.Green;
+Console.WriteLine("\nCongratulations, you rolled the same numbers in " + attempts + " attempts.");
+
+Console.ReadKey();
