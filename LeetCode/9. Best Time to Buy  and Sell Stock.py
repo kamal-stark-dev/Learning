@@ -1,3 +1,5 @@
+# 121. Best Time to Buy and Sell Stock
+
 def maxProfit(prices: list[int]) -> int:
 
     """ Brute Force - O(n^2)
