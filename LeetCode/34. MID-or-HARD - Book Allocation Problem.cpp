@@ -31,15 +31,15 @@ int bookAllocationProblem(vector<int> nums, int totalStudents) {
 	if (size < totalStudents) return -1;
 
 	int totalPages = 0, maxPages = 0;
-	for (int i = 0; i < size; i++) {
+	for (int i = 0; i < size; i++) {            // O(n)
 		maxPages = max(maxPages, nums[i]);
 		totalPages += nums[i];
 	}
 	int ans = -1;
 	int left = maxPages, right = totalPages;
-	while (left <= right) {
+	while (left <= right) {                      // O(n logN) -> N is the range from maxPages to totalPages
 		int mid = left + (right - left) / 2;
-		if (isValid(nums, totalStudents, mid)) {
+		if (isValid(nums, totalStudents, mid)) { // O(n)
 			ans = mid;
 			right = mid - 1;
 		}
@@ -60,6 +60,6 @@ int main() {
 
 /*
 Wrote this program fully in notepad and it run successfully in one try (no typos no nothing) ==> : )
-Time complexity: O()
-Space complexity: O()
+Time complexity: O(n log.N)
+Space complexity: O(1)
 */
