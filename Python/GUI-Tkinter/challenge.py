@@ -8,9 +8,15 @@ def draw_on_canvas(event, bclr='black', bs = 5):
     canvas.create_oval((x - bs/2, y - bs/2, x + bs/2, y + bs/2), fill=bclr, outline=bclr)
 
 def pick_color():
+    global bclr
     color = askcolor(title='Choose a color')
     if color[1]:
-        window['bg'] = color[1]
+        bclr = color[1]
+
+def on_key_press(event):
+    if event.char == 'r':
+        canvas.create_rectangle((10, 10, event.x, event.y))
+
 
 window = tk.Tk()
 window.title("Drawing app")
@@ -22,7 +28,9 @@ main_label.pack()
 canvas = tk.Canvas(window, bg='white')
 canvas.pack()
 
-canvas.bind('<Control-Motion>', lambda event: draw_on_canvas(event, 'black', brush_size_var.get()))
+bclr = 'black'
+canvas.bind('<Motion>', lambda event: on_key_press(event))
+canvas.bind('<Control-Motion>', lambda event: draw_on_canvas(event, bclr, brush_size_var.get()))
 canvas.bind('<Shift-Motion>', lambda event: draw_on_canvas(event, 'white', eraser_size_var.get()))
 
 brush_size_label = tk.Label(window, text='Brush Size')
