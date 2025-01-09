@@ -18,15 +18,29 @@ table = ttk.Treeview(
 table.heading('first', text='First name')
 table.heading('last', text='Last name')
 table.heading('email', text='Email')
-table.pack()
+table.pack(fill='both', expand=True)
 
 # Insert values
 # table.insert(parent='', index=0, values=('Kamalveer', 'Singh', 'Kamalveer3829@gmail.com'))
+
 email_ends = ['gmail.com', 'outlook.com', 'email.me', 'hotmail.in', 'yahoo.in', 'email.com']
+
 for i in range(30):
     fn = choice(first_names)
     ln = choice(last_names)
-    email_end = choice(email_ends)
-    table.insert(parent='', index=i, values=(fn, ln, f"{fn.lower()}{ln.lower()}@{email_end}"))
+    email = f"{fn.lower()}{ln.lower()}@{choice(email_ends)}"
+    table.insert(parent='', index=i, values=(fn, ln, email))
+
+def item_select(_):
+    for item in table.selection():
+        print(table.item(item)['values'])
+
+table.bind('<<TreeviewSelect>>', item_select)
+
+def delete_item(_):
+    for item in table.selection():
+        table.delete(item)
+
+table.bind('<Delete>', delete_item)
 
 window.mainloop()
