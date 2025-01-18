@@ -32,26 +32,8 @@ print("x //= 2 ->", x)
 x **= 3  # equivalent to x = x ** 3
 print("x **= 3 ->", x)
 
-"""
-If you are not familiar with `Bitwise Operators` skip this for now
-"""
-
-# Bitwise AND and assign
-x &= 2  # equivalent to x = x & 2
-print("x &= 2 ->", x)
-
-# Bitwise OR and assign
-x |= 1  # equivalent to x = x | 1
-print("x |= 1 ->", x)
-
-# Bitwise XOR and assign
-x ^= 2  # equivalent to x = x ^ 2
-print("x ^= 2 ->", x)
-
-# Bitwise right shift and assign
-x >>= 1  # equivalent to x = x >> 1
-print("x >>= 1 ->", x)
-
-# Bitwise left shift and assign
-x <<= 2  # equivalent to x = x << 2
-print("x <<= 2 ->", x)
+# create a variable with any value and then add 20 to it and divide it by 4 and print it
+num = 10
+num += 20
+num /= 4
+print('(10 + 20) / 4 =', num) # 10 + 20 = 30 / 4 = 7.5
