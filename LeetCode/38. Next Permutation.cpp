@@ -58,6 +58,9 @@ int main() {
 
     nextPermutation(nums);
 
+    // you can also use the function present inside the STL library for the same
+    // next_permutation(nums.begin(), nums.end());
+
     for (int n: nums) cout << n;
 }
 
