@@ -70,3 +70,4 @@ print(type(dict_example))
 # manually change datatypes
 print('float(10):', type(float(10)))
 print('string(10):', type(str(10)))
+print('list(10, 20, 30):', type(list((10, 20, 30)))) # note we are converting a `tuple` to `list`
