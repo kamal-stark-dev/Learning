@@ -123,6 +123,6 @@ def sum_unlimited(*args):
     sum = 0
     for arg in args: sum += arg
     return sum
-    # you can use return sum(args)
+    # you can also use -> `return sum(args)`
 
 print(sum_unlimited(10, 20, 30, 40, 50))
