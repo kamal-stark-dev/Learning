@@ -109,3 +109,7 @@ print(f"\n{dir(monster_1) = }")
 # see the attributes with their values
 print(f"\n{vars(monster_1) = }")
 print(f"\n{monster_2.__dict__ = }")
+
+"""
+NOTE: Everything in python is an object including strings, integers and even functions.
+"""
