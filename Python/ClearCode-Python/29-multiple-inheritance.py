@@ -44,7 +44,7 @@ shark = Shark(
     has_scales=False
 )
 
-print(f'''
+print(f'''Accessing the attributes ~
 {shark.health = }
 {shark.energy = }
 {shark.speed = }
