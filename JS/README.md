@@ -56,4 +56,4 @@ document.body.innerHTML = "Hello, World!!";
 
 **_You'll see the text "Hello, World!!" in the page._**
 
-> To get back the origional website you can just `Refresh` your webpage.
+> To get back the original website you can just `Refresh` your webpage.
