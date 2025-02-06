@@ -33,6 +33,18 @@ The installation usually happens in terminal (CLI).
 import pyautogui
 from time import sleep
 
-sleep(3)
-message = "This text is being written by the machine!!"
-pyautogui.write(message, interval=0.1)
+# sleep(3)
+# message = "This text is being written by the machine!!"
+# pyautogui.write(message, interval=0.1)
+
+# Custom Modules
+import one_piece
+
+# using custom module's attributes and methods
+print(f"\n{one_piece.strawhats = }")
+print(f"{one_piece.random_character() = }")
+print(f"{one_piece.random_fight() = }")
+
+# creating an object
+luffy = one_piece.Character('Luffy', 19, 'Male', 'Pirate', 'Meat')
+luffy.list_details()
