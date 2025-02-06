@@ -1,3 +1,5 @@
+# THIS IS A CUSTOM MODULE - ONE PIECE
+
 from random import choice
 
 strawhats = ['Luffy', 'Zoro', 'Nami', 'Ussop', 'Sanji', 'Chopper', 'Robin', 'Franky', 'Brook', 'Jimbei']
@@ -40,3 +42,6 @@ def random_fight():
     while fighter1 == fighter2:
         fighter2 = random_character()
     return f"{fighter1} vs {fighter2}"
+
+if __name__ == "__main__":
+    print('This will only be executed when this file is executed and will be skipped when it\'s imported!!')
