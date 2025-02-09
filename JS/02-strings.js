@@ -81,3 +81,7 @@ console.log(`
 This is a
 Multiline String.
 `);
+
+// Exercise - add a popup which display a bill and then thanks the customer for buying in a multiline string.
+console.log(`Total Cost: $${9.99 + 14.99}
+Thankyou, come again!`);

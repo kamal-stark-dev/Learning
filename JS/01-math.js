@@ -1,3 +1,5 @@
+// `console.log(value)` --> is used to print "value" on the `console screen`
+
 // Basic Arithmetic
 console.log("Addition:", 2 + 2); // 4
 console.log("Subtraction:", 8 - 2); // 6
