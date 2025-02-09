@@ -59,7 +59,8 @@ int main(void) {
 
     for (auto configuration: allConfigurations) {
         for (string row: configuration) {
-            cout << row << endl;
+            for (char item: row) cout << item << " ";
+            cout << endl;
         }
         cout << endl;
     }
