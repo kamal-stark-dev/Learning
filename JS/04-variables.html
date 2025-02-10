@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Variables</title>
+  </head>
+  <body>
+    <h2>Cart Quantity</h2>
+    <button onclick="console.log(`Cart Quantity: ${cartQuantity}`)">
+      Show Quantity
+    </button>
+    <button
+      onclick="cartQuantity++; console.log(`Cart Quantity: ${cartQuantity}`)"
+    >
+      Add to Cart
+    </button>
+    <button
+      onclick="cartQuantity--; console.log(`Cart Quantity: ${cartQuantity}`)"
+    >
+      Remove from Cart
+    </button>
+    <button
+      onclick="cartQuantity += 2; console.log(`Cart Quantity: ${cartQuantity}`)"
+    >
+      +2
+    </button>
+    <button
+      onclick="cartQuantity += 3; console.log(`Cart Quantity: ${cartQuantity}`)"
+    >
+      +3
+    </button>
+    <button
+      onclick="cartQuantity = 0; console.log(`Reset Success!\nCart Quantity: ${cartQuantity}`)"
+    >
+      Reset Cart
+    </button>
+    <hr />
+
+    <h2>Simple Calculator</h2>
+    <p>
+      Numbers------
+      <button onclick="result = result + '1'; console.log(result)">1</button>
+      <button onclick="result = result + '2'; console.log(result)">2</button>
+      <button onclick="result = result + '3'; console.log(result)">3</button>
+      <button onclick="result = result + '4'; console.log(result)">4</button>
+      <button onclick="result = result + '5'; console.log(result)">5</button>
+      <button onclick="result = result + '6'; console.log(result)">6</button>
+      <button onclick="result = result + '7'; console.log(result)">7</button>
+      <button onclick="result = result + '8'; console.log(result)">8</button>
+      <button onclick="result = result + '9'; console.log(result)">9</button>
+      <button onclick="result = result + '0'; console.log(result)">0</button>
+    </p>
+    <p>
+      Operations----
+      <button onclick="result = result + ' + '; console.log(result)">+</button>
+      <button onclick="result = result + ' - '; console.log(result)">-</button>
+      <button onclick="result = result + ' * '; console.log(result)">*</button>
+      <button onclick="result = result + ' / '; console.log(result)">/</button>
+    </p>
+    <p>
+      Evaluate-------
+      <button onclick="result = eval(result); console.log('Result =', result)">
+        =
+      </button>
+      <button onclick="result = ''; console.log('Result Cleared')">
+        Clear
+      </button>
+    </p>
+
+    <script>
+      // Variable - it is a container which stores a value which can be accessed or modified later
+
+      let var_1 = 100; // this creates a variable with the name `var_1` having a value `100`
+      console.log(var_1);
+
+      let calculation = 2 * 3;
+      console.log(calculation);
+      console.log(calculation + 10);
+
+      let name = "Jake";
+      console.log(name); // it's deprecated though :(
+
+      /*
+      Rules for naming variables -
+            1. cannot use reserved keywords (like let, console etc.) you can use "let1" or "lEt" though
+            2. can't start a var name with a number (like 2var, 10names etc.) you can use "names10" or "var_1"...
+            3. Can't use special characters except '$' and '_', and also no space.
+
+      What is this `;` after each line ??
+      -> Well this is used to tell the end of an instruction. (similar to '.' in English language)
+
+      # You can add multiple instructions in the same line like -
+      `console.log(1); console.log(2); let a = 10; console.log(a);`
+      but for readability we write each instruction in a new line :)
+
+      NOTE: Js inserts semicolon automatically for the end of instruction in each line, but it's widely preferred to DIY.
+      */
+
+      // changing the value in a variable
+      let num = 10; // assignment
+      console.log(num);
+
+      num = 5; // re-assignment (we do not use `let` again)
+      console.log(num);
+
+      num = num / 2;
+      console.log(num); // 2.5
+
+      // Mini-project (Cart)
+      let cartQuantity = 0;
+
+      // NOTE: a = a + 5, is same as doing a += 5, and if you want to add one you can use -> `a++`
+      // same goes for a -= 5, a *= 5, a /= 5, a **= 5,...
+
+      // `camelCase` is the standard naming convention for javascript
+      // examples - a, sqrtA, findPaths, cartQuantity, aVeryBigVariableName, etc.
+
+      /*
+      Types of Casing ~
+            1. Camel Case: cartQuantity
+            2. Pascal Case: CartQuantity
+            3. Kebab Case: cart-quantity (can't be used in JS, used in HTML and CSS)
+            4. Snake Case: cart_quantity (used in Python etc.)
+      */
+
+      // Other ways to create a variable
+
+      const PI = 3.14159; // you can't change it's value
+      // PI = 1; -> will give a type error (also convention to CAPITALIZE var_names for constants)
+
+      var variable_1 = 10;
+      variable_1 = 20;
+      // 'var' also creates mutable(modifiable) variables like 'let' but has some issues which we'll see later
+
+      let number = 10;
+      console.log(typeof number); // number
+      number = "Hello";
+      console.log(typeof number); // string
+
+      // for mini-calculator
+      let result = "";
+    </script>
+  </body>
+</html>
