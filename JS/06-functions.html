@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Functions</title>
+  </head>
+  <body>
+    <p>Rock Paper Scissors (Functions)</p>
+    <button onclick="playerMove = `rock`; playGame(playerMove);">Rock</button>
+    <button onclick="playerMove = `paper`; playGame(playerMove);">Paper</button>
+    <button onclick="playerMove = `scissors`; playGame(playerMove);">
+      Scissors
+    </button>
+    <script>
+      // Function - Let's use reuse code
+      function func() {
+        console.log("Hello from function.");
+        console.log("2 + 2 =", 2 + 2);
+      }
+
+      // to use the function you need to call it.
+      func();
+      func();
+
+      // a function let's use reuse code
+      function greetUser(name) {
+        if (!name) console.log("Hi there!");
+        else console.log(`Hi ${name}!`);
+      }
+      greetUser("Starky");
+      greetUser();
+
+      // rock paper scissors ~ improved
+      function pickComputerMove() {
+        let computerMove = ``;
+        const randomNumber = Math.random(); // 0 <= num < 1
+
+        if (randomNumber >= 0 && randomNumber < 1 / 3) computerMove = "rock";
+        if (randomNumber >= 1 / 3 && randomNumber < 2 / 3)
+          computerMove = "rock";
+        else computerMove = "scissors";
+
+        return computerMove;
+      }
+
+      function playGame(playerMove) {
+        const computerMove = pickComputerMove();
+        let result = "";
+
+        if (playerMove === "rock") {
+          if (computerMove === "rock") result = "It's a Tie";
+          else if (computerMove === "paper") result = "You Lose";
+          else if (computerMove === "scissors") result = "You Win";
+        } else if (playerMove === "paper") {
+          if (computerMove === "paper") result = "It's a Tie";
+          else if (computerMove === "scissors") result = "You Lose";
+          else if (computerMove === "rock") result = "You Win";
+        } else if (playerMove === "scissors") {
+          if (computerMove === "scissors") result = "It's a Tie";
+          else if (computerMove === "rock") result = "You Lose";
+          else if (computerMove === "paper") result = "You Win";
+        }
+        alert(
+          `Your Move: ${playerMove}, Computer Move: ${computerMove}.\n${result}!!`
+        );
+      }
+    </script>
+  </body>
+</html>
