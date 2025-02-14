@@ -12,10 +12,18 @@
     </button>
 
     <button
-      onclick="score.wins = 0; score.losses = 0; score.ties = 0; alert(`All scores set to 0.`)"
+      onclick="score.wins = 0; score.losses = 0; score.ties = 0; localStorage.removeItem('score'); alert(`All scores set to 0.`);"
     >
       Reset Score
     </button>
+
+    <pre>
+Updates -
+  1. made `score` an object.
+  2. add `win`, `loss`, `tie` counts display.
+  3. used localStorage for saving `score`.
+  4. use of JSON - `stringify()` and `parse()`
+    </pre>
     <script>
       // an object groups multiple values together
       const product = {
@@ -37,12 +45,140 @@
       delete product.isCotton;
       console.log(product);
 
+      const product2 = {
+        name: "shirt",
+        "item-type": "clothing",
+        // you even store objects inside objects
+        rating: {
+          stars: 4.5,
+          count: 87,
+        },
+        fun: function funcInsideObject() {
+          console.log("Function inside an Object!");
+        },
+      };
+      console.log(product2.name); // dot notation
+      console.log(product2["name"]); // bracket notation
+
+      // when to use the bracket notation
+      // console.log(product2.item-type); // will say "type" is not defined as it thinks of it as `product2.item - type`.
+      console.log(product2["item-type"]);
+
+      let variable = "name";
+      console.log(product2[variable]); // you can also use variables
+      console.log(product2["item" + "-" + "type"]); // calculate things inside brackets
+
+      // accessing nested items
+      console.log("Rating:", product2.rating.stars);
+
+      // calling functions from objects
+      product2.fun(); // a function inside an object is called a `method`
+
+      // console is an object and log is a method for it
+      console.log("typeof console:", typeof console);
+      console.log("typeof console.log:", typeof console.log);
+
+      // same goes for "Math.random()" and all other things you'll see
+
+      // Built-in Objects - console and Math etc are objects provided by the language
+      // There are two more objects - JSON and localStorage which we can use to improve our game
+
+      /*
+      JSON - JavaScript Object Notation, similar to objects but has less features.
+        1. All properties in JSON must use ""
+        2. You can't use functions
+        3. JSON syntax is more universal (that's why this is used to send data between computers)
+        4. Used when we store data
+
+      JSON object is JS helps to convert js-object to json-string and vice versa.
+      */
+
+      let jsonString = JSON.stringify(product2); // converts JS object to JSON (you'll not see function here)
+      console.log(jsonString);
+      console.log("typeof JSON object:", typeof jsonString); // string
+
+      // converting jsonString back to object
+      console.log(JSON.parse(jsonString));
+
+      /*
+        - we are currently storing our data in variables but they are temporary, if we refresh/close the page it's deleted.
+
+        Use of localStorage object ~ to store the data in the local-storage (Cool)
+
+        NOTE: localStorage only supports strings
+      */
+      localStorage.setItem("message", "this is a safe message");
+      console.log(localStorage.getItem("message"));
+
+      /*
+      null - used when we intentionally want things to be empty
+      function func(value = "default") {
+        console.log(value);
+      }
+
+      func();                // 'default'
+      func(undefined);       // 'default'
+
+      func(null);            // null
+
+      > In most of the cases null and undefined work the same ways.
+      */
+
+      console.log("Length of 'hello':", "hello".length);
+      console.log("Upper Case of 'hello':", "hello".toUpperCase());
+
+      // we didn't have to create an object for "hello" above, this is called "auto-boxing"
+      // autoboxing works with everything except `null` and `undefined`
+
+      // objects are references - so the object below has the location of the data and references to it when used
+      const object_1 = {
+        message: "Hello",
+      };
+
+      const object_2 = object_1; // doesn't makes a copy of object but of the reference (copy by reference)
+
+      object_1.message = "World";
+      // and it being a reference tells why you can modify it's features
+      console.log(object_1);
+
+      const object_3 = {
+        message: "World",
+      };
+      console.log(object_1 === object_3); // false (compares references)
+      console.log(object_1 === object_2); // true (as they are refering to same thing)
+      console.log(object_1.message === object_3.message); // true
+
+      const object_4 = {
+        message: "Hello World",
+        price: 10,
+      };
+
+      // const message = object_1.message;
+      const { message, price } = object_4; // destructuring - shorcut
+      console.log("Message:", message, "Price:", price);
+
+      const object_5 = {
+        message, // same as doing `message: message` -> shorthand
+
+        // method: function func_1() {
+        //   console.log("Method");
+        // },
+        method() {
+          // shorthand method
+          console.log("Method");
+        },
+      };
+      console.log(object_5);
+      object_5.method();
+
+      // -------------------------------------------------------------------------------------------------------- //
       // rock paper scissors ~ improved
-      const score = {
+
+      let score = JSON.parse(localStorage.getItem("score")) || {
         wins: 0,
         losses: 0,
         ties: 0,
-      };
+      }; // gives default value of 0, 0, 0.
 
       function pickComputerMove() {
         let computerMove = ``;
@@ -77,6 +213,8 @@
         if (result === "You Win") score.wins++;
         else if (result === "You Lose") score.losses++;
         else if (result === "It's a Tie") score.ties++;
+
+        localStorage.setItem("score", JSON.stringify(score));
 
         alert(
           `Your Move: ${playerMove}, Computer Move: ${computerMove}.\n${result}!!\nWins: ${score.wins} Losses: ${score.losses} Ties: ${score.ties}`
