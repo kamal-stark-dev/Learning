@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>DOM - Document Object Manipulation</title>
+  </head>
+  <body>
+    <h3>DOM - Document Object Manipulation</h3>
+    <button>Hello</button>
+    <button class="js-btn">World</button>
+
+    <p>YouTube's Subscribe Button ~</p>
+    <button class="js-yt-subscribe" onclick="Subscribe()">Subscribe</button>
+
+    <hr />
+    <h3>Mini-Project</h3>
+    <a href="./Rock-Paper-Scissors.html">Rock Paper Scissors</a>
+    <hr />
+
+    <h3>Amazon Shipping Calculator</h3>
+    <p>Orders under $50 = +$5 shipping.</p>
+    <p>Orders over $50 = Free shipping.</p>
+    <input
+      type="text"
+      placeholder="Cost of order"
+      class="js-cost"
+      onkeydown="if(event.key === 'Enter') calculateTotal();"
+    />
+    <button onclick="calculateTotal();">Calculate</button>
+    <p class="js-total"></p>
+
+    <script>
+      // DOM is another built-in object called `document object`
+      //   document.body.innerHTML = "Hello World!";
+      document.title = "DOM goes brrr...";
+      console.log(document.title);
+
+      console.log(document.body);
+      console.log(typeof document.body);
+
+      // `querySelector` method used to get any element from the page
+      let firstBtn = document.querySelector("button"); // gets the first button element
+      console.log(firstBtn.innerHTML);
+      firstBtn.innerHTML = "Changed via DOM";
+
+      document.querySelector(".js-btn").innerHTML = "Second Button"; // using a class selector
+      // Note: HTML elements are JS objects, so you can save them in variables like we did above for `firstBtn`
+
+      // window object --> represent the browser
+      window.document;
+      window.console;
+      window.alert;
+
+      // we don't have to write 'window' explicitly, JS adds it by itself. So, we can directly use 'document', 'console' etc.
+
+      // --------------------------------------------------------------------------------------------------- //
+
+      function Subscribe() {
+        ytSubscribeBtn = document.querySelector(`.js-yt-subscribe`);
+        if (ytSubscribeBtn.innerText === `Subscribe`)
+          ytSubscribeBtn.innerText = "Subscribed!";
+        else ytSubscribeBtn.innerText = `Subscribe`;
+      }
+
+      function calculateTotal() {
+        let inputCost = document.querySelector(".js-cost").value;
+        if (!inputCost || isNaN(inputCost)) {
+          document.querySelector(".js-total").innerHTML = `(._.) Invalid Input`;
+          return;
+        }
+        let amount = +inputCost; // +inputCost ==> converts the `string` to `number`
+        if (amount < 50) amount += 10;
+        document.querySelector(".js-total").innerHTML = "$" + amount;
+      }
+      // `keydown` & `click` are events, `onClick` & `onKeyDown` are event-listeners.
+    </script>
+  </body>
+</html>
