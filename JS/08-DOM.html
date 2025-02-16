@@ -2,6 +2,41 @@
 <html lang="en">
   <head>
     <title>DOM - Document Object Manipulation</title>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      /* subscribe button styles */
+      .subscribe-btn {
+        border: none;
+        padding: 10px 15px;
+        background-color: black;
+        color: white;
+        font-weight: bold;
+        border-radius: 20px;
+        cursor: pointer;
+        margin-bottom: 8px;
+      }
+      .is-subscribed {
+        background-color: #eee;
+        color: black;
+      }
+
+      /* cost input, button styles */
+      .cost-input {
+        font-size: 15px;
+        padding: 8px;
+      }
+      .calculate-btn {
+        color: white;
+        background-color: green;
+        font-size: 15px;
+        padding: 10px 12px;
+        border: none;
+        cursor: pointer;
+      }
+    </style>
   </head>
   <body>
     <h3>DOM - Document Object Manipulation</h3>
@@ -9,11 +44,13 @@
     <button class="js-btn">World</button>
 
     <p>YouTube's Subscribe Button ~</p>
-    <button class="js-yt-subscribe" onclick="Subscribe()">Subscribe</button>
+    <button class="js-yt-subscribe subscribe-btn" onclick="Subscribe()">
+      Subscribe
+    </button>
 
     <hr />
     <h3>Mini-Project</h3>
-    <a href="./Rock-Paper-Scissors.html">Rock Paper Scissors</a>
+    <a href="Rock-Paper-Scissors.html">Rock Paper Scissors</a>
     <hr />
 
     <h3>Amazon Shipping Calculator</h3>
@@ -22,10 +59,10 @@
     <input
       type="text"
       placeholder="Cost of order"
-      class="js-cost"
+      class="js-cost cost-input"
       onkeydown="if(event.key === 'Enter') calculateTotal();"
     />
-    <button onclick="calculateTotal();">Calculate</button>
+    <button onclick="calculateTotal();" class="calculate-btn">Calculate</button>
     <p class="js-total"></p>
 
     <script>
@@ -56,9 +93,13 @@
 
       function Subscribe() {
         ytSubscribeBtn = document.querySelector(`.js-yt-subscribe`);
-        if (ytSubscribeBtn.innerText === `Subscribe`)
-          ytSubscribeBtn.innerText = "Subscribed!";
-        else ytSubscribeBtn.innerText = `Subscribe`;
+        if (ytSubscribeBtn.innerText === `Subscribe`) {
+          ytSubscribeBtn.innerText = "Subscribed";
+          ytSubscribeBtn.classList.add("is-subscribed");
+        } else {
+          ytSubscribeBtn.innerText = `Subscribe`;
+          ytSubscribeBtn.classList.remove("is-subscribed");
+        }
       }
 
       function calculateTotal() {
