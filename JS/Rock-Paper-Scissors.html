@@ -3,26 +3,91 @@
   <head>
     <title>Rock Paper Scissors</title>
     <style>
-      
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #111;
+        color: white;
+        margin: 0 24px;
+      }
+
+      .title {
+        font-size: 32px;
+        font-weight: bold;
+      }
+
+      .move-button {
+        background-color: transparent;
+        border: 2px dashed white;
+        width: 108px;
+        height: 108px;
+        border-radius: 54px;
+        margin-right: 12px;
+        cursor: pointer;
+      }
+      .move-icon {
+        height: 48px;
+      }
+
+      .result {
+        font-size: 24px;
+        font-weight: bold;
+      }
+
+      .score {
+        font-weight: bold;
+        margin-top: 24px;
+      }
+
+      .reset-score {
+        background-color: white;
+        color: black;
+        font-size: 15px;
+        padding: 8px 14px;
+        cursor: pointer;
+      }
+      .reset-score:hover {
+        background-color: #eff;
+      }
     </style>
   </head>
   <body>
-    <p>Rock Paper Scissors</p>
-    <button onclick="playerMove = `rock`; playGame(playerMove);">Rock</button>
-    <button onclick="playerMove = `paper`; playGame(playerMove);">Paper</button>
-    <button onclick="playerMove = `scissors`; playGame(playerMove);">
-      Scissors
-    </button>
-
-    <p class="js-current-result"></p>
-    <p class="js-current-moves"></p>
-    <p class="js-score"></p>
-
+    <p class="title">Rock Paper Scissors</p>
     <button
-      onclick="score.wins = 0; score.losses = 0; score.ties = 0; localStorage.removeItem('score'); updateScoreElement();"
+      onclick="playerMove = `rock`; playGame(playerMove);"
+      class="move-button"
     >
-      Reset Score
+      <img
+        src="./assets/rock-paper-scissors/rock-image.png"
+        alt="Rock"
+        class="move-icon"
+      />
     </button>
+    <button
+      onclick="playerMove = `paper`; playGame(playerMove);"
+      class="move-button"
+    >
+      <img
+        src="./assets/rock-paper-scissors/paper-image.png"
+        alt="Paper"
+        class="move-icon"
+      />
+    </button>
+    <button
+      onclick="playerMove = `scissors`; playGame(playerMove);"
+      class="move-button"
+    >
+      <img
+        src="./assets/rock-paper-scissors/scissors-image.png"
+        alt="Scissors"
+        class="move-icon"
+      />
+    </button>
+
+    <p class="js-current-result result"></p>
+    <p class="js-current-moves"></p>
+    <p class="js-score score"></p>
+
+    <button onclick="resetScores();" class="reset-score">Reset Score</button>
 
     <script>
       // rock paper scissors
@@ -40,15 +105,27 @@
       updateScoreElement();
 
       function updateScoreElement() {
-        scoreElement.innerHTML = `Wins: ${score.wins} Losses: ${score.losses} Ties: ${score.ties}`;
+        scoreElement.innerHTML = `Wins: ${score.wins}\tLosses: ${score.losses}\tTies: ${score.ties}`;
       }
 
       function showCurrentMoves(userMove, computerMove) {
-        currentMovesElement.innerHTML = `Your Move: ${userMove} - Computer's Move:${computerMove}`;
+        currentMovesElement.innerHTML = `You
+        <img src='./assets/rock-paper-scissors/${userMove}-image.png' class="move-icon">
+        <img src='./assets/rock-paper-scissors/${computerMove}-image.png' class="move-icon">
+        Computer`;
       }
 
       function showCurrentResult(result) {
         currentResultElement.innerHTML = result;
+      }
+
+      function resetScores() {
+        score.wins = 0;
+        score.losses = 0;
+        score.ties = 0;
+        localStorage.removeItem("score");
+        showCurrentResult(`Score was Reset`);
+        updateScoreElement();
       }
 
       function pickComputerMove() {
