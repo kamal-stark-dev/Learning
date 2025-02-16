@@ -36,6 +36,9 @@
         border: none;
         cursor: pointer;
       }
+      .invalid-input {
+        color: red;
+      }
     </style>
   </head>
   <body>
@@ -103,14 +106,27 @@
       }
 
       function calculateTotal() {
-        let inputCost = document.querySelector(".js-cost").value;
+        let input = document.querySelector(".js-cost");
+        let inputCost = input.value;
+        let outputElem = document.querySelector(".js-total");
+
         if (!inputCost || isNaN(inputCost)) {
-          document.querySelector(".js-total").innerHTML = `(._.) Invalid Input`;
+          outputElem.classList.add("invalid-input");
+          outputElem.innerHTML = `(._.) Invalid Input`;
           return;
         }
+
         let amount = +inputCost; // +inputCost ==> converts the `string` to `number`
+        if (amount < 0) {
+          outputElem.classList.add("invalid-input");
+          outputElem.innerHTML = "Error: Cost cannot be less than $0";
+          return;
+        }
         if (amount < 50) amount += 10;
-        document.querySelector(".js-total").innerHTML = "$" + amount;
+        if (outputElem.classList.contains("invalid-input")) {
+          outputElem.classList.remove("invalid-input");
+        }
+        outputElem.innerHTML = "$" + amount;
       }
       // `keydown` & `click` are events, `onClick` & `onKeyDown` are event-listeners.
     </script>
