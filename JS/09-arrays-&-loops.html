@@ -17,6 +17,7 @@
       onkeydown="handleKeyDown(event);"
     />
     <button onclick="addTask();">Add Task</button>
+    <div class="js-todo-tasks"></div>
 
     <!-- --------------------------------------- -->
 
@@ -53,11 +54,64 @@
       my_array.splice(0, 1); // (index, count)
       console.log(my_array);
 
+      // loops
+      /*
+      let i = 1;
+      while (i <= 5) {
+        console.log(i);
+        i++;
+      }
+      */
+      // i -> loop variable, i <= 5 -> loop condition, {...} -> loop body, i++ -> increment step
+
+      /*
+      for (let i = 1; i <= 5; i++) {
+        console.log(i);
+      }
+      */
+
+      // looping through an array
+      let fruits = ["apple", "banana", "orange", "neural networks", "gotcha"];
+
+      for (let i = 0; i < fruits.length; i++) {
+        console.log(fruits[i]);
+      }
+
+      // let's make a function which prints the sum of all the elements of an array
+      my_array = [2, 4, 5, 1];
+      let totalSum = 0;
+      for (let i = 0; i < my_array.length; i++) {
+        totalSum += my_array[i];
+      }
+      console.log("sum of elements of my_array is", totalSum);
+
+      // a function that prints the min and max elements in an array
+      function minMax(nums) {
+        if (nums.length == 0) return [null, null];
+
+        let minElement = nums[0],
+          maxElement = nums[0];
+        for (let i = 0; i < nums.length; i++) {
+          if (nums[i] < minElement) minElement = nums[i];
+          else if (nums[i] > maxElement) maxElement = nums[i];
+        }
+        return [minElement, maxElement];
+      }
+
+      let [minElement, maxElement] = minMax([]);
+      console.log(`Min: ${minElement}\nMax: ${maxElement}`);
+
+      [minElement, maxElement] = minMax([-2, 3, -5, 7, 10]);
+      console.log(`Min: ${minElement}\nMax: ${maxElement}`);
+
       // ----------------------------------------------------------------------------------------------------- //
 
       // TO DO LIST
       let taskInput = document.querySelector(".task-input");
       let tasks = [];
+
+      // show tasks
+      renderTasks();
 
       function addTask() {
         let task = taskInput.value;
@@ -68,6 +122,18 @@
         tasks.push(task);
         taskInput.value = "";
         console.log(tasks);
+        // show tasks
+        renderTasks();
+      }
+
+      function renderTasks() {
+        let todoListHTML = ``;
+        for (let i = 0; i < tasks.length; i++) {
+          const task = tasks[i];
+          const taskHTML = `<p>${task}</p>`;
+          todoListHTML += taskHTML;
+        }
+        document.querySelector(".js-todo-tasks").innerHTML = todoListHTML;
       }
 
       function handleKeyDown(event) {
