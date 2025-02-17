@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Arrays and Loops</title>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <p>To Do List</p>
+    <input
+      type="text"
+      placeholder="Enter task"
+      class="task-input"
+      onkeydown="handleKeyDown(event);"
+    />
+    <button onclick="addTask();">Add Task</button>
+
+    <!-- --------------------------------------- -->
+
+    <script>
+      // array - type of data that represent list of values
+      let my_array = [10, 20, 30];
+      console.log(my_array);
+
+      // accessing the first value in array (zero-indexed ==> starts with the index 0)
+      console.log(my_array[0]);
+
+      // change value in array
+      my_array[1] = 15;
+      console.log(my_array[1]);
+
+      // an array can have multiple types of items
+      let array_2 = [10, "text", true, { item: "socks" }, [1, 2, 3]];
+
+      // typeof array - object
+      console.log("typeof array", typeof array_2);
+
+      // to specifically check if something is array or not use
+      console.log(Array.isArray("apple"));
+      console.log(Array.isArray([1, 2, 3]));
+
+      // length of array
+      console.log("length of [1, 2, 3, 4, 5] is", [1, 2, 3, 4, 5].length);
+
+      my_array = [1, 2, 3];
+      my_array.push(4); // to add more items in the end of array
+      console.log(my_array);
+
+      // remove value(s) from the array
+      my_array.splice(0, 1); // (index, count)
+      console.log(my_array);
+
+      // ----------------------------------------------------------------------------------------------------- //
+
+      // TO DO LIST
+      let taskInput = document.querySelector(".task-input");
+      let tasks = [];
+
+      function addTask() {
+        let task = taskInput.value;
+
+        if (task === "") {
+          return;
+        }
+        tasks.push(task);
+        taskInput.value = "";
+        console.log(tasks);
+      }
+
+      function handleKeyDown(event) {
+        if (event.key === "Enter") {
+          addTask();
+        }
+      }
+    </script>
+  </body>
+</html>
