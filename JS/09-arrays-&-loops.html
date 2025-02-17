@@ -37,24 +37,36 @@
       let array_2 = [10, "text", true, { item: "socks" }, [1, 2, 3]];
 
       // typeof array - object
-      console.log("typeof array", typeof array_2);
+      console.log("typeof [1, 2, 3]:", typeof [1, 2, 3]);
 
       // to specifically check if something is array or not use
-      console.log(Array.isArray("apple"));
-      console.log(Array.isArray([1, 2, 3]));
+      console.log('Array.isArray("apple"):', Array.isArray("apple"));
+      console.log("Array.isArray([1, 2, 3]):", Array.isArray([1, 2, 3]));
 
       // length of array
       console.log("length of [1, 2, 3, 4, 5] is", [1, 2, 3, 4, 5].length);
 
       my_array = [1, 2, 3];
       my_array.push(4); // to add more items in the end of array
-      console.log(my_array);
+      console.log("array after pushing:", my_array);
 
       // remove value(s) from the array
       my_array.splice(0, 1); // (index, count)
-      console.log(my_array);
+      console.log("array after splice:", my_array);
 
-      // loops
+      // arrays are references like objects
+      const array1 = [1, 2, 3];
+      const array2 = array1;
+      const array3 = array1.slice(); // avoid referencing issue
+      array2.push(4);
+      console.log(`array1: ${array1}
+array2: ${array2}
+array3: ${array3}`);
+
+      // destructuring
+      let [firstValue, secondValue] = [1, 2, 3, 4, 5];
+
+      // ------- loops -------
       /*
       let i = 1;
       while (i <= 5) {
@@ -69,6 +81,27 @@
         console.log(i);
       }
       */
+
+      // break and continue in loops
+      /*
+      for (let i = 0; i <= 10; i++) {
+        if (i === 3) continue; // skip this iteration
+        if (i === 8) break; // stop the loop
+        console.log(i);
+      }
+      */
+
+      /*
+      let i = 1;
+      while (i <= 10) {
+        if (i % 3 === 0) {
+          i++; // we need to add this manually or bad things will happen :(
+          continue;
+        }
+        console.log(i);
+        i++;
+      }
+     */
 
       // looping through an array
       let fruits = ["apple", "banana", "orange", "neural networks", "gotcha"];
