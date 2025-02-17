@@ -21,12 +21,43 @@ def pressButton(button):
         pyautogui.leftClick()
 
 # open calculator
-openCalculator()
+# openCalculator()
 
-# perform calculation
-pressButton('2')
-pressButton('dot')
-pressButton('5')
-pressButton('plus')
-pressButton('2')
-pressButton('equals')
+# # perform calculation
+# pressButton('2')
+# pressButton('dot')
+# pressButton('5')
+# pressButton('plus')
+# pressButton('2')
+# pressButton('equals')
+
+validSymbols = {}
+convertor = {'.': 'dot', '+': 'plus', '*': 'multiply', '-': 'minus', '=': 'equals', '/': 'divide'}
+
+def parseString(calculationStr):
+    paths = []
+    for symbol in calculationStr:
+        if symbol not in validSymbols:
+            continue
+        if symbol == ' ':
+            continue
+        elif symbol in convertor:
+            paths.append(convertor[symbol])
+        else:
+            paths.append(symbol)
+    return paths
+
+def calculate(input: str):
+    # find the relative paths
+    buttons = parseString(input)
+
+    # open the calculator
+    openCalculator()
+
+    # click appropriate buttons
+    for button in buttons:
+        pressButton(button)
+    time.sleep(1)
+
+calString = '2   *  2.5 = '
+calculate(calString)
