@@ -11,7 +11,6 @@ def openCalculator():
     pyautogui.press('enter')
     time.sleep(1)
 
-# performing calculation 2 + 2 =
 def pressButton(button):
     imgPath = rf'buttons/{button}.png'
     location = pyautogui.locateCenterOnScreen(imgPath, confidence=0.9)
@@ -31,15 +30,13 @@ def pressButton(button):
 # pressButton('2')
 # pressButton('equals')
 
-validSymbols = {}
+validSymbols = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*', '/', '.', '='}
 convertor = {'.': 'dot', '+': 'plus', '*': 'multiply', '-': 'minus', '=': 'equals', '/': 'divide'}
 
 def parseString(calculationStr):
     paths = []
     for symbol in calculationStr:
         if symbol not in validSymbols:
-            continue
-        if symbol == ' ':
             continue
         elif symbol in convertor:
             paths.append(convertor[symbol])
