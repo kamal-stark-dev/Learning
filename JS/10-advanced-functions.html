@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Advanced Functions</title>
+  </head>
+  <body>
+    <script>
+      // creating and calling a function
+      function greet(user) {
+        console.log(`Hello, ${user}.`);
+      }
+      greet("Jake"); // Hello, Jake.
+
+      // functions are values --> you can save them in a variable
+      const func = function () {
+        console.log("Function inside a variable.");
+      };
+      console.log(func);
+      console.log("typof func:", typeof func);
+      func(); // calling the variable
+
+      // You can not do HOISTING (calling func before it's declaration) when you are using then in a variable.
+
+      const object1 = {
+        num: 2,
+        fun: function () {
+          // you can remove the name as you can call this using `object.fun()`
+          console.log("Hello World");
+        },
+      };
+      object1.fun(); // calling the function with object
+
+      function run(param) {
+        // passing function as parameters --> callback
+        param();
+        param();
+      }
+      run(function () {
+        console.log("Hello World :)");
+      });
+
+      setTimeout(function () {
+        console.log("Timeout");
+      }, 3000); // this will run after 3000ms (3s)
+
+      console.log("Written after Timeout."); // this will be shown before timeout
+
+      /*
+      Asynchronous Code - won't wait for the current statement to finish before going to the next line
+      As we can see that the `setTimeout` is asynchronous.
+
+      Synchronous Code - will wait for the line to finish before going to the next line.
+
+      Note: The code inside an asynchronous code block is synchronous, until specifically set.
+      Advantage: We don't have to wait for the statement to complete and then move onto next lines.
+      */
+
+      // setInverval -> calls the function after each interval specified (Asynchronous)
+      setInterval(function () {
+        console.log("Interval");
+      }, 3000);
+    </script>
+  </body>
+</html>
