@@ -58,3 +58,5 @@ def calculate(input: str):
 
 calString = '2   *  2.5 = '
 calculate(calString)
+
+# TODO: Need to make it more functional and have things like "squares and roots and all"
