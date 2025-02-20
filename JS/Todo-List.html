@@ -7,6 +7,18 @@
         font-family: Arial, Helvetica, sans-serif;
       }
 
+      .container {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .title {
+        font-size: 28px;
+        font-weight: bold;
+      }
+
       .task-input,
       .due-date-input {
         padding: 8px;
@@ -42,19 +54,21 @@
     </style>
   </head>
   <body>
-    <h3>Todo List go Brrr...</h3>
-    <div class="todo-input-grid">
-      <input
-        type="text"
-        placeholder="Enter task"
-        class="task-input"
-        onkeydown="handleEvent(event);"
-      />
-      <input type="date" class="due-date-input" />
-      <button onclick="addTask();" class="add-btn">Add</button>
-    </div>
+    <div class="container">
+      <p class="title">Todo List go Brrr...</p>
+      <div class="todo-input-grid">
+        <input
+          type="text"
+          placeholder="Enter task"
+          class="task-input"
+          onkeydown="handleEvent(event);"
+        />
+        <input type="date" class="due-date-input" />
+        <button onclick="addTask();" class="add-btn">Add</button>
+      </div>
 
-    <div class="js-todo-list todo-grid"></div>
+      <div class="js-todo-list todo-grid"></div>
+    </div>
 
     <script>
       tasks = [
