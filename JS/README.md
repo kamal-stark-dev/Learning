@@ -64,3 +64,8 @@ document.body.innerHTML = "Hello, World!!";
 
 1. [Rock-Paper-Scissors](./Rock-Paper-Scissors.html)
 2. [Todo-List](./Todo-List.html)
+
+### Learning Resources
+
+1. [JavaScript Tutorial - SuperSimpleDev](https://www.youtube.com/watch?v=EerdGm-ehJQ)
+2. [JavascriptInfo](https://javascript.info/)
