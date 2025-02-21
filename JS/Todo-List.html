@@ -107,19 +107,19 @@
         let todoTasksHTML = ``;
         let todoDiv = document.querySelector(".js-todo-list");
 
-        for (let i = 0; i < tasks.length; i++) {
-          const todoObject = tasks[i];
+        tasks.forEach(function (todoObject, index) {
           let { name, dueDate } = todoObject;
           const taskHTML = `
             <div>${name}</div>
             <div>${dueDate}</div>
             <button onclick="
-                tasks.splice(${i}, 1);
+                tasks.splice(${index}, 1);
                 renderTasks();
             " class="delete-btn">Delete</button>
           `;
           todoTasksHTML += taskHTML;
-        }
+        });
+
         todoDiv.innerHTML = todoTasksHTML;
       }
     </script>
