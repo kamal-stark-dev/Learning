@@ -159,6 +159,23 @@ Open the `developer-tools` to see them.
 
       // short form for the same
       console.log([1, 2, 3].map((value) => value * 2));
+
+      console.log(
+        "HERE ->",
+        [-1, 2, 1, -2, 4].filter((value) => value >= 0).length
+      );
+
+      // a function that adds `num` to each element in the `array`
+      function addNum(array, num) {
+        return array.map((value) => value + num);
+      }
+      console.log(addNum([5, 10, 15], 5));
+
+      console.log(
+        ["egg", "bread", "juice", "apple", "egg"].filter((value) => {
+          return value !== "egg";
+        })
+      );
     </script>
   </body>
 </html>

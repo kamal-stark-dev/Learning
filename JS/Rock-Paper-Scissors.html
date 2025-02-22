@@ -78,10 +78,14 @@
     <p class="js-current-moves"></p>
     <p class="js-score score"></p>
 
-    <button onclick="resetScores();" class="btn-style">Reset Score</button>
+    <button onclick="resetConfirmation();" class="btn-style">
+      Reset Score
+    </button>
     <button onclick="autoPlay();" class="js-auto-play btn-style">
       Auto Play
     </button>
+
+    <div class="js-reset-confirmation"></div>
 
     <script>
       // rock paper scissors
@@ -111,6 +115,17 @@
 
       function showCurrentResult(result) {
         currentResultElement.innerHTML = result;
+      }
+
+      function resetConfirmation() {
+        const resetScoreConfirmation = document.querySelector(
+          ".js-reset-confirmation"
+        );
+        resetScoreConfirmation.innerHTML = `
+          <p>Are you sure you want to reset the score?</p>
+          <button class="btn-style" onclick="resetScores(); document.querySelector('.js-reset-confirmation').innerHTML = '';">Yes</button>
+          <button class="btn-style" onclick="document.querySelector('.js-reset-confirmation').innerHTML = '';">No</button>
+        `;
       }
 
       function resetScores() {
@@ -181,7 +196,7 @@
           intervalId = setInterval(function () {
             const playerMove = pickComputerMove();
             playGame(playerMove);
-          }, 1000);
+          }, 750);
         } else if (autoPlayElem.innerText === "Stop Play") {
           clearInterval(intervalId);
           autoPlayElem.innerHTML = `Auto Play`;
@@ -196,6 +211,10 @@
           playGame(`paper`);
         } else if (event.key === "s") {
           playGame(`scissors`);
+        } else if (event.key === "a") {
+          autoPlay();
+        } else if (event.key === "Backspace") {
+          resetConfirmation();
         }
       });
     </script>
