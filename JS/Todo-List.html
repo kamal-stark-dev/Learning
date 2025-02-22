@@ -64,7 +64,7 @@
           onkeydown="handleEvent(event);"
         />
         <input type="date" class="due-date-input" />
-        <button onclick="addTask();" class="add-btn">Add</button>
+        <button class="add-btn js-add-btn">Add</button>
       </div>
 
       <div class="js-todo-list todo-grid"></div>
@@ -87,6 +87,10 @@
           addTask();
         }
       }
+
+      document.querySelector(".js-add-btn").addEventListener("click", () => {
+        addTask();
+      });
 
       function addTask() {
         let taskInputElement = document.querySelector(".task-input");
@@ -112,15 +116,22 @@
           const taskHTML = `
             <div>${name}</div>
             <div>${dueDate}</div>
-            <button onclick="
-                tasks.splice(${index}, 1);
-                renderTasks();
-            " class="delete-btn">Delete</button>
+            <button class="delete-btn js-delete-btn">Delete</button>
           `;
           todoTasksHTML += taskHTML;
         });
 
         todoDiv.innerHTML = todoTasksHTML;
+
+        // we get all the delete buttons and then ran a for each loop and added event listner for every button
+        document
+          .querySelectorAll(".js-delete-btn")
+          .forEach((deleteButton, index) => {
+            deleteButton.addEventListener("click", () => {
+              tasks.splice(index, 1);
+              renderTasks();
+            });
+          });
       }
     </script>
   </body>

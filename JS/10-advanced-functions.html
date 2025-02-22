@@ -4,6 +4,22 @@
     <title>Advanced Functions</title>
   </head>
   <body>
+    <pre>
+Things are happening in the Console.
+Open the `developer-tools` to see them.
+    </pre>
+    <hr />
+    <p>Click on this button to make background red for 3 seconds.</p>
+    <button class="js-make-red">Make Red</button>
+    <br /><br />
+
+    <p>Use these buttons to add or remove messages and see the title.</p>
+    <button onclick="msgCount++;">Add Msg</button>
+    <button onclick="if (msgCount >= 1) msgCount--;">Remove Msg</button>
+
+    <br /><br />
+    <button class="js-event-btn">Event</button>
+
     <script>
       // creating and calling a function
       function greet(user) {
@@ -56,9 +72,93 @@
       */
 
       // setInverval -> calls the function after each interval specified (Asynchronous)
-      setInterval(function () {
+      let intervalId;
+      intervalId = setInterval(function () {
         console.log("Interval");
-      }, 3000);
+      }, 2000); // every 2 seconds
+
+      // stop an interval
+      setTimeout(function () {
+        clearInterval(intervalId);
+      }, 6000); // run this code after 12 seconds - timeout
+
+      let my_array = ["one", "two", "three", "four"];
+      my_array.forEach(function (value, index) {
+        if (value === "two") {
+          return; // works as continue
+        }
+        console.log(index, value);
+      });
+
+      // `forEach` method is preferred way to loop through an array, you can also get `index` like above.
+      // if you need to use break then it's recommended to use regular for loops.
+
+      const makeRedBtn = document.querySelector(".js-make-red");
+      makeRedBtn.addEventListener("click", () => {
+        makeRed(3);
+      });
+
+      function makeRed(waitTime) {
+        let prevBgColor = document.body.style.backgroundColor;
+        document.body.style.backgroundColor = "red";
+        setTimeout(function () {
+          document.body.style.backgroundColor = prevBgColor;
+        }, waitTime * 1000);
+      }
+
+      // function that shows messages in title
+      let msgCount = 3;
+      let titles = [`Advanced Functions`, `(${msgCount}) new messages`];
+      let currIdx = 0;
+
+      setInterval(function () {
+        if (msgCount <= 0) {
+          document.title = `Advanced Functions`;
+          return;
+        }
+        titles[1] = `(${msgCount}) new messages`;
+        currIdx = (currIdx + 1) % titles.length;
+        document.title = titles[currIdx];
+      }, 2000);
+
+      // shorter way to write functions -> Arrow Functions
+      const arrowFunction = (param) => {
+        console.log("Arrow Function:", param);
+      };
+      arrowFunction("Cool");
+
+      const oneline = () => 2 + 3; // one line arrow function
+      console.log("One Line:", oneline());
+
+      const eventBtn = document.querySelector(".js-event-btn");
+      const event1 = () => {
+        console.log("Click 1");
+      };
+
+      // preferred to use addEventListner method
+      eventBtn.addEventListener("click", event1);
+      eventBtn.removeEventListener("click", event1); // you can also remove an event listner
+      eventBtn.addEventListener("click", () => {
+        console.log("Click 2");
+      });
+
+      // filter
+      console.log(
+        [1, -3, 2, 5, -10].filter((value, index) => {
+          // filter out all the negative numbers
+          return value >= 0; // should return a boolean value
+        })
+      );
+
+      // map
+      console.log(
+        [1, 2, 3].map((value, index) => {
+          return value * 2;
+        })
+      );
+
+      // short form for the same
+      console.log([1, 2, 3].map((value) => value * 2));
     </script>
   </body>
 </html>
