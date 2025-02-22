@@ -52,30 +52,21 @@
   </head>
   <body>
     <p class="title">Rock Paper Scissors</p>
-    <button
-      onclick="playerMove = `rock`; playGame(playerMove);"
-      class="move-button"
-    >
+    <button onclick="playGame(`rock`);" class="move-button">
       <img
         src="./assets/rock-paper-scissors/rock-image.png"
         alt="Rock"
         class="move-icon"
       />
     </button>
-    <button
-      onclick="playerMove = `paper`; playGame(playerMove);"
-      class="move-button"
-    >
+    <button onclick="playGame(`paper`);" class="move-button">
       <img
         src="./assets/rock-paper-scissors/paper-image.png"
         alt="Paper"
         class="move-icon"
       />
     </button>
-    <button
-      onclick="playerMove = `scissors`; playGame(playerMove);"
-      class="move-button"
-    >
+    <button onclick=" playGame(`scissors`);" class="move-button">
       <img
         src="./assets/rock-paper-scissors/scissors-image.png"
         alt="Scissors"
@@ -196,6 +187,17 @@
           autoPlayElem.innerHTML = `Auto Play`;
         }
       }
+
+      // keydown event listners
+      document.body.addEventListener("keydown", (event) => {
+        if (event.key === "r") {
+          playGame(`rock`);
+        } else if (event.key === "p") {
+          playGame(`paper`);
+        } else if (event.key === "s") {
+          playGame(`scissors`);
+        }
+      });
     </script>
   </body>
 </html>
