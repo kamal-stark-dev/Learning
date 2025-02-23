@@ -126,7 +126,7 @@
        an element is placed in is determined by the order
        of the elements in the HTML. grid-column overrides
        this default ordering).
-       
+
        / span 2 means this element will take up 2 columns
        in the grid (Normally, each element takes up 1
        column in the grid). */
