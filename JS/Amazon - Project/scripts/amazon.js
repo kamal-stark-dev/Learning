@@ -1,6 +1,8 @@
-// Save the Data
+// This is how the data looks like (Array of Objects)
+/*
 const products = [
   {
+    id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
     image: "images/products/athletic-cotton-socks-6-pairs.jpg",
     name: "Black and Gray Athletic Cotton Socks - 6 Pairs",
     rating: {
@@ -8,8 +10,10 @@ const products = [
       count: 87,
     },
     priceCents: 1090,
+    keywords: ["socks", "sports", "apparel"],
   },
   {
+    id: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
     image: "images/products/intermediate-composite-basketball.jpg",
     name: "Intermediate Size Basketball",
     rating: {
@@ -17,17 +21,10 @@ const products = [
       count: 127,
     },
     priceCents: 2095,
-  },
-  {
-    image: "images/products/adults-plain-cotton-tshirt-2-pack-teal.jpg",
-    name: "Adults Plain Cotton T-Shirt - 2 Pack",
-    rating: {
-      stars: 4.5,
-      count: 56,
-    },
-    priceCents: 799,
+    keywords: ["sports", "basketballs"],
   },
 ];
+*/
 
 let productsHTML = "";
 products.forEach((product) => {
@@ -80,10 +77,39 @@ products.forEach((product) => {
         Added
         </div>
 
-        <button class="add-to-cart-button button-primary">Add to Cart</button>
+        <button
+          class="add-to-cart-button button-primary js-add-to-cart"
+          data-product-id="${product.id}"
+        >
+            Add to Cart
+        </button>
     </div>
     `;
 });
 
 // console.log(productsHTML);
 document.querySelector(".js-products-grid").innerHTML = productsHTML;
+
+document.querySelectorAll(".js-add-to-cart").forEach((button) => {
+  button.addEventListener("click", () => {
+    const productId = button.dataset.productId;
+
+    let matchingItem;
+    cart.forEach((item) => {
+      if (productId === item.productId) {
+        matchingItem = item;
+      }
+    });
+
+    if (matchingItem) {
+      matchingItem.quantity++;
+    } else {
+      cart.push({
+        productId: productId,
+        quantity: 1,
+      });
+    }
+
+    console.log(cart);
+  });
+});
