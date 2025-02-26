@@ -1,3 +1,6 @@
+import { cart } from "../data/cart.js"; // importing the cart variable from '../data/cart.js' file
+import { products } from "../data/products.js";
+
 // This is how the data looks like (Array of Objects)
 /*
 const products = [
