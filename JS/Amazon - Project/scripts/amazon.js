@@ -1,5 +1,5 @@
 import { products } from "../data/products.js";
-import { cart, addToCart } from "../data/cart.js";
+import { cart, addToCart, updateCartQuantity } from "../data/cart.js";
 import { formatCurrency } from "./utils/money.js";
 
 // This is how the data looks like (Array of Objects)
@@ -98,15 +98,7 @@ products.forEach((product) => {
 // console.log(productsHTML);
 document.querySelector(".js-products-grid").innerHTML = productsHTML;
 
-function updateCartQuantity() {
-  // calculate cart quantity
-  let cartQuantity = 0;
-  cart.forEach((cartItem) => {
-    cartQuantity += cartItem.quantity;
-  });
-
-  document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
-}
+updateCartQuantity();
 
 function handleAddedToCart(timeoutId, productId) {
   // this function sets added-to-cart text to the appropriate button

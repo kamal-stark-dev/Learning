@@ -1,4 +1,4 @@
-import { cart, removeFromCart } from "../data/cart.js";
+import { cart, removeFromCart, updateCartQuantity } from "../data/cart.js";
 import { products } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
 
@@ -100,5 +100,9 @@ document.querySelectorAll(".js-delete-link").forEach((link) => {
 
     // removing the HTML for the removed item
     document.querySelector(`.js-cart-item-container-${productId}`).remove();
+    updateCartQuantity();
   });
 });
+
+// update checkout items count
+updateCartQuantity();
