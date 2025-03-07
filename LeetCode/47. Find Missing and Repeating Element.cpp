@@ -25,7 +25,7 @@ vector<int> findMissingAndRepeatedValues(vector<vector<int>> grid) {
         }
     }
     // a -> repeated num, b -> missing num
-    // expSum + a - b = actualSum
+    // expwSum + a - b = actualSum
     expSum = (n * n) * (n * n + 1) / 2;
     b = expSum + a - actualSum;
     ans.push_back(b);
