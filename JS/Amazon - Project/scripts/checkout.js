@@ -7,6 +7,14 @@ import {
 import { products } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
 
+// using external library
+import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
+
+// using external libraries - if you are trying to do something complicated try to find a relevant library first.
+const today = dayjs();
+const deliverData = today.add(7, "day");
+console.log(deliverData.format("dddd, MMMM D"));
+
 let cartSummaryHTML = "";
 
 cart.forEach((cartItem) => {
