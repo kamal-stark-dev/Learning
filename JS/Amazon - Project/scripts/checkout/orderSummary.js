@@ -14,6 +14,7 @@ import {
 
 // using external library
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
+import { renderPaymentSummary } from "./paymentSummary.js";
 
 // using external libraries - if you are trying to do something complicated try to find a relevant library first.
 
@@ -122,6 +123,8 @@ export function renderOrderSummary() {
       // removing the HTML for the removed item
       document.querySelector(`.js-cart-item-container-${productId}`).remove();
       updateCartQuantity();
+
+      renderPaymentSummary(); // Controller in MVC
     });
   });
 
@@ -174,6 +177,7 @@ export function renderOrderSummary() {
       const { productId, deliveryOptionId } = element.dataset;
       updateDeliveryOption(productId, deliveryOptionId);
       renderOrderSummary();
+      renderPaymentSummary(); // controller
     });
   });
 }
