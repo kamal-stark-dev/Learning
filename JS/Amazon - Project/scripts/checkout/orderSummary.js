@@ -5,38 +5,28 @@ import {
   updateQuantity,
   updateDeliveryOption,
 } from "../../data/cart.js";
-import { products } from "../../data/products.js";
+import { products, getProduct } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
-import { deliveryOptions } from "../../data/deliveryOptions.js";
+import {
+  deliveryOptions,
+  getDeliveryOption,
+} from "../../data/deliveryOptions.js";
 
 // using external library
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 
 // using external libraries - if you are trying to do something complicated try to find a relevant library first.
-const today = dayjs();
-const deliverData = today.add(7, "day");
-console.log(deliverData.format("dddd, MMMM D"));
 
 export function renderOrderSummary() {
   let cartSummaryHTML = "";
 
   cart.forEach((cartItem) => {
     const productId = cartItem.productId;
-    let matchingProduct;
-
-    products.forEach((product) => {
-      if (product.id == productId) {
-        matchingProduct = product;
-      }
-    });
+    const matchingProduct = getProduct(productId);
 
     const deliveryOptionId = cartItem.deliveryOptionId;
-    let deliveryOption;
-    deliveryOptions.forEach((option) => {
-      if (option.id === deliveryOptionId) {
-        deliveryOption = option;
-      }
-    });
+
+    const deliveryOption = getDeliveryOption(deliveryOptionId);
 
     const today = dayjs();
     const deliverDate = today.add(deliveryOption.deliveryDays, "days");
