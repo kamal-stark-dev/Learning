@@ -58,3 +58,6 @@ int main(void) {
 
     return 0;
 }
+/*
+Each function here has time complexity of O(1). <constant time complexity>
+*/
