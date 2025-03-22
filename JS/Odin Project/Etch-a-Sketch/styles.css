@@ -38,6 +38,10 @@ main {
   align-items: center;
   gap: 12px;
 }
+.guide {
+  border-top: 2px dashed black;
+  padding-top: 16px;
+}
 button {
   color: black;
   background-color: white;
@@ -51,7 +55,17 @@ button:hover {
   color: white;
   background-color: #333;
 }
-
+.grid {
+  margin-top: 24px;
+  font-size: 17px;
+  border-top: 2px dashed black;
+  padding-top: 16px;
+}
+.grid input {
+  font-size: 16px;
+  padding: 4px;
+  width: 40px;
+}
 #color-selector {
   -webkit-appearance: none;
   -moz-appearance: none;
