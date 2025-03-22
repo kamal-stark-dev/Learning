@@ -1,6 +1,7 @@
 // QUEUE - FIFO (First In First Out)
 
 #include <iostream>
+#include <queue>
 using namespace std;
 
 class Node {
@@ -23,7 +24,7 @@ public:
         head = tail = nullptr;
     }
 
-    void enqueue(int val) {
+    void push(int val) {
         Node* newNode = new Node(val);
         if (empty()) {
             head = tail = newNode;
@@ -33,7 +34,7 @@ public:
         tail = newNode;
     }
 
-    void dequeue() {
+    void pop() {
         if (empty()) {
             cout << "Queue is Empty.\n";
             return;
@@ -69,13 +70,14 @@ int main(void) {
         front -> look at front
     */
 
-    Queue q;
+    // Queue q;
+    queue<int> q;
 
-    q.enqueue(1);
-    q.enqueue(2);
-    q.enqueue(3);
+    q.push(1);
+    q.push(2);
+    q.push(3);
 
-    q.dequeue();
+    q.pop();
 
     cout << q.front() << endl;
 
