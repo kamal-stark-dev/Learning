@@ -473,3 +473,151 @@ int main() {
 ### 1. Sort
 
 The `std::sort` function in C++ is part of the `<algorithm>` header and is used to **sort elements** in a range. It rearranges the elements in **ascending order by default** or according to a custom comparator if provided.
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+bool comp(pair<int, int> p1, pair<int, int> p2) {
+    if (p1.second < p2.second) return true;
+    if (p1.second > p2.second) return false;
+    if (p1.first > p2.first) return true;
+    return false;
+}
+
+int main(void) {
+    // sort(a, a + n);
+
+    vector<int> nums = {3, 5, 2, 1, 4};
+
+    sort(nums.begin(), nums.end());
+
+    for (int n : nums) cout << n << " ";
+    cout << endl;
+
+    sort(nums.begin(), nums.end(), greater<int>());
+    // greater<int>() is an inbuilt comparator
+
+    for (int n : nums) cout << n << " ";
+    cout << endl;
+
+    vector<pair<int, int>> arr = {{1, 2}, {2, 1}, {4, 1}};
+
+    // sort is according to second element ascending
+    // if second element is same then
+    // sort it according to the first element descending
+
+    sort(arr.begin(), arr.end(), comp);
+
+    for (auto i : arr) {
+        cout << i.first << " " << i.second << endl;
+    }
+
+    return 0;
+}
+```
+
+### 2. Builtin Popcount
+
+This function utilizes the built-in `__builtin_popcount` function to count the number of set bits (1s) in the binary representation of an integer.
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(void) {
+    int num = 7; // 111 -> 3 set bits
+    cout << "Number of set bits (1s) in `" << num << "` are `" << __builtin_popcount(num) << "`.\n";
+
+    long long lnum = 192729804892;
+    int count = __builtin_popcountll(lnum);
+
+    cout << "Number of set bits (1s) in `" << lnum << "` are `" << count << "`.\n";
+
+    return 0;
+}
+```
+
+### 3. Next Permutation
+
+The `next_permutation` function rearranges elements into the **next lexicographically greater permutation**. If no such permutation exists, it rearranges the elements into the smallest possible order.
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(void) {
+    string s = "213";
+    sort(s.begin(), s.end());
+
+    do {
+        cout << s << endl;
+    }
+    while(next_permutation(s.begin(), s.end()));
+    // return falsy value when no permutations exists
+
+    return 0;
+}
+```
+
+### 4. Maximum Element
+
+Finds the **largest element in a given range** using the `max_element` function. The `max_element` function is part of the C++ Standard Template Library (STL) and returns an iterator pointing to the maximum element in the range [first, last).
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(void) {
+    vector<int> nums = {5, 2, 4, 8, 2, -3};
+
+    vector<int>::iterator max_it = max_element(nums.begin(), nums.end());
+    int maxi = *max_element(nums.begin(), nums.end());
+
+    cout << *(max_it) << " " << maxi << endl; // 8 8
+
+    return 0;
+}
+```
+
+---
+
+### Summary of STL in C++
+
+The **Standard Template Library (STL)** in C++ is a powerful collection of pre-defined classes and functions that simplify common programming tasks.
+
+It provides a rich set of **containers**, **algorithms**, and **iterators** to handle data efficiently.
+
+#### Key Highlights:
+
+1. **Containers**:
+
+   - **Sequence Containers** like `vector`, `deque`, and `list` maintain the order of elements.
+   - **Associative Containers** like `set`, `map`, and their unordered counterparts provide fast lookups and unique element storage.
+   - **Unordered Containers** use hash tables for efficient operations.
+
+2. **Specialized Containers**:
+
+   - **Stack**: Follows LIFO (Last In, First Out) principle.
+   - **Queue**: Follows FIFO (First In, First Out) principle.
+   - **Priority Queue**: Processes elements based on priority.
+
+3. **Algorithms**:
+
+   - Pre-defined functions like `sort`, `reverse`, `max_element`, and `next_permutation` make data manipulation seamless.
+   - Advanced utilities like `__builtin_popcount` help with bit-level operations.
+
+4. **Iterators**:
+   - Enable traversal of container elements, supporting operations like insertion, deletion, and access.
+
+### Why Use STL?
+
+- **Efficiency**: Optimized for performance with minimal overhead.
+- **Flexibility**: Works with any data type using templates.
+- **Convenience**: Reduces boilerplate code, allowing developers to focus on logic.
+
+The STL is an _indispensable_ tool for **competitive programming, system design, and real-world applications**, offering a robust foundation for solving complex problems with ease.
+
+---
+
+### Thankyou (Go Away Now)
