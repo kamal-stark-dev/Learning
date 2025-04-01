@@ -349,3 +349,127 @@ int main(void) {
     return 0;
 }
 ```
+
+#### Unordered Set
+
+An `unordered_set` is a container that stores unique elements in no particular order.
+It provides **fast insertion, deletion, and lookup** operations using a `hash table`.
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+// all operations (generically) -> O(1)
+// worst case (rare) -> O(n)
+
+int main(void) {
+    unordered_set<int> s; // unique elements but randomly ordered
+
+    /*
+        doesn't have lower_bound & upper_bound functions
+        it does not store elements in any order and
+        has better time  complexity than set in most cases,
+        except when some collision happens
+    */
+
+    return 0;
+}
+```
+
+### 9. Map
+
+A `map` is an associative container that stores **key-value pairs**. It automatically **sorts the elements by the keys** and allows fast retrieval of values using keys. Each key in a map is unique, and it is implemented as a **balanced binary search tree**.
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(void) {
+    map<int, int> m; // key-value pair -> with unique keys
+
+    m[1] = 2;
+    m.emplace(3, 1);
+    m.insert({2,4}); // {{1, 2}, {2, 4}, {3, 1}}
+
+    // note: map stores keys in sorted order
+
+    map<pair<int, int>, int> m2;
+
+    m2[{1, 2}] = 5; // key => {1, 2}, value => 5
+
+    for (auto item : m) {
+        cout << item.first << " " << item.second << endl;
+    }
+
+    cout << m[1] << endl; // 2
+    cout << m[10] << endl; // 0 - if not there
+
+    auto it = m.find(3);
+    cout << (it->second) << endl; // 1
+
+    it = m.find(100); // m.end()
+
+    it = m.lower_bound(2);
+    it = m.upper_bound(3);
+
+    // erase, swap, size, empty are same as others
+
+    return 0;
+}
+```
+
+#### Multimap & Unordered Map
+
+A `multimap` is an associative container that allows storing **multiple values for the same key**. An `unordered_map` is also an associative container, but it stores unique key-value pairs and **uses a hash table** for fast lookups.
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(void) {
+    multimap<int, int> mm;
+
+    /*
+    [Sorted + Duplicate Keys] -> O(log n)
+        you can store duplicate keys that are stored in sorted
+        order but you can't use `m[key]` to access values.
+    */
+
+    unordered_map<int, int> um;
+
+    /*
+    [Unsorted + Unique Keys] -> O(1) | O(n) -> worst case
+        allows faster retrieval but it doesn't stores the keys
+        in sorted order, and stores unique keys only.
+    */
+
+    return 0;
+}
+```
+
+---
+
+## Algorithms
+
+Algorithms in STL are **pre-defined functions** that help perform common tasks like **searching, sorting, or manipulating data efficiently**. For example:
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    vector<int> v = {3, 1, 4, 1, 5};
+
+    sort(v.begin(), v.end()); // Sorts the vector: {1, 1, 3, 4, 5}
+    reverse(v.begin(), v.end()); // Reverses the vector: {5, 4, 3, 1, 1}
+
+    cout << *max_element(v.begin(), v.end()) << endl; // Finds max element: 5
+    cout << count(v.begin(), v.end(), 1) << endl; // Counts occurrences of 1: 2
+
+    return 0;
+}
+```
+
+### 1. Sort
+
+The `std::sort` function in C++ is part of the `<algorithm>` header and is used to **sort elements** in a range. It rearranges the elements in **ascending order by default** or according to a custom comparator if provided.
