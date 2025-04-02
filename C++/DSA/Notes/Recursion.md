@@ -96,3 +96,27 @@ int main(void) {
     return 0;
 }
 ```
+
+---
+
+### Factorials Less than or Equal to `N`:
+
+I found this problem quite good for recursion practice - [Factorials Less than or Equal to n](https://www.geeksforgeeks.org/problems/find-all-factorial-numbers-less-than-or-equal-to-n3548/0?problemType=functional&difficulty%255B%255D=-1&page=1&query=problemTypefunctionaldifficulty%255B%255D-1page1)
+
+```cpp
+vector<long long> factorialNumbers(long long n, long long num = 1, long long count = 2) {
+    vector<long long> ans;
+
+    if (num > n) return ans;
+
+    ans.push_back(num);
+
+    vector<long long> next = factorialNumbers(n, num * count, count + 1);
+
+    ans.insert(ans.end(), next.begin(), next.end());
+
+    return ans;
+}
+```
+
+To be continued...
