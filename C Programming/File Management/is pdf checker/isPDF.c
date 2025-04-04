@@ -1,6 +1,14 @@
 #include <stdio.h>
 #include <stdint.h> // for uint8_t
 
+/*
+uint8_t
+    -> u stands for unsigned (positive only)
+    -> int is for integer type
+    -> 8 is the number of bytes
+    -> _t tells that this is its own type (convention)
+*/
+
 int main(int argc, char *argv[])
 {
     if (argc != 2)
@@ -18,9 +26,9 @@ int main(int argc, char *argv[])
     }
 
     uint8_t buffer[4];
-    fread(buffer, 1, 4, f); // read 4 bytes to buffer 1 byte at a time from file
+    int blocks_read = fread(buffer, 1, 4, f); // read 4 bytes to buffer 1 byte at a time from file
 
-    // for a PDF it should be 37 80 68 70
+    // for a PDF the first four bytes should be 37 80 68 70
     uint8_t pdfBytes[4] = {37, 80, 68, 70};
 
     int isPDF = 1;
@@ -41,6 +49,8 @@ int main(int argc, char *argv[])
     {
         printf("The file \"%s\" is not a PDF.\n", filename);
     }
+
+    printf("Blocks read: %i\n", blocks_read);
 
     return 0;
 }
