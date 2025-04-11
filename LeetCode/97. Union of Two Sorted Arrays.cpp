@@ -49,3 +49,8 @@ int main(void) {
     for (int n : unionArr) cout << n << " ";
     return 0;
 }
+
+/*
+Time Complexity: O(n + m)
+Space Complexity: O(1) -> computing & O(n + m) -> storing union
+*/
