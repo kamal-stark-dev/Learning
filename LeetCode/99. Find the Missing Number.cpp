@@ -61,6 +61,9 @@ int main(void) {
 }
 
 /*
+A ^ A = 0
+0 ^ A = A
+
 Time Complexity:
     Brute: O(n * n)
     Better: O(2 * n)
