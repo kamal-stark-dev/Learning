@@ -38,10 +38,22 @@ int findMissing_Optimal(vector<int> nums) {
     return nSum - sum;
 }
 
+int findMissing_Optimal2(vector<int> nums) {
+    int n = nums.size();
+    int xor1 = 0, xor2 = 0;
+
+    for (int i = 0; i < n; i++) {
+        xor1 ^= nums[i];
+        xor2 ^= i;
+    }
+    xor2 ^= n;
+    return xor1 ^ xor2;
+}
+
 int main(void) {
     vector<int> nums = {3, 0, 1};
 
-    int missingNumber = findMissing_Optimal(nums);
+    int missingNumber = findMissing_Optimal2(nums);
 
     cout << "The missing number is " << missingNumber << endl;
 
@@ -53,9 +65,13 @@ Time Complexity:
     Brute: O(n * n)
     Better: O(2 * n)
     Optimal: O(n)
+    XOR Optimal: O(n)
 
 Space Complexity:
     Brute: O(1)
     Better: O(n)
     Optimal: O(1)
+    XOR Optimal: O(1)
+
+NOTE: XOR Optimal is slightly better than the SUM one as the sum can exceed INT_MAX, but XOR approach will be in the integer range.
 */
