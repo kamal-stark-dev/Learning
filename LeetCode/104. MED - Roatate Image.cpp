@@ -22,14 +22,14 @@ void rotateImage_optimal(vector<vector<int>>& matrix) {
     int n = matrix.size();
 
     // transpose the matrix
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) { // O(n / 2 * n / 2) nearly
         for (int j = i + 1; j < n; j ++) {
             swap(matrix[i][j], matrix[j][i]);
         }
     }
 
     // reverse each row
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) { // O(n * n / 2) -> n / 2 for reversing
         reverse(matrix[i].begin(), matrix[i].end());
     }
     return;
