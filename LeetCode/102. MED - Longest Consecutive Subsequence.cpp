@@ -10,11 +10,11 @@ int longestSubsequence(vector<int> nums) {
     int longest = 0;
     unordered_set<int> st;
 
-    for (int n: nums) {
+    for (int n: nums) { // O(n), no collisions
         st.insert(n);
     }
 
-    for (int n: st) {
+    for (int n: st) { // O(2 * n) not O(n), think about it (hint: while loop)
         if (st.find(n - 1) == st.end()) { // possible start of the series
             int el = n;
             int count = 0;
@@ -39,7 +39,7 @@ int main(void) {
 /*
 Time Complexity:
     Better Version: O(n logn) + O(n) -> if we use the sort approach
-    Optimal Version: O(n) + O(n) -> if no collision occurs
+    Optimal Version: O(n) + O(2 * n) -> if no collision occurs, O(n ^ 2) -> if collision occurs
 
 Space Complexity:
     Better Version: O(1)
