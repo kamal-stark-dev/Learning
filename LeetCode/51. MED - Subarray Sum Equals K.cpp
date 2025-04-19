@@ -47,11 +47,26 @@ int subarraySum_PrefixSum(vector<int>& nums, int k) {
     return count;
 }
 
+int subarraySum_Optimal(vector<int>& nums, int k) { // using variable instead of making prefixSum array
+    int n = nums.size();
+    unordered_map<int, int> mp;
+    mp[0] = 1; // if we find k in start then `presum - k = 0` is in map set as '1'
+    int count = 0, presum = 0;
+
+    for (int i = 0; i < n; i++) {
+        presum += nums[i];
+        int rem = presum - k;
+        count += mp[rem];
+        mp[presum] += 1;
+    }
+    return count;
+}
+
 int main(void) {
     vector<int> nums = {9, 4, 20, 3, 10, 5};
     int k = 33;
 
-    int subarraySumCount = subarraySum_PrefixSum(nums, k);
+    int subarraySumCount = subarraySum_Optimal(nums, k);
     cout << "There are " << subarraySumCount << " subarrays adding up to " << k << endl;
 
     return 0;
