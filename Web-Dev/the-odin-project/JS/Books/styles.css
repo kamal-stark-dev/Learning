@@ -1,0 +1,113 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: burlywood;
+  color: brown;
+  font-size: 16px;
+}
+
+main {
+  margin: 2rem 4rem;
+}
+
+.heading {
+  font-size: 32px;
+  text-align: center;
+  margin: 1rem;
+}
+
+.books {
+  margin-top: 4rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.book {
+  border: 1px solid black;
+  padding: 1rem;
+  aspect-ratio: 3/4;
+  width: 240px;
+  position: relative;
+}
+
+.book .remove-book {
+  font-size: 1.5rem;
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  opacity: 0;
+  pointer-events: none; /* prevents interaction when not visible */
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.book .read-status {
+  cursor: pointer;
+}
+
+.book:hover .remove-book {
+  opacity: 0.6;
+  pointer-events: auto;
+  border-radius: 50%;
+}
+
+.book .remove-book:hover {
+  opacity: 1;
+}
+
+.div-add-book {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#add-book {
+  border: none;
+  padding: 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#add-book:hover {
+  background-color: rgb(231, 231, 231);
+}
+
+#dialog-box {
+  background-color: white;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 1.5rem;
+  width: 400px;
+  border: 1px solid black;
+}
+
+#dialog-box form {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 0 0;
+  gap: 12px;
+}
+
+#dialog-box form button {
+  padding: 12px;
+  width: max-content;
+  margin: 12px auto 0;
+  cursor: pointer;
+}
+
+#close-dialog {
+  margin-bottom: 12px;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+  padding: 4px;
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Library go brrr...</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main>
+      <h1 class="heading">It's a Library I guess ~</h1>
+      <div class="books" id="books"></div>
+
+      <dialog id="dialog-box">
+        <button autofocus id="close-dialog">
+          <i class="ri-close-large-line"></i>
+        </button>
+        <h2>Enter New Book's Details</h2>
+        <form>
+          <label>Title: <input required type="text" id="book-name" /></label>
+          <label>Author: <input required type="text" id="book-author" /></label>
+          <label>Pages: <input required type="number" id="book-pages" /></label>
+          <button>Add Book</button>
+        </form>
+      </dialog>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
