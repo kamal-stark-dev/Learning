@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\91638\\Desktop\\Learning MF\\Learning\\C\u002B\u002B\\The_Cherno\\NewProject\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F37D1054-7135-488C-A2CE-73034D0B2CB7}|NewProject\\NewProject.vcxproj|C:\\Users\\91638\\Desktop\\Learning MF\\Learning\\C\u002B\u002B\\The_Cherno\\NewProject\\NewProject\\src\\PureVirtualFunction.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{F37D1054-7135-488C-A2CE-73034D0B2CB7}|NewProject\\NewProject.vcxproj|solutionrelative:NewProject\\src\\PureVirtualFunction.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F37D1054-7135-488C-A2CE-73034D0B2CB7}|NewProject\\NewProject.vcxproj|C:\\Users\\91638\\Desktop\\Learning MF\\Learning\\C\u002B\u002B\\The_Cherno\\NewProject\\NewProject\\src\\VirtualFunctions.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{F37D1054-7135-488C-A2CE-73034D0B2CB7}|NewProject\\NewProject.vcxproj|solutionrelative:NewProject\\src\\VirtualFunctions.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "VirtualFunctions.cpp",
+              "DocumentMoniker": "C:\\Users\\91638\\Desktop\\Learning MF\\Learning\\C\u002B\u002B\\The_Cherno\\NewProject\\NewProject\\src\\VirtualFunctions.cpp",
+              "RelativeDocumentMoniker": "NewProject\\src\\VirtualFunctions.cpp",
+              "ToolTip": "C:\\Users\\91638\\Desktop\\Learning MF\\Learning\\C\u002B\u002B\\The_Cherno\\NewProject\\NewProject\\src\\VirtualFunctions.cpp",
+              "RelativeToolTip": "NewProject\\src\\VirtualFunctions.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-06-08T13:45:44.171Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PureVirtualFunction.cpp",
+              "DocumentMoniker": "C:\\Users\\91638\\Desktop\\Learning MF\\Learning\\C\u002B\u002B\\The_Cherno\\NewProject\\NewProject\\src\\PureVirtualFunction.cpp",
+              "RelativeDocumentMoniker": "NewProject\\src\\PureVirtualFunction.cpp",
+              "ToolTip": "C:\\Users\\91638\\Desktop\\Learning MF\\Learning\\C\u002B\u002B\\The_Cherno\\NewProject\\NewProject\\src\\PureVirtualFunction.cpp",
+              "RelativeToolTip": "NewProject\\src\\PureVirtualFunction.cpp",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABYAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-06-08T13:43:20.299Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

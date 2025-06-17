@@ -31,4 +31,12 @@ A language which supports objects and requires them belonging to a class but doe
 3. Third Generation Languages: `Modula`, introduced the concept of abstract data types.
 4. Fourth Generation Languages (Object-Oriented Languages): `Smalltalk`, `Objective C`, `C++`, emphasis on relationship between abstract data types through the use of inheritance.
 
-> `C++` was designed by `Bjarne Stourstrup` of **AT&BT Bell Laboratories** in the early 1980s.
+> `C++` was designed by `Bjarne Stourstrup` of **AT&BT Bell Laboratories** in the early 1980s. It was designed to incorporate the object-oriented paradigm to the C programming language.
+
+C was widely-used in the industry because it was:
+
+1. **Efficient**: It has a number of low-level features which utilizes the hardware better than other languages.
+2. **Felxible**: Can be used to solve problems in most application areas.
+3. **Available**: Compilers for C are readily available for most computers.
+
+> Other influences for C++ were `Simula67` and `Algol68`.
