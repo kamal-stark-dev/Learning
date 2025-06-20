@@ -8,3 +8,5 @@ createRoot(document.getElementById("root")).render(
     <App />
   </StrictMode>
 );
+
+// JSX - Simply means a combination of JavaScript and HTML
