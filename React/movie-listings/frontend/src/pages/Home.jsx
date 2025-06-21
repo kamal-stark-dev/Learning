@@ -17,7 +17,11 @@ function Home() {
     { id: 10, title: "Iron Man", release_date: "2008" },
   ];
 
-  const handleSearch = () => {};
+  const handleSearch = (e) => {
+    e.preventDefault();
+    alert(searchQuery);
+    // setSearchQuery("");
+  };
 
   return (
     <div className="home">
@@ -27,6 +31,7 @@ function Home() {
           placeholder="Search for movies..."
           className="search-input"
           value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
         />
         <button type="submit" className="search-button">
           Search
