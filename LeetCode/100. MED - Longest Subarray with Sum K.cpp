@@ -22,24 +22,22 @@ int longestSubarray_brute(vector<int> nums, int k) {
 int longestSubarray_optimal(vector<int> nums, int k) {
     map<int, int> m; // sum, index
 
-        int n = nums.size();
-        int sum = 0;
-        int maxLen = 0;
+    int n = nums.size(), sum = 0, maxLen = 0;
 
-        for (int i = 0; i < n; i++) {
-            sum += nums[i];
-            if (sum == k) {
-                maxLen = max(maxLen, i + 1);
-            }
-            int rem = sum - k;
-            if (m.find(rem) != m.end()) {
-                maxLen = max(maxLen, i - m[rem]);
-            }
-            if (m.find(sum) == m.end()) {
-                m[sum] = i;
-            }
+    for (int i = 0; i < n; i++) {
+        sum += nums[i];
+        if (sum == k) {
+            maxLen = max(maxLen, i + 1);
         }
-        return maxLen;
+        int rem = sum - k;
+        if (m.find(rem) != m.end()) {
+            maxLen = max(maxLen, i - m[rem]);
+        }
+        if (m.find(sum) == m.end()) {
+            m[sum] = i;
+        }
+    }
+    return maxLen;
 }
 
 // if you have an array of non-negative elements then the below approach is the optimal one
