@@ -24,10 +24,25 @@ function Home() {
     loadPopularMovies();
   }, []); // [] -> is dependency array
 
-  const handleSearch = (e) => {
+  const handleSearch = async (e) => {
     e.preventDefault();
-    alert(searchQuery);
-    // setSearchQuery("");
+
+    if (!searchQuery.trim()) return;
+    if (loading) return;
+
+    setLoading(true);
+    const searchResults = await searchMovies(searchQuery);
+    setMovies(searchResults);
+    setError(null);
+    try {
+    } catch (err) {
+      console.log(err);
+      setError("Failed to search movies...");
+    } finally {
+      setLoading(false);
+    }
+
+    setSearchQuery("");
   };
 
   return (
