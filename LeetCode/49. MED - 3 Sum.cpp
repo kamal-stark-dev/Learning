@@ -71,7 +71,7 @@ vector<vector<int>> threeSum_TwoPointers(vector<int> nums) {
     sort(nums.begin(), nums.end());
 
     // base cases
-    if (nums.size() > 3) return {};
+    if (nums.size() < 3) return {};
     if (nums[0] > 0) return {};
 
     vector<vector<int>> ans;
@@ -90,6 +90,7 @@ vector<vector<int>> threeSum_TwoPointers(vector<int> nums) {
 
                 left++; right--;
                 while(left < right && nums[left] == nums[left - 1]) left++;
+                while (left < right && nums[right] == nums[right + 1]) right--;
             }
             else if (nums[left] + nums[right] + nums[i] > 0) {
                 right--;
@@ -100,10 +101,42 @@ vector<vector<int>> threeSum_TwoPointers(vector<int> nums) {
     return ans;
 }
 
+vector<vector<int>> threeSum_TwoPointers_Practice(vector<int> nums) {
+    // Step 1: sort the array
+    sort(nums.begin(), nums.end());
+
+    int n = nums.size();
+    vector<vector<int>> ans;
+
+    // Step 2: traverse through each index in nums
+    for (int i = 0; i < n; i++) {
+        if (nums[i] > 0) break;
+        if (i > 0 && nums[i] == nums[i - 1]) continue; // skip `i` if it's same as previous
+        int j = i + 1, k = n - 1;
+
+        // Step 3: use the two pointers approach to find triplets
+        while (j < k) {
+            int sum = nums[i] + nums[j] + nums[k];
+            if (sum == 0) {
+                ans.push_back({nums[i], nums[j], nums[k]});
+
+                j++; k--;
+                while (j < k && nums[j] == nums[j - 1]) j++; // skips j if same as previous
+                while (j < k && nums[k] == nums[k + 1]) k--; // skips k if same as previous
+            }
+            else if (sum > 0) k--;
+            else j++;
+        }
+    }
+
+    return ans;
+}
+
 
 int main(void) {
     vector<int> nums = {-1, 0, 1, 2, -1, -4}; // 3 unique triplets which adds upto `0`
-    vector<vector<int>> res = threeSum_TwoPointers(nums);
+    // vector<vector<int>> res = threeSum_TwoPointers(nums);
+    vector<vector<int>> res = threeSum_TwoPointers_Practice(nums);
 
     cout << "3 Sum Unique Triplets:\n";
     for (auto row: res) {
