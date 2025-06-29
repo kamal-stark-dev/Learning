@@ -33,9 +33,32 @@ vector<int> findMissingAndRepeatedValues(vector<vector<int>> grid) {
     return ans;
 }
 
+vector<int> findMissingAndRepeatedValuesNums(vector<int> nums) {
+    int n = nums.size();
+    long long sn = (n * (n + 1)) / 2;
+    long long s2n = (n * (n + 1) * (2 * n + 1)) / 6;
+    int missing = -1, repeating = -1;
+
+    long long s = 0, s2 = 0;
+    for (int n: nums) {
+        s += n;
+        s2 += n * n;
+    }
+
+    int xmy = s - sn;
+    int xpy = (s2 - s2n) / xmy;
+
+    repeating = (xpy + xmy) / 2;
+    missing = xpy - repeating;
+    return {repeating, missing};
+}
+
 int main(void) {
-    vector<vector<int>> grid = {{1, 3}, {2, 2}};
-    vector<int> res = findMissingAndRepeatedValues(grid);
+    // vector<vector<int>> grid = {{1, 3}, {2, 2}};
+    // vector<int> res = findMissingAndRepeatedValues(grid);
+
+    vector<int> nums = {1, 2, 1, 4, 5};
+    vector<int> res = findMissingAndRepeatedValuesNums(nums);
 
     cout << "Repeated: " << res[0] << ", Missing: " << res[1] << endl;
     return 0;
