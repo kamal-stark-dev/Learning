@@ -26,8 +26,8 @@ int merge(vector<int>& nums, int start, int mid, int end) {
             temp.push_back(nums[i++]);
         }
         else { // when nums[i] > nums[j]
-            temp.push_back(nums[j++]);
             invCount += (mid - i + 1);
+            temp.push_back(nums[j++]);
         }
     }
     while (i <= mid) {
@@ -44,22 +44,23 @@ int merge(vector<int>& nums, int start, int mid, int end) {
 }
 
 int countInversions_mergeSort(vector<int>& nums, int start, int end) { // TC: O(n logn) | SC: O(n)
+    int invCount = 0;
     if (start < end) {
         int mid = start + (end - start) / 2;
 
-        int leftInvCount = countInversions_mergeSort(nums, start, mid);
-        int rightInvCount = countInversions_mergeSort(nums, mid + 1, end);
+        invCount += countInversions_mergeSort(nums, start, mid);
+        invCount += countInversions_mergeSort(nums, mid + 1, end);
 
-        int currInvCount = merge(nums, start, mid, end);
+        invCount += merge(nums, start, mid, end);
 
-        return (leftInvCount + rightInvCount + currInvCount);
+        return invCount;
     }
     return 0;
 }
 
 int main(void) {
-    // vector<int> nums = {6, 3, 5, 2, 7};
-    vector<int> nums = {10, 10, 10};
+    vector<int> nums = {6, 3, 5, 2, 7};
+    // vector<int> nums = {10, 10, 10};
     /*
     We need to count the number of inversions in the array, inversions are the pairs of (arr[i], arr[j]) that follow -
         1. i < j
