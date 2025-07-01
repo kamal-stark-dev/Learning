@@ -40,6 +40,10 @@
     "sstream": "cpp",
     "stdexcept": "cpp",
     "streambuf": "cpp",
-    "typeinfo": "cpp"
+    "typeinfo": "cpp",
+    "ios": "cpp",
+    "xiosbase": "cpp",
+    "list": "cpp",
+    "xstring": "cpp"
   }
 }
