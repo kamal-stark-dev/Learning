@@ -27,7 +27,6 @@ int rotatedBinarySearch(vector<int> nums, int target) {
         else if (nums[left] <= nums[mid]) { // left sorted
             if (nums[left] <= target && target <= nums[mid]) right = mid - 1;
             else left = mid + 1;
-
         }
         else { // right sorted
             if (nums[mid] <= target && target <= nums[right]) left = mid + 1;

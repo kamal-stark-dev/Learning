@@ -14,6 +14,8 @@ int countOccurences(vector<int>& nums, int target) {
         }
         else left = mid + 1;
     }
+    if (startIdx == -1) return 0;
+
     left = 0, right = nums.size() - 1;
     while (left <= right) {
         int mid = left + (right - left) / 2;
@@ -24,7 +26,6 @@ int countOccurences(vector<int>& nums, int target) {
         }
         else right = mid - 1;
     }
-    if (startIdx == -1) return 0;
     return endIdx - startIdx + 1;
 }
 
