@@ -1,21 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Card = ({ title, rating, isBadass, actors }) => {
+  const [count, setCount] = useState(0);
   const [hasLiked, setHasLiked] = useState(false);
+
+  useEffect(() => {
+    console.log(`${title} has been: ${hasLiked ? "Liked" : "Disliked"}`);
+  }, [hasLiked]);
+
+  useEffect(() => {
+    console.log("Card Rendered!");
+  }, []); // will only render when the component is first made
 
   return (
     <div
-      style={{
-        background: "#121212",
-        padding: "24px",
-        border: "2px solid white",
-      }}
+      className="card"
+      onClick={() => setCount((prevState) => prevState + 1)}
     >
-      <h2>{title}</h2>
+      <h2>
+        {title} - {count}
+      </h2>
       <p>Rating: {rating} </p>
       <p>Badass: {isBadass ? "Yes" : "No"}</p>
       <p>Star Cast: {actors}</p>
-      <button onClick={() => setHasLiked(!hasLiked)}>
+      <button onClick={() => setHasLiked((prevHasLiked) => !prevHasLiked)}>
         {hasLiked ? "❤️" : "🤍"}
       </button>
     </div>
