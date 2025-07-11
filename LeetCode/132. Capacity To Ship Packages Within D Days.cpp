@@ -23,8 +23,8 @@ bool validShipment(vector<int>& weights, int days, int max_limit) {
 }
 
 int minShipCapacity(vector<int>& weights, int days) {
-    // int left = *max(weights.begin(), weights.end()), right = accumulate(weights.begin(),  weights.end(), 0);
-    int left = 1, right = accumulate(weights.begin(),  weights.end(), 0);
+    int left = *max(weights.begin(), weights.end()), right = accumulate(weights.begin(),  weights.end(), 0);
+    // int left = 1, right = accumulate(weights.begin(),  weights.end(), 0);
 
     while (left < right) {
         int mid = left + (right - left) / 2;
