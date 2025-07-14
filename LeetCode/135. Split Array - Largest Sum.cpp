@@ -1,4 +1,5 @@
 // Split Array - Largest Sum (Direct Variation of Book Allocation)
+// Exactly the same approach if for Painter's Partition Problem
 
 #include <iostream>
 #include <vector>
