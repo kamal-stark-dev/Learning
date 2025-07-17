@@ -25,6 +25,20 @@ bool searchMatrix(vector<vector<int>>& mat, int target) { // O(log(rows * cols))
     return false;
 }
 
+bool searchMatrix_Easier(vector<vector<int>>& mat, int target) {
+    int m = mat.size(), n = mat[0].size();
+    int left = 0, right = (m * n) - 1;
+
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        int row = mid / m, col = mid % m;
+        if (mat[row][col] == target) return true;
+        else if (mat[row][col] < target) left = mid + 1;
+        else right = mid - 1;
+    }
+    return false;
+}
+
 int main(void) {
     vector<vector<int>> matrix = {
         {1, 3, 5, 7},
@@ -33,7 +47,7 @@ int main(void) {
     };
     int target = 11;
 
-    if(searchMatrix(matrix, target)) cout << target << " is present in the matrix.\n";
+    if(searchMatrix_Easier(matrix, target)) cout << target << " is present in the matrix.\n";
     else cout << target << " is not present in the matrix.\n";
 
     return 0;
