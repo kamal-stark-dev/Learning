@@ -45,6 +45,7 @@
     "xiosbase": "cpp",
     "list": "cpp",
     "xstring": "cpp",
-    "xutility": "cpp"
+    "xutility": "cpp",
+    "numeric": "cpp"
   }
 }
