@@ -38,6 +38,25 @@ void printLinkedList(Node* head) {
     cout << "NULL\n";
 }
 
+int lengthLinkedList(Node* head) {
+    Node* temp = head;
+    int len = 0;
+    while (temp) {
+        len++;
+        temp = temp->next;
+    }
+    return len;
+}
+
+bool searchLinkedList(Node* head, int key) {
+    Node* temp = head;
+    while (temp) {
+        if (temp->data == key) return true;
+        temp = temp->next;
+    }
+    return false;
+}
+
 int main(void) {
     Node* head = new Node(10); // new keyword is used to dynamically allocate memory
 
@@ -48,6 +67,12 @@ int main(void) {
     insertNode(head, 30);
     insertNodeAtHead(head, 0);
     printLinkedList(head);
+
+    cout << "The length of the linked list is " << lengthLinkedList(head) << ".\n";
+
+    int key1 = 20, key2 = 50;
+    cout << key1 << " is" << (searchLinkedList(head, key1) ? "": " not") << " present in the list.\n";
+    cout << key2 << " is" << (searchLinkedList(head, key2) ? "": " not") << " present in the list.\n";
 
     return 0;
 }
