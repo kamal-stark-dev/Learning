@@ -41,6 +41,24 @@ public:
 
         return slow;
     }
+
+    ListNode* hasCycle_Concise(ListNode *head) {
+        ListNode *slow = head, *fast = head, *start = head;
+
+        while (fast != NULL && fast->next != NULL) {
+            slow = slow->next;
+            fast = fast->next->next;
+
+            if (slow == fast) { // loop exists
+                while (start != fast) {
+                    start = start->next;
+                    fast = fast->next;
+                }
+                return start;
+            }
+        }
+        return NULL;
+    }
 };
 
 // Example usage
