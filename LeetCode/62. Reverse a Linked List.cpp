@@ -61,6 +61,25 @@ public:
         }
         head = prev;
     }
+
+    Node* recursive_reverse(Node* head) {
+        if (!head || !head->next) {
+            return head;
+        }
+
+        Node* newHead = recursive_reverse(head->next);
+
+        // backtracking part
+        Node* front = head->next;
+        front->next = head;
+        head->next = nullptr;
+
+        return newHead;
+    }
+
+    void reverse_list_recursion() {
+        head = recursive_reverse(head);
+    }
 };
 
 int main(void) {
@@ -74,7 +93,8 @@ int main(void) {
     cout << "Original List: ";
     myList.print_list();
 
-    myList.reverse_list();
+    // myList.reverse_list();
+    myList.reverse_list_recursion();
 
     cout << "Reversed List: ";
     myList.print_list();
