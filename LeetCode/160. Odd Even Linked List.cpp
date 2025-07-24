@@ -29,6 +29,21 @@ Node* oddEvenList(Node* head) {
     return head;
 }
 
+Node* oddEvenList_MyLogic(Node* head) {
+    if (!head || !head->next) return head;
+
+    Node *odd = head, *prev = head->next;
+    while (prev && prev->next) {
+        Node* temp = prev->next;
+        prev->next = temp->next;
+        temp->next = odd->next;
+        odd->next = temp;
+        odd = odd->next;
+        prev = prev->next;
+    }
+    return head;
+}
+
 int main(void) {
     // 2,1,3,5,6,4,7
     Node* head = new Node(2);
@@ -39,7 +54,7 @@ int main(void) {
     head->next->next->next->next->next = new Node(4);
     head->next->next->next->next->next->next = new Node(7);
 
-    head = oddEvenList(head);
+    head = oddEvenList_MyLogic(head);
 
     cout << "Odd Even List: ";
     Node* curr = head;
