@@ -9,6 +9,7 @@ void printStack(stack<int> st) {
         cout << st.top() << " ";
         st.pop();
     }
+    cout << '\n';
 }
 
 void insertSorted(stack<int>& st, int element) {
@@ -40,6 +41,10 @@ int main(void) {
     st.push(4);
     st.push(1);
 
+    cout << "Stack: ";
+    printStack(st);
+
+    cout << "Sorted Stack: ";
     sortStack(st); // O(n ^ 2)
     printStack(st); // O(n)
 
