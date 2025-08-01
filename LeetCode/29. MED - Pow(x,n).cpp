@@ -11,17 +11,16 @@ double myPow(double x, int n) {
     if (x == -1 && n % 2 != 0) return -1;
 
     double res = 1;
-    int bf = n;
 
     if (n < 0) {
         x = 1 / x;
-        bf *= -1;
+        n *= -1;
     }
 
-    while (bf > 0) {
-        if (bf % 2 == 1) res *= x;
+    while (n > 0) {
+        if (n % 2 == 1) res *= x;
         x *= x;
-        bf /= 2;
+        n /= 2;
     }
 
     return res;
@@ -30,9 +29,14 @@ double myPow(double x, int n) {
 int main(void) {
 
     double n = 2;
-    int p = 30;
+    int p = -2;
 
     cout << myPow(n, p) << endl;
 
     return 0;
 }
+
+/*
+Time Complexity: O(log n), n is the power
+Space Complexity: O(1)
+*/
