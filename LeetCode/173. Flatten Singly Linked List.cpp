@@ -98,6 +98,7 @@ Node* flattenList(Node* head) {
 }
 
 int main(void) {
+    // given the children are sorted in ascending order
     Node* head = new Node(4);
     head->child = new Node(10);
 
