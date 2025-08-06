@@ -33,6 +33,11 @@ int main(void) {
 }
 
 /*
+Time Complexity: O(n)
+Space Complexity: O(k), as we need to store at max k-elements in the map
+*/
+
+/*
 def countDistinct(nums, k):
     map = {}
     count = 0
