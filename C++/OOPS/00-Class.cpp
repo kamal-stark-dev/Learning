@@ -25,11 +25,11 @@ public: // access specifier
 
 int main(void) {
     Student s; // `s` is an object of class `Student`
-    s.name = "Jake";
+    s.name = "Jake"; // name, age, rollno are attributes
     s.age = 20;
     s.rollno = "JK-301";
 
-    s.greet();
+    s.greet(); // greet and study are methods
     s.study(2);
 
     return 0;
