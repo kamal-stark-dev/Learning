@@ -4,14 +4,14 @@
 #include <stack>
 using namespace std;
 
-int findLength(stack<int> st) {
-    int len = 0;
-    while (!st.empty()) {
-        st.pop();
-        len++;
-    }
-    return len;
-}
+// int findLength(stack<int> st) {
+//     int len = 0;
+//     while (!st.empty()) {
+//         st.pop();
+//         len++;
+//     }
+//     return len;
+// }
 
 void deleteMiddle(stack<int>& st, int len, int i = 0) {
     if (i == len / 2) {
@@ -32,9 +32,8 @@ int main(void) {
     st.push(3);
     st.push(4);
     st.push(5);
-    st.push(6);
 
-    int stackLength = findLength(st);
+    int stackLength = st.size();
     deleteMiddle(st, stackLength);
 
     while (!st.empty()) {
