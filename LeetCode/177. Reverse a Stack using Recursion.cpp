@@ -12,18 +12,29 @@ void printStack(stack<int> st) {
     cout << '\n';
 }
 
-void insert(stack<int>& st, int element) {
-    stack<int> temp;
+// void insertAtBottom(stack<int>& st, int element) {
+//     stack<int> temp;
 
-    while(!st.empty()) {
-        temp.push(st.top());
-        st.pop();
+//     while(!st.empty()) {
+//         temp.push(st.top());
+//         st.pop();
+//     }
+//     st.push(element);
+//     while(!temp.empty()) {
+//         st.push(temp.top());
+//         temp.pop();
+//     }
+// }
+
+void insertAtBottom(stack<int>& st, int element) {
+    if (st.empty()) {
+        st.push(element);
+        return;
     }
-    st.push(element);
-    while(!temp.empty()) {
-        st.push(temp.top());
-        temp.pop();
-    }
+    int elem = st.top();
+    st.pop();
+    insertAtBottom(st, element);
+    st.push(elem);
 }
 
 void reverseStack(stack<int>& st) {
@@ -32,7 +43,7 @@ void reverseStack(stack<int>& st) {
     int temp = st.top();
     st.pop();
     reverseStack(st);
-    insert(st, temp);
+    insertAtBottom(st, temp);
 }
 
 int main(void) {
@@ -51,6 +62,6 @@ int main(void) {
 }
 
 /*
-Time Complexity: O(n)
+Time Complexity: O(n * n)
 Space Complexity: O(n)
 */
