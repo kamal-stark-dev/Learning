@@ -66,7 +66,7 @@ Q. But why we do we have methods for objects and not functions ?
 --> Let's see with an example -
     we have methods as they are for `objects` because having a function for `uppercasing` a number will not make sense
 
-NOTE: you can call nest functions inside of functions and you can also use multiple methods.
+NOTE: you can nest functions inside of functions and you can also use multiple methods.
 """
 
 # striping and uppercasing
