@@ -51,6 +51,6 @@ int main(void) {
 }
 
 /*
-Time Complexity: O()
-Space Complexity: O()
+Time Complexity: O(n * 3 ^ (n - 1)) -> O(n * 3 ^ n)
+Space Complexity: O(n) + O(n * 3 ^ n) [for storage]
 */
