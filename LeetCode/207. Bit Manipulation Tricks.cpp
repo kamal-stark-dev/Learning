@@ -58,6 +58,34 @@ int unsetBit(int num, int i) {
     return num & ~(1 << i);
 }
 
+int toggleBit(int num, int i) {
+    return num ^ (1 << i);
+}
+
+int countSetBits(int num) { // O(log2 n) -> O(31)
+    int count = 0;
+    while (num) {
+        count += num & 1; // if (num % 2) count++; (num & 1) odd check is faster
+        num >>= 1; // num /= 2;
+    }
+    return count;
+
+    // return __builtin_popcount(num);
+}
+
+int countSetBits_2(int num) { // O(no. of set bits) -> better than above appraoch most of the times [as no. of set bits is usually lesser than log2 n]
+    int count = 0;
+    while (num) {
+        num = num & (num - 1); // num &= num - 1;
+        count++;
+    }
+    return count;
+}
+
+/*
+Side Note: `(low + high) >> 1` is faster than `(low + high) / 2`
+*/
+
 int main(void) {
     int num = 13; // 13 -> 1101
 
@@ -88,6 +116,14 @@ int main(void) {
     // setting i-th bit from right to 0
     cout << num << " after setting 2nd bit from the right is: " << unsetBit(num, 2) << "\n";
     cout << num << " after setting 3rd bit from the right is: " << unsetBit(num, 3) << "\n";
+
+    // toggling i-th bit from right
+    cout << num << " after toggling 1st bit from the right is: " << toggleBit(num, 1) << "\n";
+    cout << num << " after toggling 2nd bit from the right is: " << toggleBit(num, 2) << "\n";
+
+    // count set bits
+    cout << "There are " << countSetBits(num) << " set bits in " << num << ".\n";
+    cout << "There are " << countSetBits_2(64) << " set bits in " << 64 << ".\n";
 
     return 0;
 }
