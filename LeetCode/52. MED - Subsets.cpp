@@ -28,6 +28,8 @@ vector<vector<int>> subsets(vector<int>& nums) {
     return subsets;
 }
 
+
+// Bit Manipulation Trick
 vector<vector<int>> subsets_iterative(vector<int>& nums) {
     vector<vector<int>> subsets;
     int n = nums.size();
