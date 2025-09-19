@@ -82,6 +82,12 @@ int countSetBits_2(int num) { // O(no. of set bits) -> better than above appraoc
     return count;
 }
 
+void swapUsingBitsManipulation(int& a, int& b) {
+    a = a ^ b;
+    b = a ^ b;
+    a = a ^ b;
+}
+
 /*
 Side Note: `(low + high) >> 1` is faster than `(low + high) / 2`
 */
@@ -124,6 +130,11 @@ int main(void) {
     // count set bits
     cout << "There are " << countSetBits(num) << " set bits in " << num << ".\n";
     cout << "There are " << countSetBits_2(64) << " set bits in " << 64 << ".\n";
+
+    int num1 = 10, num2 = 20;
+    cout << "Before swapping num1: " << num1 << " and num2: " << num2 << "\n";
+    swapUsingBitsManipulation(num1, num2);
+    cout << "After swapping num1: " << num1 << " and num2: " << num2 << "\n";
 
     return 0;
 }
