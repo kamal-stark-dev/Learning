@@ -14,6 +14,7 @@ bool isPrime(int num) {
 }
 
 vector<int> findPrimeFactors_Brute(int num) { // O(n * root(n)) -> approx, Space -> O(log(n)) in worst case
+    if (num < 2) return {};
     vector<int> factors;
 
     for (int i = 1; i <= num; i++) {
@@ -25,6 +26,7 @@ vector<int> findPrimeFactors_Brute(int num) { // O(n * root(n)) -> approx, Space
 }
 
 vector<int> findPrimeFactors(int num) {
+    if (num < 2) return {};
     vector<int> factors;
 
     for (int i = 2; i * i <= num; i++) {
@@ -41,6 +43,7 @@ vector<int> findPrimeFactors(int num) {
 }
 
 unordered_map<int, int> findFullPrimeFactorization(int num) { // O(root(n)) -> slightly slower as it pushes multiple times
+    if (num < 2) return {};
     unordered_map<int, int> factors;
 
     while (num % 2 == 0) { // handle 2 separately (even prime)
