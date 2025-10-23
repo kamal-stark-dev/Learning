@@ -1,11 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <title>Tests</title>
+    <meta charset="utf-8" />
+    <title>Jasmine Spec Runner v5.12.0</title>
+
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="lib/jasmine-5.12.0/jasmine_favicon.png"
+    />
+    <link rel="stylesheet" href="lib/jasmine-5.12.0/jasmine.css" />
+
+    <script src="lib/jasmine-5.12.0/jasmine.js"></script>
+    <script src="lib/jasmine-5.12.0/jasmine-html.js"></script>
+    <script src="lib/jasmine-5.12.0/boot0.js"></script>
+    <!-- optional: include a file here that configures the Jasmine env -->
+    <script src="lib/jasmine-5.12.0/boot1.js"></script>
+
+    <script src="utils/moneyTest.js" type="module"></script>
+    <script src="data/cartTest.js" type="module"></script>
+    <script src="checkout/orderSummaryTest.js" type="module"></script>
   </head>
+
   <body>
-    <h1>Tests</h1>
-    <p>Open the `developer tools` -> `console` to see the results.</p>
-    <script src="moneyTest.js" type="module"></script>
+    <div class="js-test-container"></div>
   </body>
 </html>
