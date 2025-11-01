@@ -1,6 +1,8 @@
 // Stack and Queue
 
 #include <iostream>
+#include <stack>
+#include <queue>
 using namespace std;
 
 class Node {
@@ -13,6 +15,8 @@ public:
         next = NULL;
     }
 };
+
+// STACKS
 
 class Stack {
 private:
@@ -87,6 +91,8 @@ public:
     }
 };
 
+// QUEUES
+
 class Queue {
 private:
     static const int size_ = 10;
@@ -120,7 +126,7 @@ public:
         return el;
     }
 
-    int top() {
+    int front() {
         if (curr_size == 0) {
             cerr << "Queue is empty.\n";
             return -1;
@@ -149,7 +155,7 @@ public:
         queue_size++;
     }
 
-    int top() {
+    int front() {
         if (!start) {
             cerr << "Queue is empty.\n";
             return -1;
@@ -180,8 +186,107 @@ public:
     }
 };
 
+// Stack from Queue
+
+class StackFromQueue {
+private:
+    Queue q;
+public:
+    void push(int val) {
+        int size = q.size();
+        q.push(val);
+        for (int i = 0; i < size; i++) {
+            q.push(q.front());
+            q.pop();
+        }
+    }
+
+    int pop() {
+        return q.pop();
+    }
+
+    int top() {
+        return q.front();
+    }
+
+    int size() {
+        return q.size();
+    }
+};
+
+// Queue from Stack
+
+class QueueFromStack {
+private:
+    Stack s;
+public:
+    void push(int val) { // O(2n)
+        Stack temp;
+        while (s.size()) {
+            temp.push(s.top());
+            s.pop();
+        }
+        temp.push(val);
+        while (temp.size()) {
+            s.push(temp.top());
+            temp.pop();
+        }
+    }
+
+    int front() {
+        return s.top();
+    }
+
+    int pop() {
+        return s.pop();
+    }
+
+    int size() {
+        return s.size();
+    }
+};
+
+class QueueFromStack_2 { // Space -> 2 * n
+private:
+    Stack s1, s2;
+public:
+    void push(int val) { // O(1)
+        s1.push(val);
+    }
+
+    int pop() { // Ocassionally -> O(n)
+        if (s2.size()) {
+            return s2.pop();
+        }
+        else {
+            while (s1.size()) {
+                s2.push(s1.top());
+                s1.pop();
+            }
+            return s2.pop();
+        }
+    }
+
+    int top() { // Ocassionally -> O(n)
+        if (s2.size()) {
+            return s2.top();
+        }
+        else {
+            while (s1.size()) {
+                s2.push(s1.top());
+                s1.pop();
+            }
+            return s2.top();
+        }
+    }
+
+    int size() {
+
+    }
+};
+
 int main(void) {
-    StackLL s;
+    StackFromQueue s;
     s.push(1);
     s.push(2);
     s.push(3);
@@ -190,20 +295,20 @@ int main(void) {
     cout << "Top Element: " << s.top() << "\n";
     cout << "Size of Stack: " << s.size() << "\n\n";
 
-    QueueLL q;
+    QueueFromStack q;
     q.push(1);
     q.push(2);
     q.push(3);
     q.push(4);
     cout << "Popped Element: " << q.pop() << "\n";
-    cout << "Front Element: " << q.top() << "\n";
+    cout << "Front Element: " << q.front() << "\n";
     cout << "Size of Queue: " << q.size() << "\n";
 
 }
 
 // Stack -> a linear data structure that follows Last In First Out (LIFO) principle
-// push(x), pop(), top(), size()
+// push(x), pop(), top(), empty()
 // Benefits -> O(1) | Downside -> O(10) (not dynamic in nature)
 
 // Queue -> a linear data structure that follows First In First Out (FIFO) principle
-// push(x), pop(), top(), size()
+// push(x), pop(), top(), empty()
