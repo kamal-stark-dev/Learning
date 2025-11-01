@@ -3,6 +3,17 @@
 #include <iostream>
 using namespace std;
 
+class Node {
+public:
+    int data;
+    Node* next = NULL;
+
+    Node(int val) {
+        data = val;
+        next = NULL;
+    }
+};
+
 class Stack {
 private:
     int top_idx = -1;
@@ -10,7 +21,7 @@ private:
 public:
     void push(int val) { // O(1)
         if (top_idx >= 10) {
-            cout << "Stack Overflow.\n";
+            cerr << "Stack Overflow.\n";
             return;
         }
         top_idx++;
@@ -19,7 +30,7 @@ public:
 
     int top() { // O(1)
         if (top_idx == -1) {
-            cout << "Stack Underflow.\n";
+            cerr << "Stack Underflow.\n";
             return -1;
         }
         return st[top_idx];
@@ -27,7 +38,7 @@ public:
 
     int pop() { // O(1)
         if (top_idx == -1) {
-            cout << "Stack Underflow.\n";
+            cerr << "Stack Underflow.\n";
             return -1;
         }
         return st[top_idx--];
@@ -35,6 +46,44 @@ public:
 
     int size() { // O(1)
         return top_idx + 1;
+    }
+};
+
+class StackLL {
+private:
+    Node* head = NULL;
+    int stack_size = 0;
+public:
+    void push(int val) {
+        Node* temp = new Node(val);
+        temp->next = head;
+        head = temp;
+        stack_size++;
+    }
+
+    int top() {
+        if (!head) {
+            cerr << "Stack is empty.\n";
+            return -1;
+        }
+        return head->data;
+    }
+
+    int pop() {
+        if (!head) {
+            cerr << "Stack is empty.\n";
+            return -1;
+        }
+        int el = head->data;
+        Node* temp = head;
+        head = head->next;
+        delete temp;
+        stack_size--;
+        return el;
+    }
+
+    int size() {
+        return stack_size;
     }
 };
 
@@ -46,7 +95,7 @@ private:
 public:
     void push(int val) {
         if (curr_size == size_) {
-            cout << "Queue is full.\n";
+            cerr << "Queue is full.\n";
             return;
         }
         if (curr_size == 0)
@@ -59,7 +108,7 @@ public:
 
     int pop() {
         if (curr_size == 0) {
-            cout << "Queue is empty.\n";
+            cerr << "Queue is empty.\n";
             return -1;
         }
         int el = q[start];
@@ -73,7 +122,7 @@ public:
 
     int top() {
         if (curr_size == 0) {
-            cout << "Queue is empty.\n";
+            cerr << "Queue is empty.\n";
             return -1;
         }
         return q[start];
@@ -84,8 +133,55 @@ public:
     }
 };
 
+class QueueLL {
+private:
+    Node* start = NULL;
+    Node* end = NULL;
+    int queue_size = 0;
+public:
+    void push(int val) {
+        if (!start)
+            start = end = new Node(val);
+        else {
+            end->next = new Node(val);
+            end = end->next;
+        }
+        queue_size++;
+    }
+
+    int top() {
+        if (!start) {
+            cerr << "Queue is empty.\n";
+            return -1;
+        }
+        return start->data;
+    }
+
+    int pop() {
+        if (!start) {
+            cerr << "Queue is empty.\n";
+            return -1;
+        }
+
+        Node* temp = start;
+        int el = start->data;
+
+        start = start->next;
+        if (!start) end = NULL;
+
+        delete temp;
+        queue_size--;
+
+        return el;
+    }
+
+    int size() {
+        return queue_size;
+    }
+};
+
 int main(void) {
-    Stack s;
+    StackLL s;
     s.push(1);
     s.push(2);
     s.push(3);
@@ -94,7 +190,7 @@ int main(void) {
     cout << "Top Element: " << s.top() << "\n";
     cout << "Size of Stack: " << s.size() << "\n\n";
 
-    Queue q;
+    QueueLL q;
     q.push(1);
     q.push(2);
     q.push(3);
