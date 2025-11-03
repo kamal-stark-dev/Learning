@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <stack>
+#include <algorithm>
 using namespace std;
 
 bool isalnum(char c) {
@@ -22,6 +23,20 @@ int getPriority(char c) {
         default:
             return -1;
     }
+}
+
+string specialReverse(string s) {
+    // reverses the string and replaces `(` with `)` and vice-versa
+    int n = s.size();
+    int i = 0, j = n - 1;
+    while (i < j) {
+        swap(s[i++], s[j--]);
+    }
+    for (char &c: s) {
+        if (c == '(') c = ')';
+        else if (c == ')') c = '(';
+    }
+    return s;
 }
 
 string infixToPostfix(string infix) {
@@ -55,11 +70,51 @@ string infixToPostfix(string infix) {
     return postfix;
 }
 
+string infixToPrefix(string infix) {
+    // steps: reverse the infix, infix to postfix, reverse the postfix
+    infix = specialReverse(infix);
+    string prefix;
+    stack<char> st;
+
+    for (char c: infix) {
+        if (isalnum(c)) prefix += c;
+        else if (c == '(') st.push(c);
+        else if (c == ')') {
+            while (!st.empty() && st.top() != '(') {
+                prefix += st.top();
+                st.pop();
+            }
+            if (!st.empty()) st.pop();
+        }
+        else {
+            while (!st.empty() &&
+            ((c == '^' && getPriority(c) <= getPriority(st.top())) ||
+            (c != '^' && getPriority(c) < getPriority(st.top())))) {
+                prefix += st.top();
+                st.pop();
+            }
+            st.push(c);
+        }
+    }
+    while (!st.empty()) {
+        prefix += st.top();
+        st.pop();
+    }
+
+    reverse(prefix.begin(), prefix.end());
+    return prefix;
+}
+
 int main(void) {
     string infix = "a+b*(c^d-e)";
     string postfix = infixToPostfix(infix);
-
     cout << "Postfix of `" << infix << "` is: `" << postfix << "`.\n";
+
+    cout << specialReverse(infix) << endl;
+
+    infix = "(A+B)*C-D+E";
+    string prefix = infixToPrefix(infix);
+    cout << "Prefix of `" << infix << "` is: `" << prefix << "`.\n";
 
     return 0;
 }
