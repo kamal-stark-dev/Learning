@@ -9,9 +9,8 @@ using namespace std;
 vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
     stack<int> s;
     unordered_map<int, int> m;
-    vector<int> ans(nums1.size(), 0);
 
-    for (int i = nums2.size() - 1; i >= 0; i--) {
+    for (int i = nums2.size() - 1; i >= 0; i--) { // O(n2)
         while (!s.empty() && s.top() <= nums2[i]) {
             s.pop();
         }
@@ -21,8 +20,9 @@ vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
         s.push(nums2[i]);
     }
 
-    for (int i = 0; i < ans.size(); i++) {
-        ans[i] = m[nums1[i]];
+    vector<int> ans;
+    for (int n: nums1) { // O(n1)
+        ans.push_back(m[n]);
     }
     return ans;
 }
@@ -38,8 +38,9 @@ int main(void) {
     return 0;
 }
 /*
-m -> size of `nums2`
+n1 -> size of nums1
+n2 -> size of nums2
 
-Time Complexity: O(m)
-Space Complexity: O(m) as m > n
+Time Complexity: O(n1 + n2) -> O(n1) + O(2 * n2)
+Space Complexity: O(m) as m > n (and n can be m in worst case)
 */
