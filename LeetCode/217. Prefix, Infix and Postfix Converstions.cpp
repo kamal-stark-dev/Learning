@@ -103,16 +103,32 @@ string infixToPrefix(string infix) { // O(n)
     // detailed time complexity: O(n){1st reverse} + O(2 * n){postfix conversion} + O(n / 2){last reverse}
 }
 
+string postfixToInfix(string postfix) { // O(n + n{string concatenation})
+    stack<string> st;
+
+    for (char c: postfix) {
+        if (isalnum(c)) st.push(string(1, c));
+        else {
+            string operand2 = st.top();
+            st.pop();
+            string operand1 = st.top();
+            st.pop();
+            st.push("(" + operand1 + string(1, c) + operand2 + ")"); // in worst case can go upto: O(n)
+        }
+    }
+    return st.top();
+}
+
 int main(void) {
     string infix = "a+b*(c^d-e)";
-    string postfix = infixToPostfix(infix);
-    cout << "Postfix of `" << infix << "` is: `" << postfix << "`.\n";
-
-    cout << specialReverse(infix) << endl;
+    cout << "Postfix of `" << infix << "` is: `" << infixToPostfix(infix) << "`.\n";
 
     infix = "(A+B)*C-D+E";
-    string prefix = infixToPrefix(infix);
-    cout << "Prefix of `" << infix << "` is: `" << prefix << "`.\n";
+    cout << "Prefix of `" << infix << "` is: `" << infixToPrefix(infix) << "`.\n";
+
+    string postfix = "AB-CD+E*/";
+    cout << "Infix of `" << postfix << "` is: `" << postfixToInfix(postfix) << "`.\n";
+
 
     return 0;
 }
