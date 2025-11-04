@@ -119,6 +119,25 @@ string postfixToInfix(string postfix) { // O(n + n{string concatenation})
     return st.top();
 }
 
+string prefixToInfix(string prefix) { // O(n + n{string concatenation})
+    // for this we iterate from the back
+    stack<string> st;
+
+    int n = prefix.size();
+    for (int i = n - 1; i >= 0; i--) {
+        if (isalnum(prefix[i]))
+            st.push(string(1, prefix[i]));
+        else {
+            string operand1 = st.top();
+            st.pop();
+            string operand2 = st.top();
+            st.pop();
+            st.push("(" + operand1 + string(1, prefix[i]) + operand2 + ")"); // worst case: O(n)
+        }
+    }
+    return st.top();
+}
+
 int main(void) {
     string infix = "a+b*(c^d-e)";
     cout << "Postfix of `" << infix << "` is: `" << infixToPostfix(infix) << "`.\n";
@@ -129,6 +148,8 @@ int main(void) {
     string postfix = "AB-CD+E*/";
     cout << "Infix of `" << postfix << "` is: `" << postfixToInfix(postfix) << "`.\n";
 
+    string prefix = "*+PQ-MN";
+    cout << "Infix of `" << prefix << "` is: `" << prefixToInfix(prefix) << "`.\n";
 
     return 0;
 }
