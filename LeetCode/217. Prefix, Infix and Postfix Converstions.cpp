@@ -5,12 +5,12 @@
 #include <algorithm>
 using namespace std;
 
-bool isalnum(char c) {
+bool isalnum(char c) { // O(1)
     if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9')) return true;
     return false;
 }
 
-int getPriority(char c) {
+int getPriority(char c) { // O(1)
     switch(c) {
         case '^':
             return 3;
@@ -25,13 +25,9 @@ int getPriority(char c) {
     }
 }
 
-string specialReverse(string s) {
+string specialReverse(string s) { // O(n)
     // reverses the string and replaces `(` with `)` and vice-versa
-    int n = s.size();
-    int i = 0, j = n - 1;
-    while (i < j) {
-        swap(s[i++], s[j--]);
-    }
+    reverse(s.begin(), s.end());
     for (char &c: s) {
         if (c == '(') c = ')';
         else if (c == ')') c = '(';
@@ -39,7 +35,7 @@ string specialReverse(string s) {
     return s;
 }
 
-string infixToPostfix(string infix) {
+string infixToPostfix(string infix) { // O(n)
     string postfix;
     stack<char> st;
 
@@ -70,7 +66,7 @@ string infixToPostfix(string infix) {
     return postfix;
 }
 
-string infixToPrefix(string infix) {
+string infixToPrefix(string infix) { // O(n)
     // steps: reverse the infix, infix to postfix, reverse the postfix
     infix = specialReverse(infix);
     string prefix;
@@ -103,6 +99,8 @@ string infixToPrefix(string infix) {
 
     reverse(prefix.begin(), prefix.end());
     return prefix;
+
+    // detailed time complexity: O(n){1st reverse} + O(2 * n){postfix conversion} + O(n / 2){last reverse}
 }
 
 int main(void) {
