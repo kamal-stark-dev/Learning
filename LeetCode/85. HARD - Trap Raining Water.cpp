@@ -5,7 +5,7 @@
 using namespace std;
 
 // prefix array approach
-int trap(vector<int> heights) {
+int trap(vector<int> heights) { // TC: O(3 * n), SC: O(2 * n)
     int size = heights.size();
 
     vector<int> leftMax(size);
@@ -29,7 +29,7 @@ int trap(vector<int> heights) {
 }
 
 // constant space
-int trap_constantSpace(vector<int> heights) {
+int trap_constantSpace(vector<int> heights) { // TC: O(n), SC: O(1)
     int left = 0, right = heights.size() - 1;
     int leftMax = 0, rightMax = 0;
 
