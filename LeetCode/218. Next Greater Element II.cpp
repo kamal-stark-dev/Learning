@@ -57,6 +57,6 @@ int main(void) {
 }
 
 /*
-Time Complexity: O(2 * n)
+Time Complexity: O(4 * n) -> O(2 * 2n) as we are virtually doubling the nums vector
 Space Complexity: O(n)
 */
