@@ -52,11 +52,43 @@ int sumSubarrayMins(vector<int> nums) { // TC: O(3 * n), SC: O(2 * n)
     return total;
 }
 
+// extra - Sum of Subarray Maximums
+
+int sumSubarrayMaxs(vector<int>& nums) {
+    int n = nums.size(), total = 0;
+    const int MOD = 1e9 + 7;
+
+    stack<int> st;
+    vector<int> left(n), right(n);
+
+    // find left maxs
+    for (int i = 0; i < n; i++) {
+        while (!st.empty() && nums[st.top()] <= nums[i]) st.pop();
+        left[i] = st.empty() ? i + 1 : i - st.top();
+        st.push(i);
+    }
+
+    // find right maxs
+    st = stack<int>();
+    for (int i = n - 1; i >= 0; i--) {
+        while (!st.empty() && nums[st.top()] < nums[i]) st.pop();
+        right[i] = st.empty() ? n - i : st.top() - i;
+        st.push(i);
+    }
+
+    for (int i = 0; i < n; i++) {
+        total = (total + (1LL * nums[i] * left[i] % MOD * right[i] % MOD)) % MOD;
+    }
+    return total;
+}
+
 int main(void) {
-    // vector<int> nums = {3, 1, 2, 4}; // 17
-    vector<int> nums = {6, 1, 2, 7, 8, 4, 5, 3, 9}; // 126
+    vector<int> nums = {3, 1, 2, 4}; // 17
+    // vector<int> nums = {6, 1, 2, 7, 8, 4, 5, 3, 9}; // 126
 
     cout << "Subarray Minimums Sum: " << sumSubarrayMins(nums) << ".\n";
+    // extra
+    cout << "Subarray Maxumums Sum: " << sumSubarrayMaxs(nums) << ".\n";
 
     return 0;
 }
