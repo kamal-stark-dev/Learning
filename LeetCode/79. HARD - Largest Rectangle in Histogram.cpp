@@ -1,38 +1,38 @@
 // 84. Largest Rectangle in Histogram
 
 #include <iostream>
-#include <vector>
 #include <stack>
+#include <vector>
 using namespace std;
 
 int largestAreaRectangle(vector<int>& heights) {
     int maxArea = 0;
-    int size = heights.size();
-    stack<int> s;
+    int n = heights.size();
 
-    vector<int> right(size, 0);
-    for (int i = size - 1; i >= 0; i--) { // O(n)
-        while(!s.empty() && heights[s.top()] >= heights[i]) s.pop();
-        right[i] = s.empty() ? -1 : s.top();
-        s.push(i);
+    stack<int> st;
+    vector<int> right(n), left(n);
+
+    for (int i = n - 1; i >= 0; i--) {
+        while(!st.empty() && heights[st.top()] >= heights[i])
+            st.pop();
+        right[i] = st.empty() ? -1 : st.top();
+        st.push(i);
     }
 
-    // remove any elements from the stack
-    while (!s.empty()) s.pop();
+    while (!st.empty()) st.pop(); // st = stack<int>();
 
-    vector<int> left(size, 0); // O(n)
-    for (int i = 0; i < size; i++) {
-        while(!s.empty() && heights[s.top()] >= heights[i]) s.pop();
-        left[i] = s.empty() ? -1 : s.top();
-        s.push(i);
+    for (int i = 0; i < n; i++) {
+        while(!st.empty() && heights[st.top()] >= heights[i])
+            st.pop();
+        left[i] = st.empty() ? -1 : st.top();
+        st.push(i);
     }
 
-    for (int i = 0; i < size; i++) { // O(n)
+    for (int i = 0; i < n; i++) {
         int width = right[i] - left[i] - 1;
         int currArea = heights[i] * width;
         maxArea = max(currArea, maxArea);
     }
-
     return maxArea;
 }
 
