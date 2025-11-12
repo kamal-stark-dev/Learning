@@ -35,6 +35,25 @@ vector<int> maxSlidingWindow(vector<int> nums, int k) {
     return res;
 }
 
+vector<int> maxSlidingWindow_Better(vector<int>& nums, int k) {
+    vector<int> maxs;
+    deque<int> dq;
+
+    int n = nums.size();
+    for (int i = 0; i < n; i++) {
+        while (!dq.empty() && nums[dq.back()] < nums[i]) {
+            dq.pop_back();
+        }
+        dq.push_back(i);
+
+        while (!dq.empty() && dq.front() < i - k + 1) {
+            dq.pop_front();
+        }
+        if (i >= k - 1) maxs.push_back(nums[dq.front()]);
+    }
+    return maxs;
+}
+
 int main(void) {
     vector<int> nums = {1, 3, -1, -3, 5, 3, 6, 7};
     int k = 3;
