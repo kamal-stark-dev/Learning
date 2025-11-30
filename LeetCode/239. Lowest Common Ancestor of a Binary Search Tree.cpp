@@ -49,6 +49,8 @@ int main(void) {
 }
 
 /*
-Time Complexity: O()
-Space Complexity: O()
+h = height ~= logn, but in worst cases it can be O(n).
+
+Time Complexity: O(h)
+Space Complexity: O(h)
 */
