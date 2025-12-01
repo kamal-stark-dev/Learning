@@ -43,6 +43,34 @@ int kthSmallest_iterative(TreeNode* root, int k) {
     return -1; // will never execute
 }
 
+int kthSmallest_Morris(TreeNode* root, int k) { // TC: O(n), SC: O(1)
+    TreeNode* curr = root;
+    vector<int> res;
+
+    while (curr) {
+        if (!curr->left) {
+            res.push_back(curr->val);
+            curr = curr->right;
+        }
+        else {
+            TreeNode* prev = curr->left;
+            while (prev->right && prev->right != curr) {
+                prev = prev->right;
+            }
+            if (!prev->right) {
+                prev->right = curr;
+                curr = curr->left;
+            }
+            else {
+                prev->right = nullptr;
+                res.push_back(curr->val);
+                curr = curr->right;
+            }
+        }
+    }
+    return res[k - 1];
+}
+
 int main(void) {
     TreeNode* root = new TreeNode(5);
     root->left = new TreeNode(3);
@@ -52,7 +80,7 @@ int main(void) {
     root->left->left->left = new TreeNode(1);
 
     int k = 3;
-    cout << k << "(th) smallest element in BST: " << kthSmallest_iterative(root, k);
+    cout << k << "(th) smallest element in BST: " << kthSmallest_Morris(root, k);
 
     return 0;
 }
