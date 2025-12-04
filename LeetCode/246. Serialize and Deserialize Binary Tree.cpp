@@ -1,6 +1,7 @@
 // 297. Serialize and Deserialize Binary Tree
 
 #include <iostream>
+#include <queue>
 #include <string>
 #include <vector>
 using namespace std;
@@ -12,6 +13,7 @@ struct TreeNode {
     TreeNode(int x): val(x), left(nullptr), right(nullptr) {}
 };
 
+// DFS - Depth First Search
 void serialize_helper(TreeNode* node, string& s) {
     if (!node) {
         s += "N,";
@@ -60,6 +62,62 @@ TreeNode* deserialize(string data) { // TC: O(n), SC: O(h)
     return deserialize_helper(nodes, idx);
 }
 
+// BFS - Breadth First Search
+string serialize_bfs(TreeNode* root) {
+    string s = "";
+    queue<TreeNode*> q;
+    q.push(root);
+
+    while (!q.empty()) {
+        TreeNode* node = q.front(); q.pop();
+        if (node) {
+            s += to_string(node->val) + ",";
+            q.push(node->left);
+            q.push(node->right);
+        }
+        else {
+            s += "N,";
+        }
+    }
+    s.pop_back();
+    return s;
+}
+
+TreeNode* deserialize_bfs(string data) {
+    vector<string> nodes;
+    string node;
+    for (char c: data) {
+        if (c == ',') {
+            nodes.push_back(node);
+            node = "";
+        }
+        else node += c;
+    }
+    if (node.size()) nodes.push_back(node);
+
+    if (nodes[0] == "N") return nullptr;
+
+    TreeNode* root = new TreeNode(stoi(nodes[0]));
+    queue<TreeNode*> q;
+    q.push(root);
+    int index = 1;
+
+    while (!q.empty()) {
+        TreeNode* node = q.front(); q.pop();
+        if (nodes[index] != "N") {
+            node->left = new TreeNode(stoi(nodes[index]));
+            q.push(node->left);
+        }
+        index++;
+        if (nodes[index] != "N") {
+            node->right = new TreeNode(stoi(nodes[index]));
+            q.push(node->right);
+        }
+        index++;
+    }
+    return root;
+}
+
 void display(TreeNode* node) {
     if (!node) return;
     display(node->left);
@@ -74,8 +132,8 @@ int main(void) {
     root->right->left = new TreeNode(4);
     root->right->right = new TreeNode(5);
 
-    string serialized = serialize(root);
-    TreeNode* deserialized = deserialize(serialized);
+    string serialized = serialize_bfs(root);
+    TreeNode* deserialized = deserialize_bfs(serialized);
 
     display(deserialized);
 
