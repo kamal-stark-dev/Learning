@@ -49,6 +49,9 @@ int main(void) {
 }
 
 /*
+N -> size of candidates
+T -> total sum
+
 Time Complexity: O(N ^ (T / min(candidates)))
 Space Complexity: O(T / min(candidates))
 */
