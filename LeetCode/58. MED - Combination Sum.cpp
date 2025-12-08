@@ -5,48 +5,50 @@
 #include <set>
 using namespace std;
 
-set<vector<int>> uniqueCombinations;
-void findCombinations(vector<int>& nums, int target, vector<int>& combination, vector<vector<int>>& combinations, int idx) {
+void findCombinations(int startIdx, vector<int>& curr, int target, const vector<int>& candidates, vector<vector<int>>& combinations) {
     if (target == 0) {
-        if (uniqueCombinations.find(combination) != uniqueCombinations.end()) {
-            return;
-        }
-        uniqueCombinations.insert(combination);
-        combinations.push_back(combination);
+        combinations.push_back(curr);
         return;
     }
-    if (idx == nums.size() || target < 0) return;
 
-    combination.push_back(nums[idx]);
-    // single
-    findCombinations(nums, target - nums[idx], combination, combinations, idx + 1);
-    // multiple
-    findCombinations(nums, target - nums[idx], combination, combinations, idx);
-    // exclide
-    combination.pop_back();
-    findCombinations(nums, target, combination, combinations, idx + 1);
+    for (int currIdx = startIdx; currIdx < candidates.size(); currIdx++) {
+        // if (target < 0) {
+        //     return;
+        // }
+        int num = candidates[currIdx];
+        if (num > target) continue;
+
+        curr.push_back(num);
+        findCombinations(currIdx, curr, target - num, candidates, combinations);
+        curr.pop_back();
+    }
 }
 
-vector<vector<int>> combinationSum(vector<int>& nums, int target) {
+vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
     vector<vector<int>> combinations;
-    vector<int> combination;
-    findCombinations(nums, target, combination, combinations, 0);
+    vector<int> curr;
+    findCombinations(0, curr, target, candidates, combinations);
     return combinations;
 }
 
 void printCombinations(vector<vector<int>> combinations) {
     for (auto combination : combinations) {
         for (int num : combination) cout << num << " ";
-        cout << endl;
+        cout << "\n";
     }
 }
 
 int main(void) {
-    vector<int> nums = {2, 3, 5};
+    vector<int> candidates = {2, 3, 5};
     int target = 8;
 
-    vector<vector<int>> combinations = combinationSum(nums, target);
+    vector<vector<int>> combinations = combinationSum(candidates, target);
     printCombinations(combinations);
 
     return 0;
 }
+
+/*
+Time Complexity: O(N ^ (T / min(candidates)))
+Space Complexity: O(T / min(candidates))
+*/
