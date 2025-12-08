@@ -4,21 +4,27 @@
 #include <vector>
 using namespace std;
 
-bool check(int i, int j, int idx, vector<vector<char>>& board, string word) {
+bool check(int row, int col, int idx, vector<vector<char>>& board, string word) {
     if (idx >= word.size()) return true;
-    if (i < 0 || i >= board.size() || j < 0 || j >= board[0].size() || board[i][j] != word[idx]) return false;
+    if (row < 0 || row >= board.size() || col < 0 || col >= board[0].size() || board[row][col] != word[idx]) return false;
 
-    char temp = board[i][j];
-    board[i][j] = '$';
+    char temp = board[row][col];
 
+    board[row][col] = '$';
+    vector<pair<int, int>> directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+    bool found = false;
+    for (auto [dr, dc]: directions) {
+        found = found || check(row + dr, col + dc, idx + 1, board, word);
+    }
+    /*
     bool found = (
-        check(i, j - 1, idx + 1, board, word) ||
-        check(i, j + 1, idx + 1, board, word) ||
-        check(i - 1, j, idx + 1, board, word) ||
-        check(i + 1, j, idx + 1, board, word)
+        check(row + 1, col, idx + 1, board, word) ||
+        check(row - 1, col, idx + 1, board, word) ||
+        check(row, col + 1, idx + 1, board, word) ||
+        check(row, col - 1, idx + 1, board, word)
     );
-
-    board[i][j] = temp; // backtrack
+    */
+    board[row][col] = temp; // backtrack -> or `board[row][col] = word[idx]`
 
     return found;
 }
@@ -31,9 +37,8 @@ bool exists(vector<vector<char>>& board, string word) {
     bool answer = false;
     for (int i = 0; i < m; i++) {
         for (int j = 0; j < n; j++) {
-            if (board[i][j] == word[0])
-                answer = check(i, j, 0, board, word);
-            if (answer) return true;
+            if (check(i, j, 0, board, word))
+                return true;
         }
     }
     return false;
@@ -55,5 +60,6 @@ int main(void) {
 
 /*
 Time Complexity: O(m * n * (4 ^ L)), L -> length of the word and as we will be checking all four directions we have 4 choices
+    - check: O(4 ^ L)
 Space Complexity: O(L), the maximum recursion depth is L
 */
