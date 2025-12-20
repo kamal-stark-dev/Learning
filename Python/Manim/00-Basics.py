@@ -24,3 +24,36 @@ class Name(Scene):
         self.play(sq.animate.scale(1.5), tri.animate.to_edge(DL), run_time=2)
         self.wait()
 
+class Arrow(Scene):
+    def construct(self):
+        rect = Rectangle(color=WHITE, height=2, width=3).to_edge(UL, buff=1)
+        circ = Circle().to_edge(DOWN, buff=1)
+
+        arrow = always_redraw(
+            lambda: Line(
+                start=rect.get_bottom(), end=circ.get_top()
+            ).add_tip()
+        )
+
+        self.play(Create(VGroup(rect, circ, arrow)))
+        self.wait()
+
+        self.play(rect.animate.to_edge(UR, buff=1).scale(0.5), circ.animate.to_edge(DR, buff=1).scale(0.5))
+        self.wait()
+
+class Updaters(Scene):
+    def construct(self):
+        num = MathTex("log(2)")
+
+        box = always_redraw(lambda: SurroundingRectangle(num, color=WHITE, fill_color=RED, fill_opacity=0.75, buff=0.5))
+        box.set_z_index(-1)
+
+        label = always_redraw(lambda: Text("Logarithms").next_to(box, DOWN, buff=0.25))
+
+        self.play(Write(num))
+        self.play(Create(box))
+        self.play(Write(label))
+
+        self.play(num.animate.shift(RIGHT * 2), run_time=2)
+
+        self.wait()
