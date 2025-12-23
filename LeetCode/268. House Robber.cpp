@@ -4,7 +4,20 @@
 #include <vector>
 using namespace std;
 
-int rob(vector<int>& houses) {
+int rob(vector<int>& houses) { // Tc: O(n), SC: O(n)
+    int n = houses.size();
+    if (n == 1) return houses[0];
+
+    vector<int> dp(n + 1);
+    dp[1] = houses[0];
+    dp[2] = max(houses[0], houses[1]);
+    for (int i = 3; i <= n; i++) {
+        dp[i] = max(dp[i - 1], houses[i - 1] + dp[i - 2]);
+    }
+    return dp[n];
+}
+
+int rob_optimized(vector<int>& houses) {
     int maxi = 0, prevMax = 0, temp = 0;
     for (int house: houses) {
         temp = maxi;
@@ -16,7 +29,7 @@ int rob(vector<int>& houses) {
 
 int main(void) {
     vector<int> houses = {2, 7, 9, 3, 1};
-    cout << "Max amount you can rob is " << rob(houses) << ".\n";
+    cout << "Max amount you can rob is " << rob_optimized(houses) << ".\n";
 
     return 0;
 }
