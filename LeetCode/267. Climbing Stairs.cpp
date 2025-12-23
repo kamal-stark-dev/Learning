@@ -30,7 +30,7 @@ int climbStairs_TopDown(int n) { // Memoization, TC: O(n), SC: O(n)
 int climbStairs_BottomUp(int n) { // TC: O(n), SC: O(n)
     if (n <= 2) return n;
     vector<int> dp(n + 1);
-    dp[1] = dp[2] = 1;
+    dp[1] = 1, dp[2] = 2;
     for (int i = 3; i <= n; i++) {
         dp[i] = dp[i - 1] + dp[i - 2];
     }
@@ -49,7 +49,7 @@ int climbStairs_BottomUp_Optimized(int n) { // TC: O(n), SC: O(1)
 
 int main(void) {
     int n = 3;
-    cout << "There are " << climbStairs_BottomUp_Optimized(n) << " ways to climb to the top.\n";
+    cout << "There are " << climbStairs_BottomUp(n) << " ways to climb to the top.\n";
 
     return 0;
 }
