@@ -1,6 +1,7 @@
 // 5. Longest Palindromic Substring
 
 #include <iostream>
+#include <vector> // for dp solution
 using namespace std;
 
 // O(n)
@@ -30,6 +31,28 @@ string longestPalindrome_Brute(string s) {
         }
     }
     return max_str;
+}
+
+// Dynamic Programming
+string longestPalindrome_DP(string s) { // TC: O(n ^ 2), SC: O(n ^ 2)
+    int n = s.size();
+    int resIdx = 0, resLen = 0;
+
+    vector<vector<bool>> dp(n, vector<bool>(n, false));
+
+    for (int i = n - 1; i >= 0; i--) {
+        for (int j = i; j < n; j++) {
+            if (s[i] == s[j] && (j - i <= 2 || dp[i + 1][j - 1])) {
+                dp[i][j] = true;
+
+                if (resLen < (j - i + 1)) {
+                    resIdx = i;
+                    resLen = j - i + 1;
+                }
+            }
+        }
+    }
+    return s.substr(resIdx, resLen);
 }
 
 // O(n ^ 2) -> we check for palindromes from the middle and expand outwards
@@ -63,7 +86,7 @@ string longestPalindrome_Better(string s) {
 
 int main(void) {
     string s = "babad";
-    cout << "The longest palindromic string in `" << s << "` is `" << longestPalindrome_Better(s) << "`.\n";
+    cout << "The longest palindromic string in `" << s << "` is `" << longestPalindrome_DP(s) << "`.\n";
 
     return 0;
 }
