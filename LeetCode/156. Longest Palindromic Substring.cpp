@@ -32,12 +32,13 @@ string longestPalindrome_Brute(string s) {
     return max_str;
 }
 
-// O(n ^ 2) -> this can be done by changing the logic to check for palindromes
+// O(n ^ 2) -> we check for palindromes from the middle and expand outwards
 string longestPalindrome_Better(string s) {
     string res = "";
     int res_len = 0, n = s.length();
 
     for (int i = 0; i < n; i++) {
+        // odd len palindromes
         int l = i, r = i;
         while (l >= 0 && r < n && s[l] == s[r]) {
             if ((r - l + 1) > res_len) {
@@ -47,6 +48,7 @@ string longestPalindrome_Better(string s) {
             l--; r++;
         }
 
+        // even len palindromes
         l = i, r = i + 1;
         while (l >= 0 && r < n && s[l] == s[r]) {
             if ((r - l + 1) > res_len) {
@@ -65,3 +67,8 @@ int main(void) {
 
     return 0;
 }
+
+/*
+Time Complexity: O(n ^ 2)
+Space Complexity: O(1) for computation, O(n) for output string
+*/
