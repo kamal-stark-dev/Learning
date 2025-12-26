@@ -24,6 +24,30 @@ int coinChange_brute(vector<int>& coins, int amount) {
     return ans;
 }
 
+// memoization
+int dfs_m(int amount, vector<int>& dp, const vector<int>& coins) {
+    if (amount == 0) return 0;
+    if (amount < 0) return INT_MAX;
+    if (dp[amount] != -1) return dp[amount];
+
+    int res = INT_MAX;
+    for (int coin : coins) {
+        int sub = dfs_m(amount - coin, dp, coins);
+        if (sub != INT_MAX) {
+            res = min(res, 1 + sub);
+        }
+    }
+
+    return dp[amount] = res;
+}
+
+int coinChange_m(vector<int>& coins, int amount) {
+    vector<int> dp(amount + 1, -1);
+    int res = dfs_m(amount, dp, coins);
+    return (res == INT_MAX) ? -1 : res;
+}
+
+
 // tabulation
 int coinChange(vector<int>& coins, int amount) {
     vector<int> dp(amount + 1, amount + 1);
