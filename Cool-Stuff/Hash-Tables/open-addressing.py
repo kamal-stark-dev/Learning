@@ -30,6 +30,14 @@ How it works?
 NOTE: Most randomly selected probing sequences modulo N will produce a cycle shorter than the table size, which creates a problem when you try to insert value and all the indexes(buckets) on the cycle are filled because you'll get stuck in an infinite loop.
 """
 
+class MyCustomError(Exception):
+    def __init__(self, message, error_code):
+        super().__init__(message)
+        self.error_code = error_code
+
+    def __str__(self):
+        return f"{super().__str__()} (Error Code: {self.error_code})"
+
 class hash_table_open_addressing:
     def __init__(self, SIZE=10):
         self.SIZE = SIZE
@@ -46,12 +54,15 @@ class hash_table_open_addressing:
         hash_val = self.hash(key)
         index = hash_val
 
-        while self.table[index] != None:
+        while self.table[index] is not None:
             if self.table[index][0] == key: # key already exists (just update the value)
                 break
-            print('Collision:', key)
+            # print('Collision:', key)
             index = (hash_val + self.probe(x)) % self.SIZE
             x += 1
+
+            if x > self.SIZE:
+                raise MyCustomError("Cycle detected or Table is full.", 69)
 
         self.table[index] = (key, value)
 
@@ -67,12 +78,16 @@ class hash_table_open_addressing:
     def remove(self):
         pass
 
-ht = hash_table_open_addressing()
+ht = hash_table_open_addressing(12)
 values = ["Naruto", "Sasuke", "Sakura", "Kakashi", "Jiraya", "Tsunade", "Itachi", "Might Guy", "Madara", "Danzo"]
 
 for key, value in enumerate(values):
-    ht.insert(key, value)
+    try:
+        ht.insert(key, value)
+    except MyCustomError as e:
+        print("Error:", e)
 
 print(ht.table)
 
+ht.insert(1, "Kamal Stark is Awesome!")
 print(ht.find(1))
