@@ -39,26 +39,28 @@ class MyCustomError(Exception):
         return f"{super().__str__()} (Error Code: {self.error_code})"
 
 class hash_table_open_addressing:
-    def __init__(self, SIZE=10):
+    def __init__(self, SIZE=11):
         self.SIZE = SIZE
         self.table = [None] * SIZE
 
     def hash(self, x):
         return (x * x + 3) % self.SIZE
 
-    def probe(self, x):
-        return (2 * x) % self.SIZE
+    def probe(self, key):
+        return 1 + (key % (self.SIZE - 1))
 
     def insert(self, key, value):
         x = 1
         hash_val = self.hash(key)
         index = hash_val
 
-        while self.table[index] is not None:
+        while self.table[index] not in [None, ()]: # not empty or a tombstone
             if self.table[index][0] == key: # key already exists (just update the value)
-                break
+                self.table[index] = (key, value)
+                return
+
             # print('Collision:', key)
-            index = (hash_val + self.probe(x)) % self.SIZE
+            index = (hash_val + x * self.probe(key)) % self.SIZE
             x += 1
 
             if x > self.SIZE:
@@ -67,18 +69,35 @@ class hash_table_open_addressing:
         self.table[index] = (key, value)
 
     def find(self, key):
-        x = 0
+        x = 1
         hash_val = self.hash(key)
         index = hash_val
-        while self.table[index] != None and self.table[index][0] != key:
-            index = (hash_val + self.probe(x)) % self.SIZE
+        while self.table[index] is not None:
+            if self.table[index] != () and self.table[index][0] == key:
+                return self.table[index]
+
+            index = (hash_val + x * self.probe(key)) % self.SIZE
             x += 1
-        return self.table[index] # value or None
 
-    def remove(self):
-        pass
+            if x > self.SIZE:
+                return None
+        return None
 
-ht = hash_table_open_addressing(12)
+    def remove(self, key):
+        x = 1
+        hash_val = self.hash(key)
+        index = hash_val
+
+        while self.table[index] is not None:
+            if self.table[index] != () and self.table[index][0] == key:
+                self.table[index] = () # set bucket to tombstone
+            index = (hash_val + x * self.probe(key)) % self.SIZE
+            x += 1
+
+            if x > self.SIZE:
+                return
+
+ht = hash_table_open_addressing()
 values = ["Naruto", "Sasuke", "Sakura", "Kakashi", "Jiraya", "Tsunade", "Itachi", "Might Guy", "Madara", "Danzo"]
 
 for key, value in enumerate(values):
@@ -86,6 +105,9 @@ for key, value in enumerate(values):
         ht.insert(key, value)
     except MyCustomError as e:
         print("Error:", e)
+
+ht.remove(4)
+ht.remove(6)
 
 print(ht.table)
 
