@@ -40,43 +40,79 @@ class MyCustomError(Exception):
 
 class hash_table_open_addressing:
     def __init__(self, SIZE=11):
+        """
+        Docstring for __init__
+
+        :param self: it's needed to store members, so yeah!
+        :param SIZE: size of the hash table (make sure it's prime to prevent early cycles)
+        """
         self.SIZE = SIZE
         self.table = [None] * SIZE
 
     def hash(self, x):
+        """
+        Docstring for hash
+
+        :param self: it's requried to access class members, so yeah!
+        :param x: value you want to hash
+        """
         return (x * x + 3) % self.SIZE
 
     def probe(self, key):
+        """
+        Docstring for probe
+
+        :param self: it's required so yeah!
+        :param key: to compute probe value
+        """
         return 1 + (key % (self.SIZE - 1))
 
     def insert(self, key, value):
-        x = 1
+        """
+        Docstring for insert
+
+        :param self: it's a function inside the class so yeah!
+        :param key: key for the value you want to insert
+        :param value: value you want to insert in the hash table
+        """
         hash_val = self.hash(key)
+        step = self.probe(key)
+
+        x = 0
         index = hash_val
 
-        while self.table[index] not in [None, ()]: # not empty or a tombstone
+        while self.table[index] is not None and self.table[index] != (): # not empty or a tombstone
             if self.table[index][0] == key: # key already exists (just update the value)
                 self.table[index] = (key, value)
                 return
 
             # print('Collision:', key)
-            index = (hash_val + x * self.probe(key)) % self.SIZE
+            index = (hash_val + x * step) % self.SIZE
             x += 1
 
             if x > self.SIZE:
-                raise MyCustomError("Cycle detected or Table is full.", 69)
+                raise MyCustomError("Hash Table is full.", 69)
 
         self.table[index] = (key, value)
 
     def find(self, key):
-        x = 1
+        """
+        Docstring for find
+
+        :param self: it's a class method so yeah!
+        :param key: to find the element in the hash table
+        """
         hash_val = self.hash(key)
+        step = self.probe(key)
+
+        x = 0
         index = hash_val
+
         while self.table[index] is not None:
             if self.table[index] != () and self.table[index][0] == key:
                 return self.table[index]
 
-            index = (hash_val + x * self.probe(key)) % self.SIZE
+            index = (hash_val + x * step) % self.SIZE
             x += 1
 
             if x > self.SIZE:
@@ -84,32 +120,50 @@ class hash_table_open_addressing:
         return None
 
     def remove(self, key):
-        x = 1
+        """
+        Docstring for remove
+
+        :param self: it's a member function so yeah!
+        :param key: key is used to find the pair to remove
+
+        refer to this for better understanding - https://youtu.be/7eLDTtbzX4M?si=fs7nISmMooF6TyNy
+        """
         hash_val = self.hash(key)
+        step = self.probe(key)
+
+        x = 0
         index = hash_val
 
         while self.table[index] is not None:
             if self.table[index] != () and self.table[index][0] == key:
                 self.table[index] = () # set bucket to tombstone
-            index = (hash_val + x * self.probe(key)) % self.SIZE
+                return
+            index = (hash_val + x * step) % self.SIZE
             x += 1
 
             if x > self.SIZE:
                 return
 
+# creating a hash table
 ht = hash_table_open_addressing()
 values = ["Naruto", "Sasuke", "Sakura", "Kakashi", "Jiraya", "Tsunade", "Itachi", "Might Guy", "Madara", "Danzo"]
 
 for key, value in enumerate(values):
     try:
+        # insertion
         ht.insert(key, value)
     except MyCustomError as e:
         print("Error:", e)
 
+# removal
 ht.remove(4)
 ht.remove(6)
 
+# printing
 print(ht.table)
 
+# insertion of already existing key
 ht.insert(1, "Kamal Stark is Awesome!")
+
+# searching
 print(ht.find(1))
