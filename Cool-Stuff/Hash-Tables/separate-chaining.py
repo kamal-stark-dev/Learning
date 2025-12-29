@@ -1,4 +1,4 @@
-# Separate Chaining
+# Separate Chaining goes brrr...
 
 """
 Separate Chaining: is one of many strategies to deal with hash collisions by maintaining a data structure (usually a linked list) to hold all the different values which hashed to a particular(same) value.
@@ -112,3 +112,8 @@ print("Val at 3 (after removal): ", ht.getVal(3))
 
 print("\nUpdated Hash Table:")
 ht.printTable()
+
+"""
+Q. How do you maintain `O(1)` insertion and lookup time complexity once your hash table gets really full and you have really long linked list chain?
+> Once the hash table you created contains a lot of elements you should create a new HT with a larger capacity and rehash all the items inside the old HT in the new HT.
+"""
