@@ -139,6 +139,14 @@ We can also notice that 4 values in our hash table are empty, even after inserti
 
 2. Open Addressing: deals with hash collisions by finding another place within the hash table for the object to go by offsetting it from the position to which it hashed to.
 
+# What real systems do (sanity check):
+
+<System>                            <Strategy>                          <Threshold>
+Java - HashMap                      Double hashing–like	                0.75
+(open addressing variant)
+CPython - dict	                    Perturbed probing (OA)              ~0.66
+C++ - unordered_map	                Separate chaining                   1.0 (different rules)
+
 
 # Complexity:
 Operation           Average             Worst
