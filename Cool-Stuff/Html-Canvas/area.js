@@ -1,5 +1,8 @@
 // logic goes brrr...
 
+// there is no need to use the line below as the "id" is a valid js variable name, we can directly use it.
+// const canvas = document.getElementById("canvas");
+
 const WIDTH = 800;
 const HEIGHT = 800;
 
@@ -56,12 +59,22 @@ function arcPath(
   path.arc(x, y, radius, startAngle, endAngle, counter_clockwise);
 }
 
-function font(text, x, y, font = "32px Arial", style = "normal") {
+function text(
+  text,
+  x,
+  y,
+  color = "#000000",
+  font = "32px Arial",
+  style = "normal"
+) {
   ctx.save();
   ctx.font = font;
+
   if (style == "normal") {
+    ctx.fillStyle = color;
     ctx.fillText(text, x, y);
   } else if (style == "stroke") {
+    ctx.fillStyle = color;
     ctx.strokeText(text, x, y);
   } else {
     console.log("Invalid style selected.");
@@ -164,5 +177,9 @@ ctx.stroke(shape);
 
 ctx.restore();
 
-// drawing grid
-// grid(gridX, gridY, grid_width, grid_height, 3, 3, (line_width = 2.5));
+// label for size
+text("Find the Area", 300, 70, "black", "32px Arial");
+line(710, 500, 722, 500, 4);
+line(720, 500, 720, 700, 4);
+line(710, 700, 722, 700, 4);
+text("4", 730, 610, "black", "32px Arial");

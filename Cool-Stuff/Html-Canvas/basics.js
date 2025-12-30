@@ -24,7 +24,7 @@ function circle(x, y, radius, startAngle, endAngle, counter_clockwise=false) {
   ctx.stroke();
 }
 
-function font(text, x, y, font="32px Arial", style="normal") {
+function text(text, x, y, font="32px Arial", style="normal") {
   ctx.font = font;
   if (style == "normal") {
     ctx.fillText(text, x, y);
@@ -86,7 +86,7 @@ line(0, 0, WIDTH, HEIGHT);
 circle(WIDTH / 2, HEIGHT / 2, HEIGHT / 2, 0, 2 * Math.PI);
 
 // text
-font("Hello Mello", WIDTH / 2 - 160, HEIGHT / 2 + 36, "72px Helvetica", "stroke");
+text("Hello Mello", WIDTH / 2 - 160, HEIGHT / 2 + 36, "72px Helvetica", "stroke");
 
 // image
 image_address = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.cnn.com%2Fapi%2Fv1%2Fimages%2Fstellar%2Fprod%2F150324154003-01-internet-cats-restricted.jpg%3Fq%3Dw_3000&f=1&nofb=1&ipt=91c799ce5dc157b57a8e59d2630a2baae0e33addb24075f228224b0679229a34"
