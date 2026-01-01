@@ -103,9 +103,6 @@ int longestCommonSubsequence_1rowDP(string text1, string text2) {
             }
             prevDiag = temp; // shift the diagonal for next column
         }
-
-        for (int n: dp) cout << n << " ";
-        cout << "\n";
     }
     return dp[0];
 }
