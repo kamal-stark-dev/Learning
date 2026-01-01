@@ -66,12 +66,57 @@ int longestCommonSubsequence(string text1, string text2) {
     return dp[0][0];
 }
 
+// 2-row DP - TC: O(m x n), SC: O(n)
+int longestCommonSubsequence_2rowDP(string text1, string text2) {
+    int m = text1.size(), n = text2.size();
+    vector<int> curr(n + 1, 0), prev(n + 1, 0);
+
+    for (int i = m - 1; i >= 0; i--) {
+        for (int j = n - 1; j >= 0; j--) {
+            if (text1[i] == text2[j]) {
+                curr[j] = 1 + prev[j + 1];
+            }
+            else {
+                curr[j] = max(curr[j], prev[j + 1]);
+            }
+            prev = curr;
+        }
+    }
+    return prev[0];
+}
+
+// 1-row DP - TC: O(m x n), SC: O(n)
+int longestCommonSubsequence_1rowDP(string text1, string text2) {
+    int m = text1.size(), n = text2.size();
+    vector<int> dp(n + 1, 0);
+
+    for (int i = m - 1; i >= 0; i--) {
+        int prevDiag = 0;
+        for (int j = n - 1; j >= 0; j--) {
+            int temp = dp[j]; // save old dp[i + 1][j]
+
+            if (text1[i] == text2[j]) {
+                dp[j] = 1 + prevDiag;
+            }
+            else {
+                dp[j] = max(dp[j], dp[j + 1]);
+            }
+            prevDiag = temp; // shift the diagonal for next column
+        }
+
+        for (int n: dp) cout << n << " ";
+        cout << "\n";
+    }
+    return dp[0];
+}
+
 // it can also be done in min(m, n) space.
 
 int main(void) {
-    string text1 = "abcde", text2 = "ace";
+    // string text1 = "abcde", text2 = "ace";
+    string text1 = "abcba", text2 = "abcbcba";
 
-    cout << longestCommonSubsequence(text1, text2) << "\n";
+    cout << longestCommonSubsequence_1rowDP(text1, text2) << "\n";
 
     return 0;
 }
