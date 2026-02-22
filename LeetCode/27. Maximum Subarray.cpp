@@ -11,16 +11,6 @@ int main(void) {
     int arr[] = {3, -4, 5, 4, -1, 7, -8};
     int n = sizeof(arr) / sizeof(arr[0]);
 
-    // cout << "The subarrays of the arr are:\n";
-    // for (int start = 0; start < n; start++) {
-    //     for (int end = start; end < n; end++) {
-    //         cout << "{";
-    //         for (int i = start; i <= end; i++) {
-    //             cout << arr[i] << " ";
-    //         } cout << "\b}, ";
-    //     } cout << endl;
-    // }
-
     // max subarray sum - brute force ( O(n^3) )
     /*
     int maxSum = 0;
@@ -31,18 +21,6 @@ int main(void) {
                 sum += arr[k];
             }
             maxSum = max(sum, maxSum);
-        }
-    }
-    */
-
-    // this one is O(n^2)
-    /*
-    int maxSum = INT_MIN;    // setting it to zero will be troublesum when all the elements are negative
-    for (int i = 0; i < n; i++) {
-        int currSum = 0;
-        for (int j = i; j < n; j++) {
-            currSum += arr[j];
-            maxSum = max(currSum, maxSum);
         }
     }
     */
@@ -58,10 +36,6 @@ int main(void) {
             currSum = 0;
     }
 
-    /*
-    NOTE: I notice that when I use `nums.at(i)` instead of `nums[i]` the time taken is significantly more, and you can also use `for each` loop in vectors and it won't affect the time.
-    */
-
     cout << "\nThe maximum sum is: " << maxSum << endl;
 
     return 0;
@@ -71,4 +45,26 @@ int main(void) {
 array - {1, 2, 3, 4, 5}
 subarrays - 1, 2, 3, 4, 5, 12, 23, 34, 45, 123, 234, 345, 1234, 2345, 12345
     --> there are (n * (n + 1)) / 2 subarrays for a array of size `n`, [for n = 5, subarrays = 5 * 6 / 2 = 15]
+*/
+
+/*
+Equivalent C Code:
+```c
+# include <limits.h>
+
+# define MAX(a, b) ((a > b) ? a : b)
+
+int maxSubArray(int* nums, int numsSize) {
+    int res = INT_MIN;
+    int sum = 0;
+
+    for (int i = 0; i < numsSize; i++) {
+        if (sum < 0)
+            sum = 0;
+        sum += nums[i];
+        res = MAX(res, sum);
+    }
+    return res;
+}
+```
 */
