@@ -1,4 +1,5 @@
 import k from "./kaplayCtx.js";
+import game from "./scenes/game.js";
 import mainMenu from "./scenes/mainMenu.js";
 
 // 1. loading assets
@@ -45,7 +46,7 @@ k.loadSound("city", "sounds/Cing.mp3");
 
 k.scene("main-menu", mainMenu);
 
-k.scene("game", () => {});
+k.scene("game", game);
 
 k.scene("gameover", () => {});
 
