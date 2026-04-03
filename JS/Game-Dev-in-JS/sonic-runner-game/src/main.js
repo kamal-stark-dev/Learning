@@ -1,11 +1,14 @@
 import k from "./kaplayCtx.js";
 import game from "./scenes/game.js";
+import gameover from "./scenes/gameover.js";
 import mainMenu from "./scenes/mainMenu.js";
 
 // 1. loading assets
 
 k.loadSprite("chemical-bg", "graphics/chemical-bg.png");
 k.loadSprite("platforms", "graphics/platforms.png");
+k.loadSprite("game-over-pose", "graphics/sonic-game-over-pose.png");
+k.loadSprite("sonic-bg", "graphics/sonic-bg.png");
 
 // handling spritesheet
 k.loadSprite("sonic", "graphics/sonic.png", {
@@ -40,7 +43,7 @@ k.loadSound("hurt", "sounds/Hurt.wav");
 k.loadSound("hyper-ring", "sounds/HyperRing.wav");
 k.loadSound("jump", "sounds/Jump.wav");
 k.loadSound("ring", "sounds/Ring.wav");
-k.loadSound("city", "sounds/Cing.mp3");
+k.loadSound("city", "sounds/City.mp3");
 
 // 2. Creating Scenes
 
@@ -48,6 +51,6 @@ k.scene("main-menu", mainMenu);
 
 k.scene("game", game);
 
-k.scene("gameover", () => {});
+k.scene("gameover", gameover);
 
 k.go("main-menu");
