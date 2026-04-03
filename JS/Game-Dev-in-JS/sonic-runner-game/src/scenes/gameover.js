@@ -1,7 +1,7 @@
 import k from "../kaplayCtx";
 
-export default function gameover(citySfx) {
-  citySfx.paused = true;
+export default function gameover(gameMusic) {
+  gameMusic.paused = true;
 
   let bestScore = k.getData("best-score");
   const currentScore = k.getData("current-score");
@@ -25,7 +25,7 @@ export default function gameover(citySfx) {
 
   k.add([
     k.sprite("sonic-bg"),
-    k.scale(5),
+    k.scale(5.4),
     k.pos(k.center()),
     k.anchor("center"),
   ]);
@@ -38,27 +38,25 @@ export default function gameover(citySfx) {
   ]);
 
   k.add([
-    k.text("GAME-OVER", { font: "mania", size: 96 }),
+    k.text("GAME-OVER", { font: "mania", size: 124 }),
     k.anchor("center"),
     k.pos(k.center().x, k.center().y - 300),
   ]);
 
   k.add([
-    k.text(`BEST SCORE: ${bestScore}`),
-    {
+    k.text(`BEST SCORE: ${bestScore}`, {
       font: "mania",
-      size: 84,
-    },
+      size: 48,
+    }),
     k.anchor("center"),
     k.pos(k.center().x - 500, k.center().y - 160),
   ]);
 
   k.add([
-    k.text(`CURRENT SCORE: ${currentScore}`),
-    {
+    k.text(`CURRENT SCORE: ${currentScore}`, {
       font: "mania",
-      size: 84,
-    },
+      size: 48,
+    }),
     k.anchor("center"),
     k.pos(k.center().x + 500, k.center().y - 160),
   ]);

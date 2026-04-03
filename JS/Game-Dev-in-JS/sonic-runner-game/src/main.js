@@ -43,7 +43,7 @@ k.loadSound("hurt", "sounds/Hurt.wav");
 k.loadSound("hyper-ring", "sounds/HyperRing.wav");
 k.loadSound("jump", "sounds/Jump.wav");
 k.loadSound("ring", "sounds/Ring.wav");
-k.loadSound("city", "sounds/City.mp3");
+k.loadSound("game-music", "sounds/game-music.mp3");
 
 // 2. Creating Scenes
 
