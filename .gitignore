@@ -1,1 +1,15 @@
 *.exe
+.venv/
+
+dist/
+env/
+
+.vscode/
+
+# uv extra information
+.python-version
+*.lock
+
+# RUST
+target/
+*.pdb
