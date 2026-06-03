@@ -272,3 +272,53 @@ else
     statement;
 ```
 
+## Arrays:
+```c 
+#include <stdio.h>
+
+int main() {
+  int ch, space_count, char_count;
+  int digit_count[10];
+
+  space_count = char_count = 0;
+  for (int i = 0; i < 10; ++i)
+    digit_count[i] = 0;
+
+  while ((ch = getchar()) != EOF) {
+    if (ch >= '0' && ch <= '9')
+      ++digit_count[ch - '0'];
+    else if (ch == ' ' || ch == '\n' || ch == '\t')
+      ++space_count;
+    else 
+      ++char_count;
+  }
+
+  printf("digits = ");
+  for (int i = 0; i < 10; i++) {
+    printf(" %d", digit_count[i]);
+  }
+  printf(", white space = %d, char = %d\n", 
+         space_count, char_count);
+
+  return 0;
+}
+```
+
+The declaration `int digit_count[10];` declares *digit_count* to be an array of 10 integers. Arrays subscripts (indexes) always start with zero in C, so the elements are `digit_count[0]`, `digit_count[1]`, `digit_count[2]`, ..., `digit_count[9]`. This is reflected in the `for` loops that initialize and print the array.
+
+`c - '0'` is an integer expression with a value between 0 to 9 corresponding to the character '0' and '9' stored in ch, and thus a valid index for the array `digit_count`.
+
+We can also see an if-else pattern in the code:
+```c 
+if (condition)
+    statement;
+else if (condition)
+    statement;
+else
+    statement;
+```
+
+This occurs frequently in programs as a way to express a multi-way decision. The conditions are evaluated in order from the top until some *condition* is satisfied; at the point the corresponding statement part is executed, and the entire construction is finished. If none of the condition is satisfied, the statement after the final else is executed if it is present.
+
+
+
