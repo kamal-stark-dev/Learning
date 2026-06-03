@@ -320,5 +320,72 @@ else
 
 This occurs frequently in programs as a way to express a multi-way decision. The conditions are evaluated in order from the top until some *condition* is satisfied; at the point the corresponding statement part is executed, and the entire construction is finished. If none of the condition is satisfied, the statement after the final else is executed if it is present.
 
+## Functions:
+A function is a self-contained, reusable block of code designed to perform a specif task. Most functions follow a simple three-step lifecycle:
+
+1. Input (Parameters): You pass data into the function to give it context.
+2. Execution (Body): The function runs its internal logic to manipulate that data.
+3. Output (Return Value): The function sends the final result back to the main program.
+
+Benefits:
+- Code reusability
+- Modularity
+- Easier debugging
+- Readability
+
+There are two types of functions: 
+1. **Built-in Functions**: these are pre-made functions provided by the library or programming language. Examples include `print()` in python or `printf(), getchar(), putchar()` etc. in `stdio.h`.
+2. **User-Defined Functions**: these are custom functions that you write yourself to solve the unique requirements of your specific software application.
+
+Let's write a user-defined function to calculate the power of (base, power) as we don't have a `**` power operator in C:
+```c 
+#include <stdio.h>
+
+int power(int a, int b);
+
+int main() {
+    int base = 2, pow = 5;
+    printf("%d^%d = %d\n", base, pow, power(base, pow));
+
+    return 0;
+}
+
+int power(int base, int pow) {
+    int res = 1;
+
+    for (int i = 1; i <= pow; i++) 
+        res = res * base;
+
+    return res;
+}
+```
+
+A function definition has this form:
+```
+return-type function-name(parameter declarations, if any) {
+    declarations
+    statements
+}
+```
+
+Function definitions can appear in any order, and in one source file or several, although no function can be split between files. For the moment, we will assume that both functions are in the same file, so whatever you have learned about running C programs will still work.
+
+The function `power` is called by `main`, in the line: `printf("%d^%d = %d\n", base, pow, power(base, pow));` the call passes two arguments to `power`, which returns an integer to be formatted and printed.
+
+`int power(int base, int pow)` declares the parameter types and names, and the type of result the funciton returns. The names used by `power` for its parameters are local to it, and are not visible to any other function: other routines can use the same name without any conflict. For example, the `base` and `pow` variables are in both the `main` and `power` function without any conflicts.
+
+The value that `power` computes is returned to `main` by the `return` statement. Any expression may follow `return` (`return expression;`). A function need not to return a value. 
+
+> NOTE: A return statement with no expression causes control, but no useful value, to be returned to the caller, as does "falling off the end" of a function by reacing the terminating right brace of the function. And the calling function can ignore a value returned by a function.
+
+You may have noticed that there is a return statement at the end of the `main` function too, since `main` is a function like any other, it may return a value to its caller, which is in effect the environment in which the program was executed. Typically, a return value of zero implies normal termination; non-zero values signal unusual or errorneous termination conditions.
+
+The declaration: `int power(int a, int b);` just before the `main` says that `power` is a function that expects two `int` arguments and returns an `int`. This declaration which is called *function prototype*, has to agree with the definition and uses of power. It is error if the definition of a funciton or any uses of it do not agree with this prototype.
+
+Parameter names need not agree, moreover they are optional too (you could've written this too):
+```c 
+int power(int, int);
+```
+Well chosen names are good documentation however, so we will often use them.
 
 
