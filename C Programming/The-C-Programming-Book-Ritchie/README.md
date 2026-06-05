@@ -388,4 +388,149 @@ int power(int, int);
 ```
 Well chosen names are good documentation however, so we will often use them.
 
+## Arguments - Call by Value:
+In C, all the function arguments are passed **by value.** This means that the called function is given the values of its arguments in temporary variables rather than the originals. For example, if we pass a variable `n` to a function and modify that variable inside the function and come out of the function, the value of `n` is not altered.
 
+It usually leads to more compact programs with fewer extraneous variables, because parameters can be treated conveniently initialized local variables in the called routine (function). 
+
+For example, here is a version of `power` function that make use of this property:
+```c 
+int power(int base, int pow) {
+    int res;
+    for (res = 1; pow > 0; pow--) 
+        res = res * base;
+    return res;
+}
+```
+The parameter `pow` is used as a temporary variable, and is counted down (a for loop backwards) until it becomes zero; there is no need for a new variable `i`. Whatever is done to `pow` inside `power` function has no effect on the argument that `power` was originally called with.
+
+> NOTE: When necessary, it's possible to arrange for a function to modify a variable in a calling routine(function), which is called **Call-by-Reference**.
+
+>NOTE: Also note that the story is different with arrays, when the name of an array is used as an argument, the value passed to the function is the location or address of the beginning of the array - there is no copying of the array elements. By subscripting (indexing) this value, the function can access and alter any argument of the array.
+
+## Character Arrays:
+The most common type of array in C is the array of characters. These are used for making strings (essentially a string is just array of characters).
+
+```c 
+#include <stdio.h>
+
+#define MAXLINE 1000
+
+int main() {
+    char s[MAXLINE];
+    
+    char ch;
+    int i;
+    
+    for (i = 0; i < MAXLINE - 1 && (ch = getchar()) != EOF; i++)
+        s[i] = ch;
+    s[i] = '\0';
+
+    printf("The character array is:\n%s\n", s);
+    return 0;
+}
+```
+We put the character `\0` (the *null* character, whose value is zero) at the end of the array it is creating, to mark the end of the string of characters. This conversion is also used by the C language: when a string constant like `"hello\n"` appears in a C program, it is stored as an array of characters containing the characters in the string and terminated with a `\0` to mark the end.
+
+```
++---+---+---+---+---+----+----+
+| h | e | l | l | o | \n | \0 |
++---+---+---+---+---+----+----+
+```
+
+The `%s` format specification in printf expects the corresponding argument to be a string represented in this form. 
+
+## External Variables and Scope:
+Look at the program below - 
+```c 
+#include <stdio.h>
+
+int main() {
+    int num = 10;
+    long square = num * num;
+
+    printf("%d^%d = %d\n", num, square);
+}
+```
+The variables such as `num`, and `square` are private/local to `main` function, because they are declared within `main`, no other function can have direct access to them. The same is true for the variables in other functions, each local variable in a function comes into existence only when their function is called and disappears when their funciton is exited. Such variables are usually known as *automatic variables*.
+
+Because *automatic variables* come and go with function invocation, they do not retain their value from one call to the next, and must be set upon each entry otherwise they'll contain garbage values.
+
+As an alternative to automatic variables, it is possible to define variables that are *external* to all funcitons, variables that can be accessed by name by any function. External variables are globally accessible, they can be used instead of argument lists to communicate data between functions. External variables retain their values even after the functions that set them have returned.
+
+An *external variable* must be defined, exactly once, outside of any function; this sets aside storage for it.
+
+
+Let's rewrite the longest-line program with `max`, `line` and `longest` as external variables. This requires changing the calls, declarations and bodies of all three functions.
+```c  
+#include <stdio.h>
+
+#define MAXLINE 1000
+
+int max;
+char line[MAXLINE];
+char longest[MAXLINE];
+
+int getline(void);
+void copy(void);
+
+int main() {
+  int len;
+  extern int max;
+  extern char longest[];
+
+  max = 0;
+  while ((len = getline()) > 0) {
+    if (len > max) {
+      max = len;
+      copy();
+    }
+  }
+  if (max > 0)
+    printf("%s", longest);
+  
+  return 0;
+}
+
+int getline(void) {
+  int ch, i;
+  extern char line[];
+
+  for (i = 0; i < MAXLINE - 1 
+       && (ch = getchar()) != EOF 
+       && ch != '\n'; ++i)
+    line[i] = ch;
+
+  if(ch == '\n') {
+    line[i] = ch;
+    ++i;
+  }
+  line[i] = '\0';
+  return i;
+}
+
+void copy(void) {
+  int i;
+  extern char line[], longest[];
+
+  i = 0;
+  while ((longest[i] = line[i]) != '\0') 
+    ++i;
+}
+```
+
+Syntactically, external variables are just like definitions of local variables, but since they occur outside the functions, they are external. Before the function can use an external variable, the name of the variable must be made known to the function; the declaration is the same as before except for the added keyword `extern`.
+
+> NOTE: In certain curcumstances `extern` declaration can be omitted. If the definition of the external variable occurs in the source file before its use in a particular function, then there is no need for an `extern` declaration in the function.
+
+Thus, the `extern` declarations in `main`, `getline` and `copy` are redundant. In fact, common practice is to place definitions of all external variables at the beginning of the source file, and then omit all extern declarations.
+
+If the program is in several source files, and a variable is defined in *file1* and used in *file2* and *file3*, then extern declarations are needed in *file2* and *file3* to connect the occurences to the variable.
+
+> NOTE: The usual practice is to collect `extern` declarations of variables and functions in a separate file, historically called a *header*, that is included by `#include` at the front of each source file. The suffix `.h` is conventional for header names. The function of the standard library, for example, are declared in headers like `<stdio.h>`.
+
+By the way, there is a tendency to make everything in sight and `extern` variable because it appears to simplify communications but external variables are there even when you don't need them. They can be modified by some function and you might wonder why that is. This second version of longest-line is inferior to the first program, partly for these reasons, and partly because it destroys the generality of two useful functions by writing into them the names of the variables they manipulate.
+
+At this point we have covered what might be called the conventional core of C. With this handful of building blocks, it's possible to write useful programs of considerable size. 
+
+---
