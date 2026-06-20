@@ -14,8 +14,8 @@ start_pos = Vector2(WIDTH / 2, 0)
 MASS_RADIUS = 20
 LINE_THICKNESS = 2
 
-L1 = 250
-L2 = 150
+L1 = 200
+L2 = 200
 
 l1, l2, m1, m2, phi1, phi2, phi1_d, phi2_d = 0, 0, 0, 0, 0, 0, 0, 0
 
