@@ -1,5 +1,8 @@
 *.exe
 .venv/
+venv/
+
+*.zip
 
 dist/
 env/
