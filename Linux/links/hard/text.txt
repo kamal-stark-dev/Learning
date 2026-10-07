@@ -1,0 +1,1 @@
+if I modify text.txt hard.txt will also change as they both point to the same inode (index node) - can verify the same by using "ls -li"

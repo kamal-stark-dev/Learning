@@ -1,0 +1,2 @@
+command -options arguments
+ex: ls -l /usr/bin
