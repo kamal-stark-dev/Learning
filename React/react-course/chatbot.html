@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Chatbot</title>
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+    <script type="text/babel">
+      const container = document.querySelector(".js-container");
+      const root = ReactDOM.createRoot(container);
+
+      /*
+        React components are independent, reusable building blocks used to create user interfaces. Instead of writing an entire web page in one massive file, you break the UI down into smaller, isolated pieces—like a navigation bar, a button, or a profile card—and combine them to build a complete app/website.
+      */
+
+      function ChatInput() {
+        return (
+          <>
+            {" "}
+            {/* <> </> is a fragment, which allows us to group elements together without creating an extra <div> */}
+            <input
+              type="text"
+              placeholder="Send a message to Chatbot"
+              size="30"
+            />
+            <button>Send</button>
+          </>
+        );
+      }
+
+      function ChatMessage({ message, sender }) {
+        // the arguments passed are called props
+        return (
+          <div>
+            {/* && is called the guard operator - if the first statement is true then the second statement runs */}
+            {sender === "bot" && <img src="./assets/bot.jpg" width="52px" />}
+            {message}
+            {sender === "user" && <img src="./assets/user.jpg" width="52px" />}
+          </div>
+        );
+      }
+
+      function App() {
+        return (
+          <>
+            Chatbot
+            {/* using ChatInput and ChatMessage components */}
+            <ChatInput />
+            <ChatMessage message="hello chatbot" sender="user" />
+            <ChatMessage message="Hi, how can I help you today?" sender="bot" />
+            <ChatMessage message="can youb get me todays date?" sender="user" />
+            <ChatMessage message="Today is November 25" sender="bot" />
+          </>
+        );
+      }
+
+      root.render(<App />);
+    </script>
+  </body>
+</html>
