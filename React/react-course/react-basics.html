@@ -19,6 +19,9 @@
     <!-- Babel is another external library which is a javascript compiler (translates JSX[JS + HTML] into JS code) -->
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
 
+    <!-- DayJs library to show today's date -->
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+
     <script type="text/babel">
       // JSX code example
       const button_jsx = <button>Click me!</button>;
@@ -33,17 +36,65 @@
         </p>
       );
 
+      // mini-exercise
+      let productCost = 2 * 8 + 10;
+      let shippingCost = 5;
+
+      const shipping_exercise = (
+        <div>
+          <p>Product cost: ${productCost}</p>
+          <p>Shipping cost: ${shippingCost}</p>
+          <p>Total cost: ${productCost + shippingCost}</p>
+
+          <button>Place your order</button>
+        </div>
+      );
+
       // to render multiple elements we'll store them in a div and render that div
+      const time = dayjs().format("HH:mm:ss");
+
       const div = (
         <div>
           {paragraph}
           {button_jsx}
           <p>Now we can render multiple elements (nice.)</p>
+
+          <hr />
+          {shipping_exercise}
+
+          <hr />
+          <p>Date: {dayjs().format("MMMM D")}</p>
         </div>
       );
 
       const container = document.querySelector(".js-container");
-      ReactDOM.createRoot(container).render(div);
+      const root = ReactDOM.createRoot(container);
+      root.render(div);
+
+      function updateTime() {
+        const time = dayjs().format("hh:mm:ss A");
+
+        const div = (
+          <div>
+            {paragraph}
+            {button_jsx}
+            <p>Now we can render multiple elements (nice.)</p>
+
+            <hr />
+            {shipping_exercise}
+
+            <hr />
+            <p>Date: {dayjs().format("MMMM D")}</p>
+            <p>Time: {time}</p>
+          </div>
+        );
+
+        root.render(div);
+      }
+
+      setInterval(() => {
+        updateTime();
+      }, 1000);
     </script>
   </body>
 </html>
