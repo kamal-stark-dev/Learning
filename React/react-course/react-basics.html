@@ -6,13 +6,44 @@
   <body>
     <div class="js-container"></div>
 
+    <script src="./react-basics.js"></script>
+
+    <!-- React is an external library which helps us create and manage websites easier (especially for complex websites) -->
+
+    <!-- react has shared features for both website and mobile apps -->
     <script src="https://unpkg.com/supersimpledev/react.js"></script>
+
+    <!-- react-dom has features specific to websites -->
     <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
 
+    <!-- Babel is another external library which is a javascript compiler (translates JSX[JS + HTML] into JS code) -->
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
     <script type="text/babel">
+      // JSX code example
+      const button_jsx = <button>Click me!</button>;
+
+      // JS code for the same would look like
+      const button_js = document.createElement("button");
+      button_js.innerHTML = "Click me!";
+
+      const paragraph = (
+        <p>
+          <strong>Hello World!</strong> This is some <i>random</i> paragraph.
+        </p>
+      );
+
+      // to render multiple elements we'll store them in a div and render that div
+      const div = (
+        <div>
+          {paragraph}
+          {button_jsx}
+          <p>Now we can render multiple elements (nice.)</p>
+        </div>
+      );
+
       const container = document.querySelector(".js-container");
-      ReactDOM.createRoot(container).render("Hello World!");
+      ReactDOM.createRoot(container).render(div);
     </script>
   </body>
 </html>
