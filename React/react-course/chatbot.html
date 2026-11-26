@@ -46,16 +46,53 @@
         );
       }
 
+      function ChatMessages() {
+        const [chatMessages, setChatMessages] = React.useState([
+          { message: "hello chatbot", sender: "user", id: "id1" },
+          {
+            message: "Hi, how can I help you today?",
+            sender: "bot",
+            id: "id2",
+          },
+          { message: "can you get me todays date?", sender: "user", id: "id3" },
+          { message: "Sure, today is November 26", sender: "bot", id: "id4" },
+        ]);
+
+        function sendMessage() {
+          setChatMessages([
+            ...chatMessages,
+            {
+              message: "test",
+              sender: "user",
+              id: crypto.randomUUID,
+            },
+          ]);
+        }
+
+        return (
+          <>
+            <button onClick={sendMessage}>Send Message</button>
+
+            {chatMessages.map((chatMessage) => {
+              return (
+                <ChatMessage
+                  message={chatMessage.message}
+                  sender={chatMessage.sender}
+                  key={chatMessage.id}
+                />
+              );
+            })}
+          </>
+        );
+      }
+
       function App() {
         return (
           <>
             Chatbot
             {/* using ChatInput and ChatMessage components */}
             <ChatInput />
-            <ChatMessage message="hello chatbot" sender="user" />
-            <ChatMessage message="Hi, how can I help you today?" sender="bot" />
-            <ChatMessage message="can youb get me todays date?" sender="user" />
-            <ChatMessage message="Today is November 25" sender="bot" />
+            <ChatMessages />
           </>
         );
       }
