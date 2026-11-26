@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Shopping Cart</title>
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+    <script type="text/babel">
+      const container = document.querySelector(".js-container");
+      const root = ReactDOM.createRoot(container);
+
+      function ProductDetails({ item, price, discountPrice, imgSrc }) {
+        const imagePath = `https://supersimple.dev/images/${imgSrc}`;
+
+        return (
+          <>
+            <img src={imagePath} width="100px" />
+            <p>
+              <strong>{item}</strong>
+            </p>
+            {discountPrice ? (
+              <del>
+                <p>Price: ${price}</p>
+              </del>
+            ) : (
+              <p>Price: ${price}</p>
+            )}
+            {discountPrice && <p>Discount Price: ${discountPrice}</p>}
+            <button>Add to Cart</button>
+            <hr />
+          </>
+        );
+      }
+
+      function App() {
+        return (
+          <>
+            <h2>Shopping Cart</h2>
+
+            <ProductDetails
+              item="Cotton socks"
+              price="10.90"
+              discountPrice="5.45"
+              imgSrc="cotton-socks.png"
+            />
+            <ProductDetails
+              item="Plani T-Shirt"
+              price="7.99"
+              imgSrc="plain-t-shirt.png"
+            />
+            <ProductDetails
+              item="Tennis balls"
+              price="6.00"
+              discountPrice="4.00"
+              imgSrc="tennis-balls.png"
+            />
+          </>
+        );
+      }
+
+      root.render(<App />);
+    </script>
+  </body>
+</html>
