@@ -2,6 +2,79 @@
 <html>
   <head>
     <title>Chatbot</title>
+
+    <style>
+      body {
+        background-color: #ffe5ec;
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 0;
+      }
+
+      .app-container {
+        max-width: 600px;
+        margin: auto 8px;
+
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .chat-messages-container {
+        margin-top: 24px;
+        flex-grow: 1;
+        overflow: scroll;
+        scrollbar-width: none;
+      }
+
+      .chat-input-container {
+        display: flex;
+        margin-bottom: 8px;
+      }
+
+      .chat-input {
+        padding: 12px 15px;
+        border-radius: 8px;
+        border: 1px solid black;
+        font-size: 15px;
+        flex-grow: 1;
+      }
+
+      .send-button {
+        font-size: 15px;
+        color: white;
+        cursor: pointer;
+        background-color: #fb6f92;
+        padding: 12px 20px;
+        border-radius: 8px;
+        border: none;
+        margin-left: 8px;
+      }
+
+      .chat-message-user {
+        display: flex;
+        align-items: start;
+        justify-content: end;
+      }
+
+      .chat-message-bot {
+        display: flex;
+        align-items: start;
+        justify-content: start;
+      }
+
+      .chat-message-text {
+        padding: 15px 20px;
+        border-radius: 8px;
+        margin: 0px 10px 24px 10px;
+        background-color: #ffc2d1;
+        max-width: 300px;
+      }
+
+      .message-sender-profile {
+        width: 48px;
+        border-radius: 50%;
+      }
+    </style>
   </head>
   <body>
     <div class="js-container"></div>
@@ -80,9 +153,9 @@
         }
 
         return (
-          <>
-            {/* <> </> is a fragment, which allows us to group elements together without creating an extra <div> */}
+          <div className="chat-input-container">
             <input
+              className="chat-input"
               type="text"
               placeholder="Send a message to Chatbot"
               size="30"
@@ -90,26 +163,36 @@
               onKeyDown={handleEnter}
               value={inputText}
             />
-            <button onClick={sendMessage}>Send</button>
-          </>
+            <button onClick={sendMessage} className="send-button">
+              Send
+            </button>
+          </div>
         );
       }
 
       function ChatMessage({ message, sender }) {
         // the arguments passed are called props
         return (
-          <div>
+          <div
+            className={
+              sender === "user" ? "chat-message-user" : "chat-message-bot"
+            }
+          >
             {/* && is called the guard operator - if the first statement is true then the second statement runs */}
-            {sender === "bot" && <img src="./assets/bot.jpg" width="52px" />}
-            {message}
-            {sender === "user" && <img src="./assets/user.jpg" width="52px" />}
+            {sender === "bot" && (
+              <img className="message-sender-profile" src="./assets/bot.jpg" />
+            )}
+            <div className="chat-message-text">{message}</div>
+            {sender === "user" && (
+              <img className="message-sender-profile" src="./assets/user.jpg" />
+            )}
           </div>
         );
       }
 
       function ChatMessages({ chatMessages }) {
         return (
-          <>
+          <div className="chat-messages-container">
             {chatMessages.map((chatMessage) => {
               return (
                 <ChatMessage
@@ -119,7 +202,7 @@
                 />
               );
             })}
-          </>
+          </div>
         );
       }
 
@@ -137,15 +220,14 @@
         ]);
 
         return (
-          <>
-            Chatbot
+          <div className="app-container">
             {/* using ChatInput and ChatMessage components */}
+            <ChatMessages chatMessages={chatMessages} />
             <ChatInput
               chatMessages={chatMessages}
               setChatMessages={setChatMessages}
             />
-            <ChatMessages chatMessages={chatMessages} />
-          </>
+          </div>
         );
       }
 
