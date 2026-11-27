@@ -145,7 +145,6 @@
 
         function handleEnter(event) {
           if (event.key == "Enter") {
-            console.log("Enter pressed.");
             sendMessage();
           } else if (event.key == "Escape") {
             setInputText("");
@@ -191,8 +190,22 @@
       }
 
       function ChatMessages({ chatMessages }) {
+        // Hooks - used to insert React features into our components (ex: useState, useEffect, useRef, etc.)
+        // Note - put hooks at the top of a component and they should not be inside any block (if-else, funciton, etc.)
+
+        // useRef - lets us automatically save an HTML element from the component (initial value - null)
+        const chatMessagesRef = React.useRef(null);
+
+        // useEffect - runs some code after a component is created or updated
+        React.useEffect(() => {
+          const containerElem = chatMessagesRef.current;
+          if (containerElem) {
+            containerElem.scrollTop = containerElem.scrollHeight;
+          }
+        }, [chatMessages]);
+
         return (
-          <div className="chat-messages-container">
+          <div className="chat-messages-container" ref={chatMessagesRef}>
             {chatMessages.map((chatMessage) => {
               return (
                 <ChatMessage
