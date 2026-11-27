@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+  <head>
+    <title>CSS and Hooks Exercise</title>
+
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      .heading {
+        color: #111;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #111;
+      }
+
+      .btn {
+        color: white;
+        padding: 8px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      .on {
+        background-color: rgb(25 135 84 / 1);
+      }
+
+      .off {
+        background-color: rgb(220 53 69 / 1);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+    <script type="text/babel">
+      const container = document.querySelector(".js-container");
+      const root = ReactDOM.createRoot(container);
+
+      function Heading({ heading }) {
+        return <h2 className="heading">{heading}</h2>;
+      }
+
+      function OnOffButton() {
+        const [isBtnOn, setIsBtnOn] = React.useState(true);
+
+        function flipBtn() {
+          setIsBtnOn(!isBtnOn);
+        }
+
+        return (
+          <button className={isBtnOn ? "on btn" : "off btn"} onClick={flipBtn}>
+            {isBtnOn ? "ON" : "OFF"}
+          </button>
+        );
+      }
+
+      function LoginForm() {
+        const [showPassword, setShowPassword] = React.useState(false);
+
+        function changeShowPassword() {
+          setShowPassword(!showPassword);
+
+          // TODO: start from here
+        }
+
+        return (
+          <>
+            <input type="email" placeholder="Email" />
+            <br />
+            <input type="password" placeholder="Password" />
+            <button onClick={changeShowPassword}>Show</button>
+            <br />
+            <button>Login</button>
+            <button>Sign up</button>
+          </>
+        );
+      }
+
+      function App() {
+        return (
+          <>
+            <Heading heading="ON/OFF Button" />
+            <OnOffButton />
+
+            <Heading heading="Login Form (Password toggle)" />
+            <LoginForm />
+          </>
+        );
+      }
+
+      root.render(<App />);
+    </script>
+  </body>
+</html>
