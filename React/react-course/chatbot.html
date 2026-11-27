@@ -23,12 +23,21 @@
 
       function ChatInput({ chatMessages, setChatMessages }) {
         const [inputText, setInputText] = React.useState("");
+        const [isLoading, setIsLoading] = React.useState(false);
 
         function saveInputText(event) {
           setInputText(event.target.value);
         }
 
-        function sendMessage() {
+        async function sendMessage() {
+          if (isLoading || inputText === "") {
+            return;
+          }
+
+          setIsLoading(true);
+
+          setInputText("");
+
           const tempChatMessages = [
             ...chatMessages,
             {
@@ -36,15 +45,21 @@
               sender: "user",
               id: crypto.randomUUID(),
             },
+            {
+              message: "Loading...",
+              sender: "bot",
+              id: crypto.randomUUID(),
+            },
           ];
 
           setChatMessages(tempChatMessages);
 
           /* getting response from external chatbot library */
-          const response = Chatbot.getResponse(inputText);
+          const response = await Chatbot.getResponseAsync(inputText);
 
           setChatMessages([
-            ...tempChatMessages,
+            /* remove the loading text from bot */
+            ...tempChatMessages.slice(0, -1),
             {
               message: response,
               sender: "bot",
@@ -52,7 +67,16 @@
             },
           ]);
 
-          setInputText("");
+          setIsLoading(false);
+        }
+
+        function handleEnter(event) {
+          if (event.key == "Enter") {
+            console.log("Enter pressed.");
+            sendMessage();
+          } else if (event.key == "Escape") {
+            setInputText("");
+          }
         }
 
         return (
@@ -63,6 +87,7 @@
               placeholder="Send a message to Chatbot"
               size="30"
               onChange={saveInputText}
+              onKeyDown={handleEnter}
               value={inputText}
             />
             <button onClick={sendMessage}>Send</button>
