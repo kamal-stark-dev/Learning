@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+  <head>
+    <title>State Exercise</title>
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+    <script type="text/babel">
+      const container = document.querySelector(".js-container");
+      const root = ReactDOM.createRoot(container);
+
+      function Heading({ heading, serial }) {
+        return (
+          <h2>
+            {serial ? serial : "#"}. {heading}
+          </h2>
+        );
+      }
+
+      function Counter({ count, setCount }) {
+        function changeCount() {
+          setCount(count + 1);
+        }
+
+        return <button onClick={changeCount}>Clicked {count} times</button>;
+      }
+
+      function Reset({ setCount }) {
+        function resetCount() {
+          setCount(0);
+        }
+
+        return <button onClick={resetCount}>Reset</button>;
+      }
+
+      function LiveInput() {
+        const [input, setInput] = React.useState("");
+
+        function updateInput(event) {
+          setInput(event.target.value);
+        }
+
+        function resetInput() {
+          setInput("");
+        }
+
+        function exampleInput() {
+          setInput("Gill Bates");
+        }
+
+        return (
+          <>
+            <input
+              type="text"
+              onChange={updateInput}
+              value={input}
+              placeholder="Type a name here"
+            />
+            <button onClick={resetInput}>Reset</button>
+            <button onClick={exampleInput}>Example</button>
+            <p>{input}</p>
+          </>
+        );
+      }
+
+      function LiveImage() {
+        const [imgURL, setImgURL] = React.useState("https://picsum.photos/250");
+        let newURL;
+
+        function changeURL(event) {
+          console.log(newURL);
+          newURL = event.target.value;
+        }
+
+        function changeImage() {
+          setImgURL(newURL);
+        }
+
+        return (
+          <>
+            <label htmlFor="imgURL">
+              Enter an image URL:
+              <input
+                id="imgURL"
+                type="text"
+                placeholder="https://picsum.photos/250"
+                onChange={changeURL}
+              />
+            </label>
+            <button onClick={changeImage}>Change Image</button>
+            <br />
+            <br />
+            <img
+              src={imgURL}
+              style={{ maxWidth: "400px" }}
+              alt="random image"
+            />
+          </>
+        );
+      }
+
+      function App() {
+        const [count, setCount] = React.useState(0);
+
+        return (
+          <>
+            <Heading heading="Counter" serial={1} />
+            <Counter count={count} setCount={setCount} />
+            <Reset setCount={setCount} />
+
+            <hr />
+
+            <Heading heading="Live Input Rendering" serial={2} />
+            <LiveInput />
+
+            <hr />
+            <Heading heading="Live Image Rendering" serial={3} />
+            <LiveImage />
+          </>
+        );
+      }
+
+      root.render(<App />);
+    </script>
+  </body>
+</html>
