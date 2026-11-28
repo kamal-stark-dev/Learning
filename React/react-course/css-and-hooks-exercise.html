@@ -28,6 +28,42 @@
       .off {
         background-color: rgb(220 53 69 / 1);
       }
+
+      .user-input {
+        padding: 8px 12px;
+        border-radius: 6px;
+        margin-bottom: 8px;
+        border: 1px solid black;
+      }
+
+      .show-password-btn {
+        padding: 8px;
+        margin-left: 4px;
+        border-radius: 6px;
+        border: 1px dashed black;
+        cursor: pointer;
+        background-color: #eee;
+      }
+
+      .login-btn {
+        padding: 8px 12px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        color: white;
+        background-color: rgb(0 123 255 / 1);
+        margin-right: 6px;
+      }
+
+      .auto-click-container button {
+        padding: 8px 12px;
+        border-radius: 6px;
+        border: none;
+        margin-right: 4px;
+        cursor: pointer;
+        background-color: #177e89;
+        color: white;
+      }
     </style>
   </head>
   <body>
@@ -35,6 +71,8 @@
 
     <script src="https://unpkg.com/supersimpledev/react.js"></script>
     <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
 
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
 
@@ -65,20 +103,74 @@
 
         function changeShowPassword() {
           setShowPassword(!showPassword);
-
-          // TODO: start from here
         }
 
         return (
           <>
-            <input type="email" placeholder="Email" />
+            <input className="user-input" type="email" placeholder="Email" />
             <br />
-            <input type="password" placeholder="Password" />
-            <button onClick={changeShowPassword}>Show</button>
+            <input
+              className="user-input"
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+            />
+            <button className="show-password-btn" onClick={changeShowPassword}>
+              {showPassword ? "Hide" : "Show"}
+            </button>
             <br />
-            <button>Login</button>
-            <button>Sign up</button>
+            <button className="login-btn">Login</button>
+            <button className="login-btn">Sign up</button>
           </>
+        );
+      }
+
+      function Clock() {
+        const [time, setTime] = React.useState(dayjs().format("HH:mm:ss"));
+
+        React.useEffect(() => {
+          setInterval(() => {
+            setTime(dayjs().format("hh:mm:ss A (Z)"));
+          }, 1000);
+        }, []);
+
+        return (
+          <>
+            Time: <strong>{time}</strong>
+          </>
+        );
+      }
+
+      function AutoCounter() {
+        const [count, setCount] = React.useState(0);
+        const [autoClicker, setAutoClicker] = React.useState(false);
+
+        function increaseCounter() {
+          setCount((prevCount) => prevCount + 1);
+        }
+
+        React.useEffect(() => {
+          if (!autoClicker) return;
+
+          const intervalId = setInterval(() => {
+            setCount((prevCount) => prevCount + 1);
+          }, 1000);
+
+          // cleanup function
+          return () => {
+            clearInterval(intervalId);
+          };
+        }, [autoClicker]);
+
+        return (
+          <div className="auto-click-container">
+            <button onClick={increaseCounter}>Clicked {count} times</button>
+
+            <button onClick={() => setCount(0)}>Reset</button>
+
+            <button onClick={() => setAutoClicker((prev) => !prev)}>
+              Auto Click: {autoClicker ? "ON" : "OFF"}
+            </button>
+          </div>
         );
       }
 
@@ -90,6 +182,12 @@
 
             <Heading heading="Login Form (Password toggle)" />
             <LoginForm />
+
+            <Heading heading="Clock" />
+            <Clock />
+
+            <Heading heading="Counter (Automatic feature)" />
+            <AutoCounter />
           </>
         );
       }
