@@ -26,6 +26,13 @@
         scrollbar-width: none;
       }
 
+      .welcome-message {
+        color: #888;
+        margin: 8px auto;
+        text-align: center;
+        max-width: 600px;
+      }
+
       .chat-input-container {
         display: flex;
         margin-bottom: 8px;
@@ -68,6 +75,11 @@
         margin: 0px 10px 24px 10px;
         background-color: #ffc2d1;
         max-width: 300px;
+      }
+
+      .loading-spinner {
+        height: 40px;
+        margin: -15px;
       }
 
       .message-sender-profile {
@@ -119,7 +131,12 @@
               id: crypto.randomUUID(),
             },
             {
-              message: "Loading...",
+              message: (
+                <img
+                  className="loading-spinner"
+                  src="https://supersimple.dev/images/loading-spinner.gif"
+                />
+              ),
               sender: "bot",
               id: crypto.randomUUID(),
             },
@@ -189,20 +206,26 @@
         );
       }
 
+      function useAutoScroll(dependencies) {
+        const containerRef = React.useRef(null);
+
+        React.useEffect(() => {
+          const containerElem = containerRef.current;
+
+          if (containerElem) {
+            containerElem.scrollTop = containerElem.scrollHeight;
+          }
+        }, dependencies);
+
+        return containerRef;
+      }
+
       function ChatMessages({ chatMessages }) {
         // Hooks - used to insert React features into our components (ex: useState, useEffect, useRef, etc.)
         // Note - put hooks at the top of a component and they should not be inside any block (if-else, funciton, etc.)
 
         // useRef - lets us automatically save an HTML element from the component (initial value - null)
-        const chatMessagesRef = React.useRef(null);
-
-        // useEffect - runs some code after a component is created or updated
-        React.useEffect(() => {
-          const containerElem = chatMessagesRef.current;
-          if (containerElem) {
-            containerElem.scrollTop = containerElem.scrollHeight;
-          }
-        }, [chatMessages]);
+        const chatMessagesRef = useAutoScroll([chatMessages]);
 
         return (
           <div className="chat-messages-container" ref={chatMessagesRef}>
@@ -215,6 +238,12 @@
                 />
               );
             })}
+            {chatMessages.length === 0 && (
+              <p className="welcome-message">
+                Welcome to the chatbot project! Send a message using the textbox
+                below.
+              </p>
+            )}
           </div>
         );
       }
@@ -222,14 +251,14 @@
       function App() {
         /* lifting the state up */
         const [chatMessages, setChatMessages] = React.useState([
-          { message: "hello chatbot", sender: "user", id: "id1" },
-          {
-            message: "Hi, how can I help you today?",
-            sender: "bot",
-            id: "id2",
-          },
-          { message: "can you get me todays date?", sender: "user", id: "id3" },
-          { message: "Sure, today is November 26", sender: "bot", id: "id4" },
+          // { message: "hello chatbot", sender: "user", id: "id1" },
+          // {
+          //   message: "Hi, how can I help you today?",
+          //   sender: "bot",
+          //   id: "id2",
+          // },
+          // { message: "can you get me todays date?", sender: "user", id: "id3" },
+          // { message: "Sure, today is November 26", sender: "bot", id: "id4" },
         ]);
 
         return (
